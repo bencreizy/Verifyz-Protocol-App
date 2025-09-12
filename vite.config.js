@@ -12,5 +12,13 @@ export default defineConfig({
     alias: {
       '@assets': './attached_assets'
     }
+  },
+  css: {
+    postcss: {
+      plugins: [
+        require('tailwindcss')('./tailwind.config.js'),
+        require('autoprefixer')
+      ]
+    }
   }
 })
