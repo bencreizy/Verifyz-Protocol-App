@@ -20,35 +20,149 @@ import {
   Bell
 } from 'lucide-react';
 
-// Circuit Board Background Component
+// Advanced Circuit Board Background Component
 function CircuitBackground() {
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 matrix-grid">
-      <svg className="w-full h-full opacity-20" viewBox="0 0 800 600">
+    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+      {/* Main Circuit SVG */}
+      <svg className="w-full h-full absolute inset-0" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
         <defs>
-          <pattern id="circuit" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-            {/* Horizontal lines */}
-            <path d="M20 20 L80 20 M80 20 L80 50 M80 50 L50 50 M50 50 L50 80" 
-                  stroke="currentColor" strokeWidth="1" fill="none" className="text-primary/30"/>
-            <path d="M10 60 L90 60 M30 40 L70 40" 
-                  stroke="currentColor" strokeWidth="1" fill="none" className="text-accent/20"/>
-            {/* Vertical lines */}  
-            <path d="M40 10 L40 90 M60 15 L60 85" 
-                  stroke="currentColor" strokeWidth="1" fill="none" className="text-primary/20"/>
-            {/* Connection points */}
-            <circle cx="20" cy="20" r="2" fill="currentColor" className="text-primary/60"/>
-            <circle cx="80" cy="50" r="2" fill="currentColor" className="text-accent/60"/>
-            <circle cx="50" cy="80" r="2" fill="currentColor" className="text-primary/40"/>
-            <circle cx="60" cy="40" r="1.5" fill="currentColor" className="text-accent/50"/>
-          </pattern>
-          <radialGradient id="circuitGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="rgba(0,255,0,0.1)" />
-            <stop offset="100%" stopColor="transparent" />
-          </radialGradient>
+          {/* Gradients for different circuit colors */}
+          <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#00ffff" stopOpacity="0.8"/>
+            <stop offset="50%" stopColor="#00cccc" stopOpacity="0.6"/>
+            <stop offset="100%" stopColor="#008888" stopOpacity="0.3"/>
+          </linearGradient>
+          
+          <linearGradient id="magentaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#ff00ff" stopOpacity="0.8"/>
+            <stop offset="50%" stopColor="#cc00cc" stopOpacity="0.6"/>
+            <stop offset="100%" stopColor="#880088" stopOpacity="0.3"/>
+          </linearGradient>
+          
+          <linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#00ff00" stopOpacity="0.8"/>
+            <stop offset="50%" stopColor="#00cc00" stopOpacity="0.6"/>
+            <stop offset="100%" stopColor="#008800" stopOpacity="0.3"/>
+          </linearGradient>
+          
+          <linearGradient id="yellowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#ffff00" stopOpacity="0.8"/>
+            <stop offset="50%" stopColor="#cccc00" stopOpacity="0.6"/>
+            <stop offset="100%" stopColor="#888800" stopOpacity="0.3"/>
+          </linearGradient>
+
+          {/* Glow filters */}
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+          
+          <filter id="strongGlow" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
         </defs>
-        <rect width="100%" height="100%" fill="url(#circuit)"/>
-        <rect width="100%" height="100%" fill="url(#circuitGlow)"/>
+        
+        {/* Circuit Paths - Left Side */}
+        <g className="animate-pulse-slow" style={{animationDelay: '0s'}}>
+          <path d="M50 200 L200 200 L200 350 L400 350 L400 500" 
+                stroke="url(#cyanGrad)" strokeWidth="2" fill="none" filter="url(#glow)"/>
+          <path d="M50 300 L150 300 L150 450 L350 450" 
+                stroke="url(#cyanGrad)" strokeWidth="1.5" fill="none" filter="url(#glow)"/>
+          <path d="M100 100 L300 100 L300 250 L500 250 L500 400" 
+                stroke="url(#cyanGrad)" strokeWidth="2" fill="none" filter="url(#glow)"/>
+        </g>
+        
+        {/* Circuit Paths - Right Side */}
+        <g className="animate-pulse-slow" style={{animationDelay: '1s'}}>
+          <path d="M1870 200 L1720 200 L1720 350 L1520 350 L1520 500" 
+                stroke="url(#magentaGrad)" strokeWidth="2" fill="none" filter="url(#glow)"/>
+          <path d="M1870 300 L1770 300 L1770 450 L1570 450" 
+                stroke="url(#magentaGrad)" strokeWidth="1.5" fill="none" filter="url(#glow)"/>
+          <path d="M1820 100 L1620 100 L1620 250 L1420 250 L1420 400" 
+                stroke="url(#magentaGrad)" strokeWidth="2" fill="none" filter="url(#glow)"/>
+        </g>
+        
+        {/* Circuit Paths - Top */}
+        <g className="animate-pulse-slow" style={{animationDelay: '2s'}}>
+          <path d="M400 50 L400 200 L600 200 L600 350 L800 350" 
+                stroke="url(#greenGrad)" strokeWidth="2" fill="none" filter="url(#glow)"/>
+          <path d="M600 50 L600 150 L800 150 L800 300 L1000 300" 
+                stroke="url(#greenGrad)" strokeWidth="1.5" fill="none" filter="url(#glow)"/>
+          <path d="M1000 50 L1000 180 L1200 180 L1200 320" 
+                stroke="url(#greenGrad)" strokeWidth="2" fill="none" filter="url(#glow)"/>
+        </g>
+        
+        {/* Circuit Paths - Bottom */}
+        <g className="animate-pulse-slow" style={{animationDelay: '3s'}}>
+          <path d="M400 1030 L400 880 L600 880 L600 730 L800 730" 
+                stroke="url(#yellowGrad)" strokeWidth="2" fill="none" filter="url(#glow)"/>
+          <path d="M600 1030 L600 930 L800 930 L800 780 L1000 780" 
+                stroke="url(#yellowGrad)" strokeWidth="1.5" fill="none" filter="url(#glow)"/>
+          <path d="M1000 1030 L1000 900 L1200 900 L1200 760" 
+                stroke="url(#yellowGrad)" strokeWidth="2" fill="none" filter="url(#glow)"/>
+        </g>
+        
+        {/* Central Circuit Hub */}
+        <g className="animate-pulse" style={{animationDelay: '0.5s'}}>
+          <path d="M800 400 L1000 400 L1000 600 L800 600 L800 400" 
+                stroke="url(#cyanGrad)" strokeWidth="3" fill="none" filter="url(#strongGlow)"/>
+          <path d="M900 350 L900 650" 
+                stroke="url(#magentaGrad)" strokeWidth="2" fill="none" filter="url(#glow)"/>
+          <path d="M750 500 L1050 500" 
+                stroke="url(#greenGrad)" strokeWidth="2" fill="none" filter="url(#glow)"/>
+        </g>
+        
+        {/* Connection Nodes */}
+        <g>
+          {/* Cyan nodes */}
+          <circle cx="200" cy="200" r="4" fill="#00ffff" filter="url(#strongGlow)" className="animate-pulse"/>
+          <circle cx="400" cy="350" r="3" fill="#00cccc" filter="url(#glow)" className="animate-pulse" style={{animationDelay: '0.5s'}}/>
+          <circle cx="500" cy="250" r="3" fill="#00aaaa" filter="url(#glow)" className="animate-pulse" style={{animationDelay: '1s'}}/>
+          
+          {/* Magenta nodes */}
+          <circle cx="1720" cy="200" r="4" fill="#ff00ff" filter="url(#strongGlow)" className="animate-pulse" style={{animationDelay: '1.5s'}}/>
+          <circle cx="1520" cy="350" r="3" fill="#cc00cc" filter="url(#glow)" className="animate-pulse" style={{animationDelay: '2s'}}/>
+          <circle cx="1420" cy="250" r="3" fill="#aa00aa" filter="url(#glow)" className="animate-pulse" style={{animationDelay: '2.5s'}}/>
+          
+          {/* Green nodes */}
+          <circle cx="600" cy="200" r="3" fill="#00ff00" filter="url(#glow)" className="animate-pulse" style={{animationDelay: '3s'}}/>
+          <circle cx="800" cy="350" r="4" fill="#00cc00" filter="url(#strongGlow)" className="animate-pulse" style={{animationDelay: '3.5s'}}/>
+          <circle cx="1000" cy="300" r="3" fill="#00aa00" filter="url(#glow)" className="animate-pulse" style={{animationDelay: '4s'}}/>
+          
+          {/* Yellow nodes */}
+          <circle cx="600" cy="880" r="3" fill="#ffff00" filter="url(#glow)" className="animate-pulse" style={{animationDelay: '4.5s'}}/>
+          <circle cx="800" cy="730" r="4" fill="#cccc00" filter="url(#strongGlow)" className="animate-pulse" style={{animationDelay: '5s'}}/>
+          <circle cx="1000" cy="780" r="3" fill="#aaaa00" filter="url(#glow)" className="animate-pulse" style={{animationDelay: '5.5s'}}/>
+          
+          {/* Central hub nodes */}
+          <circle cx="900" cy="500" r="6" fill="#ffffff" filter="url(#strongGlow)" className="animate-pulse" style={{animationDelay: '0.2s'}}/>
+          <circle cx="850" cy="450" r="4" fill="#00ffff" filter="url(#strongGlow)" className="animate-pulse" style={{animationDelay: '0.7s'}}/>
+          <circle cx="950" cy="550" r="4" fill="#ff00ff" filter="url(#strongGlow)" className="animate-pulse" style={{animationDelay: '1.2s'}}/>
+        </g>
       </svg>
+      
+      {/* Overlay gradient for depth */}
+      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-black/20 to-black/40 pointer-events-none"></div>
+      
+      {/* Moving light effects */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl animate-pulse" 
+             style={{top: '10%', left: '10%', animationDuration: '4s'}}></div>
+        <div className="absolute w-96 h-96 bg-magenta-500/5 rounded-full blur-3xl animate-pulse" 
+             style={{top: '10%', right: '10%', animationDuration: '6s', animationDelay: '2s'}}></div>
+        <div className="absolute w-96 h-96 bg-green-500/5 rounded-full blur-3xl animate-pulse" 
+             style={{bottom: '10%', left: '20%', animationDuration: '5s', animationDelay: '1s'}}></div>
+        <div className="absolute w-96 h-96 bg-yellow-500/5 rounded-full blur-3xl animate-pulse" 
+             style={{bottom: '10%', right: '20%', animationDuration: '7s', animationDelay: '3s'}}></div>
+      </div>
     </div>
   );
 }

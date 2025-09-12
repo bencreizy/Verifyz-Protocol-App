@@ -108,6 +108,19 @@ export default {
             transform: "scale(1.05)" 
           },
         },
+        "circuit-flow": {
+          "0%": {
+            strokeDashoffset: "100",
+            opacity: "0.3"
+          },
+          "50%": {
+            opacity: "1"
+          },
+          "100%": {
+            strokeDashoffset: "0", 
+            opacity: "0.3"
+          }
+        },
       },
     },
   },
