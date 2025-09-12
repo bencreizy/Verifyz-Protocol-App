@@ -120,76 +120,18 @@ function CircuitBackground() {
   );
 }
 
-// New Cyberpunk Fingerprint Icon Component
+// Cyberpunk Fingerprint Image Component using uploaded image
 function FingerprintIcon({ size = 120 }: { size?: number }) {
   return (
     <div className={`relative animate-pulse-slow mx-auto`} style={{ width: size, height: size }}>
-      <svg viewBox="0 0 240 240" className="w-full h-full">
-        <defs>
-          {/* Cyberpunk gradient matching the image */}
-          <linearGradient id="cyberpunkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#4F46E5" stopOpacity="1"/>
-            <stop offset="25%" stopColor="#7C3AED" stopOpacity="1"/>
-            <stop offset="50%" stopColor="#EC4899" stopOpacity="1"/>
-            <stop offset="75%" stopColor="#06B6D4" stopOpacity="1"/>
-            <stop offset="100%" stopColor="#F97316" stopOpacity="1"/>
-          </linearGradient>
-          
-          {/* Circuit board gradient */}
-          <linearGradient id="circuitGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#06B6D4" stopOpacity="1"/>
-            <stop offset="50%" stopColor="#F97316" stopOpacity="1"/>
-            <stop offset="100%" stopColor="#EC4899" stopOpacity="1"/>
-          </linearGradient>
-          
-          <filter id="cyberpunkGlow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-            <feMerge>
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
-        </defs>
-        
-        {/* Main fingerprint ridges - curved arcs */}
-        <g stroke="url(#cyberpunkGrad)" strokeWidth="3" fill="none" filter="url(#cyberpunkGlow)" className="animate-pulse-slow">
-          {/* Outer ridges */}
-          <path d="M 60 40 Q 40 60 60 120 Q 100 140 140 120 Q 160 100 150 80 Q 140 60 120 50" strokeWidth="2.5"/>
-          <path d="M 70 50 Q 50 70 70 120 Q 100 135 130 120 Q 150 100 140 80 Q 130 65 115 60" strokeWidth="2.5"/>
-          <path d="M 80 60 Q 60 80 80 115 Q 100 130 120 115 Q 140 100 130 85 Q 120 75 110 70" strokeWidth="2.5"/>
-          <path d="M 90 70 Q 70 90 90 110 Q 100 120 110 110 Q 130 95 120 90 Q 110 85 105 80" strokeWidth="2.5"/>
-          <path d="M 100 80 Q 80 95 100 105 Q 105 110 110 105 Q 120 100 115 95" strokeWidth="2.5"/>
-          
-          {/* Inner core ridges */}
-          <path d="M 105 85 Q 95 95 105 100 Q 108 102 110 100" strokeWidth="2"/>
-          <path d="M 108 88 Q 102 92 108 96" strokeWidth="1.5"/>
-        </g>
-        
-        {/* Circuit board elements on the right side */}
-        <g stroke="url(#circuitGrad)" strokeWidth="2.5" fill="none" filter="url(#cyberpunkGlow)">
-          {/* Main circuit stem */}
-          <path d="M 140 100 L 180 100 L 180 80 L 200 80" strokeWidth="3"/>
-          <path d="M 180 100 L 200 120" strokeWidth="2"/>
-          <path d="M 180 100 L 200 140" strokeWidth="2"/>
-          
-          {/* Circuit nodes/connections */}
-          <circle cx="180" cy="80" r="6" fill="#06B6D4" stroke="#06B6D4" strokeWidth="2"/>
-          <circle cx="180" cy="120" r="5" fill="#F97316" stroke="#F97316" strokeWidth="2"/>
-          <circle cx="200" cy="140" r="4" fill="#EC4899" stroke="#EC4899" strokeWidth="2"/>
-          
-          {/* Additional circuit lines */}
-          <path d="M 200 80 L 220 80 L 220 70" strokeWidth="2"/>
-          <path d="M 200 120 L 215 120" strokeWidth="1.5"/>
-          <path d="M 200 140 L 210 140 L 210 150" strokeWidth="1.5"/>
-        </g>
-        
-        {/* Animated pulse dots */}
-        <g>
-          <circle cx="180" cy="80" r="2" fill="#06B6D4" className="animate-pulse" style={{animationDelay: '0s'}}/>
-          <circle cx="180" cy="120" r="2" fill="#F97316" className="animate-pulse" style={{animationDelay: '0.5s'}}/>
-          <circle cx="200" cy="140" r="2" fill="#EC4899" className="animate-pulse" style={{animationDelay: '1s'}}/>
-        </g>
-      </svg>
+      <img 
+        src="/attached_assets/Messenger_creation_8654D694-ACD4-430E-8B08-4A3E9DAF71B6_1757684706591.png"
+        alt="Cyberpunk Fingerprint"
+        className="w-full h-full object-contain"
+        style={{
+          filter: 'drop-shadow(0 0 20px rgba(6, 182, 212, 0.5))',
+        }}
+      />
     </div>
   );
 }
