@@ -1,0 +1,35 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+--fingerprint-opacity: 0.08;
+}
+
+.bg-fingerprint {
+position: relative;
+}
+.bg-fingerprint::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 50% -10%, rgba(20,227,255,var(--fingerprint-opacity)), transparent 35%);
+  pointer-events: none;
+}
+
+.card {
+@apply rounded-2xl bg-white/5 border border-white/10 shadow-glow;
+}
+.card-neon {
+@apply card border-cyan-400/30;
+}
+.button-neon {
+@apply rounded-xl px-5 py-3 bg-cyan-500/10 border border-cyan-300/40 hover:bg-cyan-500/20 transition shadow-glow;
+}
+.section {
+@apply max-w-6xl mx-auto px-4 md:px-6;
+}
+h1,h2,h3 {
+@apply font-semibold;
+}
