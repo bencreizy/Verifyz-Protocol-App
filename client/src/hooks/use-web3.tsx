@@ -3,6 +3,15 @@ import { useQuery, useMutation } from '@tanstack/react-query';
 import { apiRequest, queryClient } from '@/lib/queryClient';
 import type { User, InsertUser } from '@shared/schema';
 
+interface PriceData {
+  maticUsd: number;
+  vfyzUsd: number;
+  presaleActive: boolean;
+  updated: string;
+  source: string;
+  error?: string;
+}
+
 interface Web3State {
   isConnected: boolean;
   account: string | null;
@@ -22,6 +31,13 @@ export function useWeb3() {
   const { data: user, isLoading: isUserLoading } = useQuery<User | null>({
     queryKey: ['/api/users/wallet', state.account],
     enabled: !!state.account && state.isConnected,
+  });
+
+  // Fetch live prices
+  const { data: priceData, isLoading: isPriceLoading } = useQuery<PriceData>({
+    queryKey: ['/api/presale/prices'],
+    refetchInterval: 30000, // Refetch every 30 seconds
+    staleTime: 20000, // Consider data stale after 20 seconds
   });
 
   // Create user mutation
@@ -79,9 +95,9 @@ export function useWeb3() {
   }, []);
 
   const calculateTokens = useCallback((usdAmount: number): number => {
-    const vfyzPrice = 0.05; // $0.05 per VFYZ token
+    const vfyzPrice = priceData?.vfyzUsd || 0.05; // Use live price or fallback
     return Math.floor(usdAmount / vfyzPrice);
-  }, []);
+  }, [priceData?.vfyzUsd]);
 
   return {
     ...state,
@@ -92,6 +108,8 @@ export function useWeb3() {
     isUserLoading,
     registerUser: createUserMutation.mutateAsync,
     isRegistering: createUserMutation.isPending,
+    priceData,
+    isPriceLoading,
   };
 }
 

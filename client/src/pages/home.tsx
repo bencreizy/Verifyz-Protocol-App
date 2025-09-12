@@ -36,12 +36,14 @@ export default function Home() {
     user,
     isUserLoading,
     registerUser,
-    isRegistering 
+    isRegistering,
+    priceData,
+    isPriceLoading
   } = useWeb3();
   
   const tokens = usdAmount ? calculateTokens(parseFloat(usdAmount) || 0) : 0;
-  const maticPrice = 0.85; // Mock MATIC/USD price
-  const vfyzPrice = 0.05; // VFYZ token price
+  const maticPrice = priceData?.maticUsd || 0.85; // Live MATIC/USD price with fallback
+  const vfyzPrice = priceData?.vfyzUsd || 0.05; // Live VFYZ token price with fallback
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -409,12 +411,20 @@ export default function Home() {
                     {/* Live Feed Display */}
                     <div className="grid grid-cols-2 gap-4">
                       <div className="bg-secondary/50 rounded-lg p-4" data-testid="card-matic-price">
-                        <div className="text-sm text-muted-foreground mb-1">MATIC/USD</div>
-                        <div className="text-xl font-bold text-primary" data-testid="text-matic-price">${maticPrice}</div>
+                        <div className="text-sm text-muted-foreground mb-1 flex items-center gap-2">
+                          MATIC/USD
+                          {isPriceLoading && <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />}
+                          {priceData?.source === 'coingecko' && <span className="text-xs text-primary">●LIVE</span>}
+                          {priceData?.error && <span className="text-xs text-destructive">●OFFLINE</span>}
+                        </div>
+                        <div className="text-xl font-bold text-primary" data-testid="text-matic-price">${maticPrice.toFixed(6)}</div>
                       </div>
                       <div className="bg-secondary/50 rounded-lg p-4" data-testid="card-vfyz-price">
-                        <div className="text-sm text-muted-foreground mb-1">VFYZ Price</div>
-                        <div className="text-xl font-bold text-accent" data-testid="text-vfyz-price">${vfyzPrice}</div>
+                        <div className="text-sm text-muted-foreground mb-1 flex items-center gap-2">
+                          VFYZ Price
+                          <span className="text-xs text-accent">●FIXED</span>
+                        </div>
+                        <div className="text-xl font-bold text-accent" data-testid="text-vfyz-price">${vfyzPrice.toFixed(3)}</div>
                       </div>
                     </div>
 

@@ -133,16 +133,50 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Mock API endpoints for presale data
+  // Live price feeds endpoint
   app.get("/api/presale/prices", async (req, res) => {
-    res.json({
-      maticUsd: 0.85,
-      vfyzUsd: 0.05,
-      presaleActive: true,
-      presaleStartDate: "2024-09-15",
-      presaleEndDate: "2024-09-29",
-      launchDate: "2024-10-06"
-    });
+    try {
+      // Fetch live MATIC/USD price from CoinGecko
+      const response = await fetch(
+        'https://api.coingecko.com/api/v3/simple/price?ids=matic-network&vs_currencies=usd&include_last_updated_at=true'
+      );
+      
+      if (!response.ok) {
+        throw new Error(`CoinGecko API error: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      const maticUsd = data['matic-network']?.usd;
+      
+      if (!maticUsd) {
+        throw new Error('MATIC price not found in response');
+      }
+      
+      res.json({
+        maticUsd: maticUsd,
+        vfyzUsd: 0.05, // Fixed VFYZ price during presale
+        presaleActive: true,
+        presaleStartDate: "2024-09-15",
+        presaleEndDate: "2024-09-29",
+        launchDate: "2024-10-06",
+        updated: new Date().toISOString(),
+        source: 'coingecko'
+      });
+    } catch (error) {
+      console.error('Price feed error:', error);
+      // Fallback to mock prices if API fails
+      res.json({
+        maticUsd: 0.85, // Fallback price
+        vfyzUsd: 0.05,
+        presaleActive: true,
+        presaleStartDate: "2024-09-15",
+        presaleEndDate: "2024-09-29",
+        launchDate: "2024-10-06",
+        updated: new Date().toISOString(),
+        source: 'fallback',
+        error: 'Live price feed unavailable'
+      });
+    }
   });
 
   // Health check endpoint
