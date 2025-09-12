@@ -4,9 +4,13 @@ import {
   type PresaleTransaction, 
   type InsertPresaleTransaction,
   type ProofSubmission,
-  type InsertProofSubmission
+  type InsertProofSubmission,
+  users,
+  presaleTransactions,
+  proofSubmissions
 } from "@shared/schema";
-import { randomUUID } from "crypto";
+import { db } from "./db";
+import { eq } from "drizzle-orm";
 
 export interface IStorage {
   // User operations
@@ -29,130 +33,138 @@ export interface IStorage {
   updateProofSubmission(id: string, updates: Partial<InsertProofSubmission>): Promise<ProofSubmission | undefined>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-  private presaleTransactions: Map<string, PresaleTransaction>;
-  private proofSubmissions: Map<string, ProofSubmission>;
-
-  constructor() {
-    this.users = new Map();
-    this.presaleTransactions = new Map();
-    this.proofSubmissions = new Map();
-  }
+export class DatabaseStorage implements IStorage {
 
   // User operations
   async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user || undefined;
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user || undefined;
   }
 
   async getUserByWalletAddress(walletAddress: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.walletAddress === walletAddress,
-    );
+    const [user] = await db.select().from(users).where(eq(users.walletAddress, walletAddress));
+    return user || undefined;
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
-    const user: User = { 
-      ...insertUser,
-      walletAddress: insertUser.walletAddress ?? null,
-      email: insertUser.email ?? null,
-      isNotificationEnabled: insertUser.isNotificationEnabled ?? false,
-      id,
-      createdAt: new Date()
-    };
-    this.users.set(id, user);
+    const [user] = await db
+      .insert(users)
+      .values({
+        ...insertUser,
+        walletAddress: insertUser.walletAddress ?? null,
+        email: insertUser.email ?? null,
+        isNotificationEnabled: insertUser.isNotificationEnabled ?? false,
+      })
+      .returning();
     return user;
   }
 
   async updateUser(id: string, updates: Partial<InsertUser>): Promise<User | undefined> {
-    const user = this.users.get(id);
-    if (!user) return undefined;
-    
-    const updatedUser = { ...user, ...updates };
-    this.users.set(id, updatedUser);
-    return updatedUser;
+    const [user] = await db
+      .update(users)
+      .set({
+        ...updates,
+        walletAddress: updates.walletAddress ?? undefined,
+        email: updates.email ?? undefined,
+        isNotificationEnabled: updates.isNotificationEnabled ?? undefined,
+      })
+      .where(eq(users.id, id))
+      .returning();
+    return user || undefined;
   }
 
   // Presale operations
   async createPresaleTransaction(insertTransaction: InsertPresaleTransaction): Promise<PresaleTransaction> {
-    const id = randomUUID();
-    const transaction: PresaleTransaction = {
-      ...insertTransaction,
-      userId: insertTransaction.userId ?? null,
-      transactionHash: insertTransaction.transactionHash ?? null,
-      status: insertTransaction.status ?? "pending",
-      id,
-      createdAt: new Date()
-    };
-    this.presaleTransactions.set(id, transaction);
+    const [transaction] = await db
+      .insert(presaleTransactions)
+      .values({
+        ...insertTransaction,
+        userId: insertTransaction.userId ?? null,
+        transactionHash: insertTransaction.transactionHash ?? null,
+        status: insertTransaction.status ?? "pending",
+      })
+      .returning();
     return transaction;
   }
 
   async getPresaleTransactionsByUser(userId: string): Promise<PresaleTransaction[]> {
-    return Array.from(this.presaleTransactions.values()).filter(
-      (transaction) => transaction.userId === userId,
-    );
+    return await db
+      .select()
+      .from(presaleTransactions)
+      .where(eq(presaleTransactions.userId, userId));
   }
 
   async getPresaleTransactionsByWallet(walletAddress: string): Promise<PresaleTransaction[]> {
-    return Array.from(this.presaleTransactions.values()).filter(
-      (transaction) => transaction.walletAddress === walletAddress,
-    );
+    return await db
+      .select()
+      .from(presaleTransactions)
+      .where(eq(presaleTransactions.walletAddress, walletAddress));
   }
 
   async updatePresaleTransaction(id: string, updates: Partial<InsertPresaleTransaction>): Promise<PresaleTransaction | undefined> {
-    const transaction = this.presaleTransactions.get(id);
-    if (!transaction) return undefined;
-    
-    const updatedTransaction = { ...transaction, ...updates };
-    this.presaleTransactions.set(id, updatedTransaction);
-    return updatedTransaction;
+    const [transaction] = await db
+      .update(presaleTransactions)
+      .set({
+        ...updates,
+        userId: updates.userId ?? undefined,
+        transactionHash: updates.transactionHash ?? undefined,
+        status: updates.status ?? undefined,
+      })
+      .where(eq(presaleTransactions.id, id))
+      .returning();
+    return transaction || undefined;
   }
 
   // Proof submission operations
   async createProofSubmission(insertSubmission: InsertProofSubmission): Promise<ProofSubmission> {
-    const id = randomUUID();
-    const submission: ProofSubmission = {
-      ...insertSubmission,
-      userId: insertSubmission.userId ?? null,
-      gpsCoordinates: insertSubmission.gpsCoordinates ?? null,
-      deviceSignature: insertSubmission.deviceSignature ?? null,
-      verificationStatus: insertSubmission.verificationStatus ?? "pending",
-      rewardAmount: insertSubmission.rewardAmount ?? null,
-      id,
-      submittedAt: new Date()
-    };
-    this.proofSubmissions.set(id, submission);
+    const [submission] = await db
+      .insert(proofSubmissions)
+      .values({
+        ...insertSubmission,
+        userId: insertSubmission.userId ?? null,
+        gpsCoordinates: insertSubmission.gpsCoordinates ?? null,
+        deviceSignature: insertSubmission.deviceSignature ?? null,
+        verificationStatus: insertSubmission.verificationStatus ?? "pending",
+        rewardAmount: insertSubmission.rewardAmount ?? null,
+      })
+      .returning();
     return submission;
   }
 
   async getProofSubmissionsByUser(userId: string): Promise<ProofSubmission[]> {
-    return Array.from(this.proofSubmissions.values()).filter(
-      (submission) => submission.userId === userId,
-    );
+    return await db
+      .select()
+      .from(proofSubmissions)
+      .where(eq(proofSubmissions.userId, userId));
   }
 
   async getProofSubmissionsByWallet(walletAddress: string): Promise<ProofSubmission[]> {
-    return Array.from(this.proofSubmissions.values()).filter(
-      (submission) => submission.walletAddress === walletAddress,
-    );
+    return await db
+      .select()
+      .from(proofSubmissions)
+      .where(eq(proofSubmissions.walletAddress, walletAddress));
   }
 
   async updateProofSubmission(id: string, updates: Partial<InsertProofSubmission>): Promise<ProofSubmission | undefined> {
-    const submission = this.proofSubmissions.get(id);
-    if (!submission) return undefined;
-    
-    const updatedSubmission = { ...submission, ...updates };
-    this.proofSubmissions.set(id, updatedSubmission);
-    return updatedSubmission;
+    const [submission] = await db
+      .update(proofSubmissions)
+      .set({
+        ...updates,
+        userId: updates.userId ?? undefined,
+        gpsCoordinates: updates.gpsCoordinates ?? undefined,
+        deviceSignature: updates.deviceSignature ?? undefined,
+        verificationStatus: updates.verificationStatus ?? undefined,
+        rewardAmount: updates.rewardAmount ?? undefined,
+      })
+      .where(eq(proofSubmissions.id, id))
+      .returning();
+    return submission || undefined;
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();
