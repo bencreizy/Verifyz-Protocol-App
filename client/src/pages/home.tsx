@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { useWeb3 } from '@/hooks/use-web3';
+import { UserRegistrationDialog } from '@/components/user-registration-dialog';
 import { 
   MapPin, 
   Satellite, 
@@ -24,7 +25,19 @@ import {
 export default function Home() {
   const [usdAmount, setUsdAmount] = useState<string>('');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { isConnected, account, isConnecting, error, connectWallet, calculateTokens } = useWeb3();
+  const [showRegistration, setShowRegistration] = useState(false);
+  const { 
+    isConnected, 
+    account, 
+    isConnecting, 
+    error, 
+    connectWallet, 
+    calculateTokens,
+    user,
+    isUserLoading,
+    registerUser,
+    isRegistering 
+  } = useWeb3();
   
   const tokens = usdAmount ? calculateTokens(parseFloat(usdAmount) || 0) : 0;
   const maticPrice = 0.85; // Mock MATIC/USD price
@@ -37,6 +50,18 @@ export default function Home() {
     }
     setIsMobileMenuOpen(false);
   };
+
+  // Handle wallet connection and user registration flow
+  const handleConnectWallet = async () => {
+    await connectWallet();
+  };
+
+  // Show registration dialog when wallet is connected but user doesn't exist
+  useEffect(() => {
+    if (isConnected && account && !isUserLoading && !user) {
+      setShowRegistration(true);
+    }
+  }, [isConnected, account, isUserLoading, user]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -347,12 +372,15 @@ export default function Home() {
                       variant="gradient" 
                       size="lg" 
                       className="w-full sm:w-auto px-8 py-4 text-lg font-semibold"
-                      onClick={connectWallet}
+                      onClick={handleConnectWallet}
                       disabled={isConnecting}
                       data-testid="button-connect-wallet"
                     >
                       <Wallet className="h-5 w-5 mr-2" />
-                      {isConnecting ? 'Connecting...' : isConnected ? `Connected: ${account?.slice(0, 6)}...${account?.slice(-4)}` : 'Connect Wallet'}
+                      {isConnecting ? 'Connecting...' : 
+                       isConnected && user ? `${user.username} (${account?.slice(0, 6)}...${account?.slice(-4)})` :
+                       isConnected ? `Connected: ${account?.slice(0, 6)}...${account?.slice(-4)}` : 
+                       'Connect Wallet'}
                     </Button>
                     {error && (
                       <p className="text-destructive text-sm mt-2" data-testid="text-wallet-error">{error}</p>
@@ -484,6 +512,17 @@ export default function Home() {
           </div>
         </footer>
       </main>
+
+      {/* User Registration Dialog */}
+      {isConnected && account && (
+        <UserRegistrationDialog
+          open={showRegistration}
+          onOpenChange={setShowRegistration}
+          walletAddress={account}
+          onRegister={registerUser}
+          isRegistering={isRegistering}
+        />
+      )}
     </div>
   );
 }

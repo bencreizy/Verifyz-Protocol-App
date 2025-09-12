@@ -1,4 +1,7 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
+import { useQuery, useMutation } from '@tanstack/react-query';
+import { apiRequest, queryClient } from '@/lib/queryClient';
+import type { User, InsertUser } from '@shared/schema';
 
 interface Web3State {
   isConnected: boolean;
@@ -13,6 +16,23 @@ export function useWeb3() {
     account: null,
     isConnecting: false,
     error: null,
+  });
+
+  // Check if user exists for connected wallet
+  const { data: user, isLoading: isUserLoading } = useQuery<User | null>({
+    queryKey: ['/api/users/wallet', state.account],
+    enabled: !!state.account && state.isConnected,
+  });
+
+  // Create user mutation
+  const createUserMutation = useMutation<User, Error, InsertUser>({
+    mutationFn: async (userData: InsertUser) => {
+      const res = await apiRequest('POST', '/api/users', userData);
+      return (await res.json()) as User;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/users/wallet', state.account] });
+    },
   });
 
   const connectWallet = useCallback(async () => {
@@ -30,12 +50,13 @@ export function useWeb3() {
       });
 
       if (accounts.length > 0) {
-        setState({
+        setState(prev => ({
+          ...prev,
           isConnected: true,
           account: accounts[0],
           isConnecting: false,
           error: null,
-        });
+        }));
       } else {
         throw new Error('No accounts found');
       }
@@ -67,6 +88,10 @@ export function useWeb3() {
     connectWallet,
     disconnectWallet,
     calculateTokens,
+    user,
+    isUserLoading,
+    registerUser: createUserMutation.mutateAsync,
+    isRegistering: createUserMutation.isPending,
   };
 }
 
