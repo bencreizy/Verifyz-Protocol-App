@@ -1,5 +1,6 @@
 
 import './index.css';
+import circuitBg from '/circuit-bg.png';
 
 export default function App() {
   return (
@@ -8,11 +9,12 @@ export default function App() {
       <div 
         className="absolute inset-0" 
         style={{
-          backgroundImage: "url('/circuit-bg.png')",
-          backgroundSize: '80% 80%',
+          backgroundImage: `linear-gradient(rgba(11, 16, 32, 0.3), rgba(11, 16, 32, 0.3)), url(${circuitBg})`,
+          backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
-          opacity: '0.4'
+          backgroundBlendMode: 'overlay',
+          opacity: 1
         }}
       ></div>
       
