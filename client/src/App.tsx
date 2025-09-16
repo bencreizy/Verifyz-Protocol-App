@@ -28,8 +28,8 @@ export default function App() {
       {/* Main content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-6">
         {/* Logo */}
-        <div className="mb-6 w-24 h-24 flex items-center justify-center">
-          <img src="/assets/logo.png" alt="VeriFyz Protocol logo" style="width:128px;height:128px;object-fit:contain;" />
+        <div className="mb-6">
+          <img src="/assets/verifyz-logo.png" alt="VeriFyz Protocol" className="w-24 h-24 object-contain mx-auto" />
         </div>
 
         <h1 className="text-5xl font-extrabold text-glow cyber-text">VeriFyz Protocol</h1>
