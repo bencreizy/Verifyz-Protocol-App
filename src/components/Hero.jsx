@@ -1,14 +1,13 @@
+
 export default function Hero() {
   return (
     <section className="min-h-screen flex items-center justify-center text-center px-4 pt-4">
       <div className="max-w-4xl mx-auto">
-        <p className="text-xl mb-8 text-brand-neon max-w-2xl mx-auto">
-          Real proof in presence.
-        </p>
-
-        <button className="cyber-button px-8 py-4 text-lg font-semibold rounded-lg glow-hover transition-all duration-300">
-          Join Presale
-        </button>
+        <img 
+          src="/verifyz-logo-new.png" 
+          alt="VeriFyz Protocol" 
+          className="mx-auto max-w-md w-full h-auto"
+        />
       </div>
     </section>
   )
