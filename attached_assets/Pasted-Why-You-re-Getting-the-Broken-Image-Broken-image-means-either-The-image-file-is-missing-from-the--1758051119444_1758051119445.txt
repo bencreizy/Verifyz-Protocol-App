@@ -1,0 +1,112 @@
+Why You’re Getting the Broken Image
+
+Broken image means either:
+
+The image file is missing from the right folder.
+
+The image path in your code is wrong (e.g. /assets/logo.png vs assets/logo.png).
+
+File format/extension doesn’t match (logo.PNG vs logo.png).
+
+You’re using the wrong variable/component in the code.
+
+Permissions or build issue.
+
+
+
+---
+
+How to Fix and Check Everything
+
+Step-by-Step (What Needs Checked & Fixed)
+
+1. Logo Image File
+
+Confirm your new logo is actually in the correct path (example: /public/logo.png or /assets/logo.png).
+
+Make sure the filename is exactly what you reference in your code (case-sensitive).
+
+
+
+2. Image Path in Code
+
+Use the correct path in your HTML/JSX:
+
+<img src="/assets/logo.png" alt="VeriFyz Protocol logo" />
+
+or (if you use React import):
+
+import logo from './assets/logo.png';
+<img src={logo} alt="VeriFyz Protocol logo" />
+
+
+
+3. File Format
+
+Check the file extension (must match: .png, .jpg, etc.).
+
+Prefer PNG for logos, ideally with transparent background.
+
+
+
+4. Component Placement
+
+Ensure the logo <img> is placed where your code renders the glowing circle (inside the right div or component).
+
+
+
+5. Image Size
+
+Recommended: 128×128px to 256×256px for logos. SVG is best if you have it.
+
+
+
+6. Build/Reload
+
+Sometimes Replit caches old assets. Hard-refresh the preview or restart the server after updating images.
+
+
+
+
+
+---
+
+Prompt for the Replit Assistant (Copy & Paste)
+
+Here’s the ultimate prompt for Replit Assistant to make sure your logo always works:
+
+
+---
+
+1. **Check if the new VeriFyz Protocol logo file is present in `/assets/logo.png` (or the correct logo path). If not, upload the correct logo image as `logo.png` (PNG format, transparent background, recommended size 128x128px or 256x256px).**
+
+2. **In the code, find the component or div where the logo should appear at the top of the homepage (inside the glowing circle). Replace the current image or placeholder with:**
+```html
+<img src="/assets/logo.png" alt="VeriFyz Protocol logo" style="width:128px;height:128px;object-fit:contain;" />
+
+(adjust the path if needed based on your file structure, e.g. ./assets/logo.png or /public/logo.png or assets/logo.png)
+
+3. Remove any placeholder image or text (“VeriFyz Protocol logo”) so only the logo displays inside the glowing circle.
+
+
+4. Verify the CSS/JSX for the glowing effect is applied to the surrounding div and not blocking the logo image. (Z-index or background issues can hide the image)
+
+
+5. Double-check the file extension is exactly .png and that the filename matches the path in the code (case-sensitive).
+
+
+6. Save all changes, hard-refresh the preview, and restart the server if the logo still does not appear.
+
+
+7. If there’s still a broken image, display the file structure showing where logo.png is placed, and update the code to reference that exact location.
+
+
+8. If using a framework (React, Next.js, Vite, etc.), use import for static assets:
+
+
+
+import logo from './assets/logo.png';
+// ...
+<img src={logo} alt="VeriFyz Protocol logo" style={{ width: '128px', height: '128px', objectFit: 'contain' }} />
+
+9. Provide confirmation when the new logo displays correctly, and list any changes made to code or file structure.
