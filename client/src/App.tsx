@@ -3,22 +3,34 @@ import './index.css';
 
 export default function App() {
   return (
-    <div className="bg-circuit bg-cover bg-center min-h-screen relative text-white">
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black bg-opacity-60"></div>
+    <div className="min-h-screen relative text-white bg-gradient-to-b from-brand-900 via-brand-800 to-brand-700">
+      {/* Circuit background */}
+      <div 
+        className="absolute inset-0" 
+        style={{
+          backgroundImage: "url('/circuit-bg.png')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          opacity: '0.25'
+        }}
+      ></div>
+      
+      {/* Additional gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-brand-900/50 via-brand-800/40 to-brand-700/50"></div>
 
       {/* Main content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-6">
-        <img
-          src="/verifyz-logo.png"
-          alt="VeriFyz Logo"
-          className="mb-6 w-24 h-24 animate-pulse-slow glow-hover"
-        />
+        {/* Logo circle with V */}
+        <div className="mb-6 w-24 h-24 rounded-full bg-gradient-to-br from-cyan-400 to-green-400 flex items-center justify-center animate-pulse-slow glow-hover">
+          <span className="text-2xl font-bold text-black">V</span>
+        </div>
+        
         <h1 className="text-5xl font-extrabold text-glow cyber-text">VeriFyz Protocol</h1>
-        <p className="mt-4 text-lg text-brand-neon">
+        <p className="mt-4 text-lg text-cyan-400">
           Real proof in presence. Verified, Anonymous, Rewarded.
         </p>
-        <button className="mt-8 px-8 py-3 rounded-lg bg-brand-neon text-black font-semibold shadow-glow hover:scale-105 hover:shadow-brand-neon/70 transition cyber-button">
+        <button className="mt-8 px-8 py-3 rounded-lg bg-cyan-500 text-black font-semibold shadow-glow hover:scale-105 hover:shadow-cyan-500/70 transition cyber-button">
           Get Started
         </button>
       </div>
