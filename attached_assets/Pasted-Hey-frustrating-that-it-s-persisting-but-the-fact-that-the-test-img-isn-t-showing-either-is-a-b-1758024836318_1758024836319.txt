@@ -1,0 +1,91 @@
+Hey—frustrating that it's persisting, but the fact that the test `<img>` isn't showing either is a big clue: The issue isn't with your CSS layering or gradients—it's fundamentally that Vite isn't serving the image from `/circuit-bg.png` at all. This points to a serving/path resolution problem, likely tied to your complex multi-directory setup (multiple Vite configs, root-level stuff, and dual App files in /src and /client/src). This sounds like a monorepo or full-stack app (e.g., with a server at root and client in a subdir), which can mess with how Vite resolves the project root and public dir.
+
+Let's drill down with more precise diagnostics and fixes, informed by common Vite pitfalls in nested setups.
+
+### 1. **Direct URL Test (Confirm Serving Failure)**
+   - Open your browser and go to `http://localhost:5173/circuit-bg.png`.
+     - If it loads the image: Serving is fine—the problem is how it's referenced in your code (e.g., extra slash or base path mismatch). Adjust to `url('circuit-bg.png')` (no leading /) temporarily, or check for a `base` in vite.config.js overriding the root.
+     - If 404 or blank: Vite isn't finding/serving from /client/public. Proceed to the next steps.
+   - In dev tools (F12) > Network tab: Reload the app, filter for "circuit-bg.png". Look for the requests (one for background, one for <img>).
+     - Status 404? Path or config issue.
+     - Status 200 but empty? Corruption or mime-type problem (try renaming to .jpg).
+     - No request at all? The src/url is being ignored or overridden (rare, but check for CSS minification or ad-blockers).
+
+### 2. **Inspect Your Vite Config(s) for Root/Public Mismatches**
+   Since you have multiple Vite configs and a "root-level setup," this is likely the root cause—Vite's `root` and `publicDir` might be misconfigured, especially in monorepos where the working directory isn't clearly /client.
+   
+   - Open your main vite.config.js (probably in /client/vite.config.js or similar). Look for:
+     - `root: ...` – Should be undefined or '.' if running from /client. If set to something else (e.g., '../' or absolute), it could shift the public dir.
+     - `publicDir: ...` – Defaults to 'public', but if customized (e.g., 'assets' or '../public'), move your image there.
+     - `base: ...` – If set to a subpath (e.g., '/app/'), assets would need `url('/app/circuit-bg.png')`. Set to '/' for root serving.
+     
+     Example fix: Update /client/vite.config.js to force correct paths (create if missing):
+     ```js
+     import { defineConfig } from 'vite';
+     import react from '@vitejs/plugin-react';
+
+     export default defineConfig({
+       plugins: [react()],
+       root: '.', // Ensures /client is the root
+       publicDir: 'public', // Explicitly set to /client/public
+       base: '/', // Serve assets from root URL
+       server: {
+         fs: {
+           strict: false // Allow serving from nested dirs if needed
+         }
+       }
+     });
+     ```
+     - If there's a root-level vite.config.js (e.g., in /vite.config.js), it might override—temporarily rename it or ensure you're running `npm run dev` from inside /client.
+     - For monorepos: If using tools like Turborepo or Nx, check workspace configs—they can alter Vite's root. Run commands with `--filter=client` or similar to isolate.
+
+   Restart the dev server after changes (`npm run dev` from /client dir).
+
+### 3. **Bypass Public Dir: Move to /src/assets and Import**
+   Public dir issues are common in nested setups, so switch to bundled assets—Vite handles these reliably via the module graph, avoiding serving quirks.
+   
+   - Move the file: From /client/public/circuit-bg.png to /client/src/assets/circuit-bg.png (create assets folder).
+   - Update App.tsx:
+     ```tsx
+     import circuitBg from './assets/circuit-bg.png'; // Relative to App.tsx; adjust if needed (e.g., '../assets/' if App is in a subdir)
+
+     function App() {
+       return (
+         <div
+           style={{
+             backgroundImage: `linear-gradient(rgba(11, 16, 32, 0.3), rgba(11, 16, 32, 0.3)), url(${circuitBg})`,
+             backgroundSize: 'cover',
+             backgroundPosition: 'center',
+             backgroundRepeat: 'no-repeat',
+             backgroundBlendMode: 'overlay',
+             minHeight: '100vh',
+             // Other styles
+           }}
+         >
+           {/* Test img – update src to ${circuitBg} */}
+           <img src={circuitBg} alt="test" style={{ position: 'absolute', top: 0, left: 0, width: '200px', opacity: 0.5 }} />
+           {/* Content */}
+         </div>
+       );
+     }
+     ```
+   - Vite will bundle it (adds hash in build for caching) and resolve the URL automatically. This works even in complex monorepos.
+
+### 4. **Check for File Corruption or Accessibility**
+   - Open the PNG in an editor (e.g., VS Code's image preview or Photoshop). If it displays, re-save as a new file (e.g., circuit-bg-new.png) and swap it in.
+   - Permissions: Ensure the file isn't read-only or blocked (rare, but check file properties).
+   - Test with a fresh image: Download a sample circuit PNG online, drop it in the same spot, and reference it instead. If it loads, your original is borked.
+
+### 5. **Address the Dual App Files and Routing Conflicts**
+   Having both /src/App.jsx and /client/src/App.tsx suggests possible duplication or a misconfigured project (e.g., an old CRA setup mixed with Vite). 
+   - Confirm which one is active: Check package.json scripts in /client—does `dev` point to Vite? If there's a server (e.g., Express at root on another port), ensure no proxy conflicts (Vite's server.proxy might be set).
+   - If full-stack: The server might be handling routes, blocking static assets. Add a Vite proxy in config if needed, but since it's dev on 5173, it should be direct.
+   - Clean slate: `npm cache clean --force`, delete node_modules, reinstall (`npm i`), and restart.
+
+### If Still Stuck
+- Share your vite.config.js contents (mask any sensitive bits).
+- Network tab screenshot or details on the image request.
+- Exact error if accessing the direct URL fails.
+- Project structure tree (e.g., from `tree /client` or similar).
+
+This targets the nested setup weirdness—moving to imported assets often sidesteps it entirely. Let's crack this! Update me on what happens.
