@@ -27,6 +27,10 @@ export default function App() {
 
       {/* Main content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-6 pt-4">
+        <div className="mb-6">
+          <img src="/verifyz-logo-main.png" alt="VeriFyz Protocol" className="w-40 h-40 object-contain mx-auto" />
+        </div>
+
         <p className="text-lg text-cyan-400">
           Real proof in presence.
         </p>
