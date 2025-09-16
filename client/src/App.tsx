@@ -26,15 +26,9 @@ export default function App() {
       <img src={circuitBg} alt="test" style={{ position: 'absolute', top: 0, left: 0, opacity: 0.5, width: '200px', zIndex: 999 }} />
 
       {/* Main content */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-6">
-        {/* Logo */}
-        <div className="mb-6">
-          <img src="/assets/verifyz-logo.png" alt="VeriFyz Protocol" className="w-24 h-24 object-contain mx-auto" />
-        </div>
-
-        <h1 className="text-5xl font-extrabold text-glow cyber-text">VeriFyz Protocol</h1>
-        <p className="mt-4 text-lg text-cyan-400">
-          Real proof in presence. Verified, Anonymous, Rewarded.
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-6 pt-4">
+        <p className="text-lg text-cyan-400">
+          Real proof in presence.
         </p>
         <button className="mt-8 px-8 py-3 rounded-lg bg-cyan-500 text-black font-semibold shadow-glow hover:scale-105 hover:shadow-cyan-500/70 transition cyber-button">
           Get Started
