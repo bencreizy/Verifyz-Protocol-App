@@ -60,12 +60,12 @@ body {
 
 /* Logo image inside logo wrapper */
 .logo-wrapper img {
-  width: 80%;
-  height: 80%;
+  width: 90%;
+  height: 90%;
   object-fit: contain;
   display: block;
   margin: 0 auto;
-  filter: drop-shadow(0 0 10px var(--color-primary)) drop-shadow(0 0 20px var(--color-accent));
+  /* Remove filters to preserve the logo's original colors */
 }
 
 /* Hide original icon styling since we replaced it with an image */
