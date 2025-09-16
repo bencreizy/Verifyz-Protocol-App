@@ -1,0 +1,187 @@
+
+:root {
+  --color-cyan: #00f5ff;
+  --color-purple: #5f27cd;
+  --color-pink: #ff0099;
+  --color-green: #3aff36;
+  --color-light: #e6efff;
+  --color-text: #aab7e1;
+  --card-bg: rgba(10, 20, 40, 0.8);
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: #010616;
+  color: var(--color-text);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 1rem;
+}
+.wrapper {
+  width: 100%;
+  max-width: 420px;
+}
+/* Hero section */
+.hero {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.logo-image {
+  display: block;
+  width: 140px;
+  height: auto;
+  margin: 0 auto 1rem;
+  filter: drop-shadow(0 0 20px var(--color-cyan)) drop-shadow(0 0 40px var(--color-pink));
+}
+.hero-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  background: linear-gradient(120deg, var(--color-cyan), var(--color-purple), var(--color-pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 8px var(--color-cyan), 0 0 16px var(--color-pink);
+  margin-bottom: 0.5rem;
+}
+.hero-subtitle {
+  font-size: 0.85rem;
+  color: var(--color-text);
+  margin-bottom: 1.2rem;
+}
+.hero-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border: none;
+  border-radius: 0.75rem;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.3px;
+  background-image: linear-gradient(90deg, var(--color-cyan) 0%, var(--color-purple) 50%, var(--color-pink) 100%);
+  color: #fff;
+  text-shadow: 0 0 6px var(--color-purple);
+  box-shadow: 0 0 12px var(--color-cyan), 0 0 24px var(--color-pink);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  margin-bottom: 1rem;
+}
+.hero-button i { font-size: 1rem; }
+.hero-button:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 16px var(--color-cyan), 0 0 32px var(--color-pink);
+}
+.scroll-down {
+  font-size: 1.5rem;
+  color: var(--color-cyan);
+  animation: bounce 2s infinite;
+}
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+/* Video section */
+.video-section { margin-bottom: 2rem; }
+.video-card {
+  position: relative;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: var(--card-bg);
+  overflow: hidden;
+}
+.video-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(135deg, var(--color-cyan), var(--color-purple), var(--color-pink));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: -1;
+}
+.video-thumbnail {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  display: block;
+}
+/* Why section */
+.why-section { margin-bottom: 2rem; }
+.why-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.4rem;
+  text-align: center;
+  color: var(--color-green);
+  text-shadow: 0 0 8px var(--color-green), 0 0 16px var(--color-purple);
+  margin-bottom: 1.5rem;
+}
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+/* Base info card styling */
+.info-card {
+  position: relative;
+  padding: 1.25rem;
+  border-radius: 1rem;
+  background: var(--card-bg);
+  overflow: hidden;
+  color: var(--color-text);
+}
+.info-card::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: var(--card-gradient);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: -1;
+}
+.card-icon {
+  font-size: 1.6rem;
+  margin-bottom: 0.6rem;
+  display: block;
+  color: var(--card-accent);
+}
+.card-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+  color: var(--card-accent);
+}
+.card-text {
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+/* Colour variations for the cards */
+.card-blue {
+  --card-accent: var(--color-cyan);
+  --card-gradient: linear-gradient(135deg, var(--color-cyan), var(--color-purple));
+}
+.card-pink {
+  --card-accent: var(--color-pink);
+  --card-gradient: linear-gradient(135deg, var(--color-pink), var(--color-purple));
+}
+.card-green {
+  --card-accent: var(--color-green);
+  --card-gradient: linear-gradient(135deg, var(--color-green), var(--color-cyan));
+}
+.card-purple {
+  --card-accent: var(--color-purple);
+  --card-gradient: linear-gradient(135deg, var(--color-purple), var(--color-pink));
+}
