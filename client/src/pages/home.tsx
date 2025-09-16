@@ -7,8 +7,12 @@ export default function Home() {
 
       {/* Content */}
       <div className="relative z-10 text-center px-6">
-        <div className="mx-auto mb-6 w-20 h-20 bg-cyan-400 rounded-full flex items-center justify-center">
-          <span className="text-black font-bold text-xl">VZ</span>
+        <div className="mx-auto mb-6 w-20 h-20 flex items-center justify-center">
+          <img 
+            src="/assets/images/circuit-bg.png" 
+            alt="VeriFyz Logo" 
+            className="w-20 h-20 object-contain filter brightness-0 invert"
+          />
         </div>
         <h1 className="text-5xl font-extrabold">VeriFyz Protocol</h1>
         <p className="mt-4 text-lg">Real proof in presence. Verified, Anonymous, Rewarded.</p>
