@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "cd client && npm run dev",
-    "build": "cd client && npm run build",
+    "dev": "tsx server/index.ts",
+    "build": "vite build",
     "preview": "cd client && npm run preview"
   },
   "dependencies": {
