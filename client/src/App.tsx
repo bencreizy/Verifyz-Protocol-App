@@ -1,4 +1,3 @@
-
 import './index.css';
 import circuitBg from '@assets/circuit-bg.png';
 
@@ -30,6 +29,10 @@ export default function App() {
             src="/verifyz-logo-main.png" 
             alt="VeriFyz Protocol" 
             className="w-64 h-auto mx-auto object-contain"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = '/assets/logo.png';
+            }}
           />
         </div>
       </div>
