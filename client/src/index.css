@@ -88,12 +88,12 @@
     @apply font-sans antialiased text-foreground;
     margin: 0;
     padding: 0;
+    font-family: sans-serif;
     color: #fff;
     position: relative;
     min-height: 100vh;
-    background: url("/assets/images/circuit-bg.png") no-repeat center center fixed;
+    background: url("/circuit-bg.png") no-repeat center center fixed;
     background-size: cover;
-    animation: circuit-flow 30s linear infinite;
   }
   
   body::before {
@@ -106,6 +106,23 @@
     background: rgba(0, 0, 0, 0.6); /* dark overlay */
     pointer-events: none;
     z-index: -1;
+  }
+
+  button, .btn, .get-started {
+    background: #0ff;
+    color: #000;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1.2em;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+    transition: all 0.3s ease-in-out;
+  }
+
+  button:hover, .btn:hover, .get-started:hover {
+    box-shadow: 0 0 20px #0ff, 0 0 40px #0ff;
+    transform: scale(1.05);
   }
 
   @keyframes matrix-rain {
