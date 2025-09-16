@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -11,6 +12,12 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       colors: {
+        brand: {
+          900: '#0b1020',
+          800: '#121a3a', 
+          700: '#182457',
+          neon: '#14e3ff'
+        },
         background: "var(--background)",
         foreground: "var(--foreground)",
         card: {
@@ -61,6 +68,13 @@ export default {
           border: "var(--sidebar-border)",
           ring: "var(--sidebar-ring)",
         },
+      },
+      boxShadow: {
+        glow: '0 0 20px rgba(20,227,255,0.35)'
+      },
+      backgroundImage: {
+        'verifyz-gradient': 'linear-gradient(180deg, #0b1020 0%, #121a3a 50%, #182457 100%)',
+        'circuit': "url('/assets/images/circuit-bg.png')"
       },
       fontFamily: {
         sans: ["var(--font-sans)"],
