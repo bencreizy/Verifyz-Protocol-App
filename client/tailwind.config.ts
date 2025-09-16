@@ -1,26 +1,31 @@
-import './index.css';
 
-export default function App() {
-  return (
-    <div className="bg-circuit bg-cover bg-center min-h-screen relative text-white">
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black bg-opacity-60"></div>
+import type { Config } from 'tailwindcss';
 
-      {/* Main content */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-6">
-        <img
-          src="/verifyz-logo.png"
-          alt="VeriFyz Logo"
-          className="mb-6 w-20 h-20"
-        />
-        <h1 className="text-5xl font-extrabold">VeriFyz Protocol</h1>
-        <p className="mt-4 text-lg">
-          Real proof in presence. Verified, Anonymous, Rewarded.
-        </p>
-        <button className="mt-8 px-8 py-3 rounded-lg bg-cyan-400 text-black font-semibold shadow-lg hover:scale-105 hover:shadow-cyan-400/70 transition">
-          Get Started
-        </button>
-      </div>
-    </div>
-  );
-}
+const config: Config = {
+  content: [
+    './index.html',
+    './src/**/*.{js,ts,jsx,tsx}',
+  ],
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          900: '#0b1020',
+          800: '#121a3a', 
+          700: '#182457',
+          neon: '#14e3ff'
+        }
+      },
+      boxShadow: {
+        glow: '0 0 20px rgba(20,227,255,0.35)'
+      },
+      backgroundImage: {
+        'verifyz-gradient': 'linear-gradient(180deg, #0b1020 0%, #121a3a 50%, #182457 100%)',
+        'circuit': "url('/assets/images/circuit-bg.png')"
+      }
+    },
+  },
+  plugins: [],
+};
+
+export default config;
