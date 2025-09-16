@@ -17,7 +17,8 @@ export default {
       },
       backgroundImage: {
         'verifyz-gradient': 'linear-gradient(180deg, #0b1020 0%, #121a3a 50%, #182457 100%)',
-        'circuit': "url('/assets/images/circuit-bg.png')"
+        'circuit': "url('/assets/images/circuit-bg.png')",
+        'fingerprint': "url('/assets/images/circuit-bg.png')"
       }
     },
   },

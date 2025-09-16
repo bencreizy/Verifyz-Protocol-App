@@ -11,7 +11,10 @@ import './styles.css'
 
 export default function App() {
   return (
-    <div className="bg-verifyz-gradient min-h-screen text-white bg-fingerprint">
+    <div className="bg-circuit bg-cover bg-center min-h-screen text-white relative">
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black bg-opacity-60"></div>
+      <div className="relative z-10">
       <Nav />
       <main>
         <Hero />
@@ -22,6 +25,7 @@ export default function App() {
         <ProofSubmit />
       </main>
       <Footer />
+      </div>
     </div>
   )
 }
