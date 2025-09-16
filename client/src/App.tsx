@@ -9,15 +9,15 @@ export default function App() {
         className="absolute inset-0" 
         style={{
           backgroundImage: "url('/circuit-bg.png')",
-          backgroundSize: 'cover',
+          backgroundSize: '80% 80%',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
-          opacity: '0.25'
+          opacity: '0.4'
         }}
       ></div>
       
-      {/* Additional gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-brand-900/50 via-brand-800/40 to-brand-700/50"></div>
+      {/* Lighter gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-brand-900/30 via-brand-800/20 to-brand-700/30"></div>
 
       {/* Main content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-6">
