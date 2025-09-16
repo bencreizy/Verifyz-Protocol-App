@@ -87,10 +87,13 @@
   body {
     @apply font-sans antialiased bg-background text-foreground;
     background: 
-      url('/circuit-board.png') #001122;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+      url('/circuit-board.png'),
+      url('./circuit-board.png'),
+      linear-gradient(135deg, #000012 0%, #001122 25%, #1a0033 50%, #003333 75%, #000012 100%),
+      #001122;
+    background-size: cover, cover, 400% 400%, auto;
+    background-position: center, center, 0% 50%, center;
+    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
     background-attachment: fixed;
     animation: circuit-flow 30s linear infinite;
     min-height: 100vh;
