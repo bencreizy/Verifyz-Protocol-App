@@ -1,0 +1,89 @@
+/* Hero Section */
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 50%, rgba(0,212,255,0.1) 100%);
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: 1rem;
+  color: var(--color-text-primary);
+}
+
+.hero p {
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  color: var(--color-text-secondary);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.hero button {
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--color-text-primary);
+  background: linear-gradient(90deg, var(--color-cyan) 0%, var(--color-pink) 100%);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255,52,210,0.4);
+}
+
+.hero button:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(0,247,255,0.6);
+}
+
+.site-logo{display:flex;justify-content:center;align-items:center;padding:24px 0 8px;}
+.site-logo img{width:min(22vw,144px);height:auto;filter:drop-shadow(0 0 18px #00f7ff) drop-shadow(0 0 36px #ff34d2);}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-top: 4rem;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+}
+
+.footer a {
+  color: var(--color-cyan);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer a:hover {
+  color: var(--color-pink);
+}
+
+/* Utility Classes */
+:root {
+  --color-primary: #0a0a23;
+  --color-secondary: #0077cc;
+  --color-accent: #ff34d2;
+  --color-cyan: #00f7ff;
+  --color-pink: #ff34d2;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #cccccc;
+  --color-border: #333333;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--color-primary);
+  color: var(--color-text-primary);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+}
