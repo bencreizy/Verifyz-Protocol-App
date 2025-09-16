@@ -28,9 +28,9 @@ export default function App() {
       
       {/* Main content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-6">
-        {/* Logo */}
-        <div className="mb-6 w-24 h-24 flex items-center justify-center">
-          <img src="/assets/verifyz-logo.png" alt="VeriFyz Protocol" className="w-full h-full object-contain" />
+        {/* Logo circle with V */}
+        <div className="mb-6 w-24 h-24 rounded-full bg-gradient-to-br from-cyan-400 to-green-400 flex items-center justify-center animate-pulse-slow glow-hover">
+          <span className="text-2xl font-bold text-black">V</span>
         </div>
         
         <h1 className="text-5xl font-extrabold text-glow cyber-text">VeriFyz Protocol</h1>
