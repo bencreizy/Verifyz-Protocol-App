@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>VeriFyz Token Presale</title>
+    <title>VeriFyz Protocol</title>
     <!-- Google Fonts for futuristic style -->
     <link
       href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Montserrat:wght@300;400;600&display=swap"
@@ -22,107 +22,207 @@
   </head>
   <body>
     <div class="main-wrapper">
-      <!-- Logo section at the very top -->
-      <header class="logo-section">
+      <!-- Hero section -->
+      <section class="hero-section">
         <div class="logo-wrapper">
           <img src="assets/fingerprint.png" alt="VeriFyz Protocol logo" class="logo-image" />
         </div>
-        <h1 class="main-title">VeriFyz Token Presale</h1>
-      </header>
+        <h1 class="hero-title">VeriFyz Protocol</h1>
+        <p class="hero-subtitle">Real proof in presence.</p>
+        <button type="button" class="hero-button">
+          <i class="fa-solid fa-rocket"></i>
+          Join Presale
+        </button>
+        <div class="scroll-indicator">
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+      </section>
 
-      <!-- YouTube video section -->
+      <!-- Video section -->
       <section class="card video-section">
         <div class="video-container">
-          <div class="video-placeholder">
-            <i class="fa-solid fa-play video-icon"></i>
-            <p class="video-text">Watch our demo video</p>
+          <div class="video-content">
+            <div class="video-text-overlay">
+              <h3>IN A WORLD WHERE YOUR DATA IS CURRENCY...</h3>
+              <p>EXPECT STOLEN DATA</p>
+            </div>
+            <div class="video-play-button">
+              <i class="fa-solid fa-play"></i>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- Use case section -->
-      <section class="card use-case-section">
-        <h2 class="section-title">
-          <i class="fa-solid fa-lightbulb"></i> Why VeriFyz?
-        </h2>
-        <div class="use-case-grid">
-          <div class="use-case-item">
-            <i class="fa-solid fa-shield-halved"></i>
-            <h3>Anonymous Verification</h3>
-            <p>Verify without exposing your identity</p>
-          </div>
-          <div class="use-case-item">
-            <i class="fa-solid fa-location-dot"></i>
-            <h3>True Proof of Presence</h3>
-            <p>GPS, QR/NFC, and device signals make spoofing impossible</p>
-          </div>
-          <div class="use-case-item">
-            <i class="fa-solid fa-link"></i>
-            <h3>Trust on Chain</h3>
-            <p>Every presence is recorded immutably on blockchain</p>
-          </div>
-          <div class="use-case-item">
-            <i class="fa-solid fa-infinity"></i>
-            <h3>Unlimited Tokens</h3>
-            <p>Scalable rewards, limitless adoption</p>
-          </div>
+      <!-- Why VeriFyz section -->
+      <section class="why-section">
+        <h2 class="section-title-large">Why VeriFyz Changes Everything</h2>
+        
+        <div class="feature-card card">
+          <i class="fa-solid fa-shield-halved feature-icon"></i>
+          <h3 class="feature-title">Anonymous Verification</h3>
+          <p class="feature-text">VeriFyz offers anonymous, yet verifiable presence without compromising user privacy.</p>
+        </div>
+
+        <div class="feature-card card">
+          <i class="fa-solid fa-building feature-icon pink"></i>
+          <h3 class="feature-title">Big Tech Failed</h3>
+          <p class="feature-text">Google, Meta, and Amazon have tried (and failed) to collect meaningful location data without privacy invasion.</p>
+        </div>
+
+        <div class="feature-card card">
+          <i class="fa-solid fa-lock feature-icon green"></i>
+          <h3 class="feature-title">True Proof of Presence</h3>
+          <p class="feature-text">Users stay anonymous while businesses get powerful insights – solving the privacy paradox.</p>
+        </div>
+
+        <div class="feature-card card">
+          <i class="fa-solid fa-chart-line feature-icon purple"></i>
+          <h3 class="feature-title">Valuable Data</h3>
+          <p class="feature-text">The first system that respects people and still delivers valuable real-world data.</p>
         </div>
       </section>
 
       <!-- Roadmap section -->
-      <section class="card roadmap-section">
-        <h2 class="section-title">
-          <i class="fa-solid fa-road"></i> Roadmap
-        </h2>
+      <section class="roadmap-section">
+        <h2 class="section-title-large roadmap-title">VeriFyz Protocol Roadmap</h2>
+        
         <div class="roadmap-timeline">
-          <div class="roadmap-step">
-            <div class="step-number">1</div>
-            <div class="step-content">
-              <h3>Event Creation</h3>
-              <p>Organizer posts eventId, geofence & time window on-chain</p>
+          <div class="roadmap-item completed">
+            <div class="roadmap-date">
+              <i class="fa-solid fa-check"></i>
+              <span class="quarter">Q2<br>2025</span>
             </div>
-          </div>
-          <div class="roadmap-step">
-            <div class="step-number">2</div>
-            <div class="step-content">
-              <h3>User Check-In</h3>
-              <p>Scan QR / tap NFC at venue. Challenge includes nonce & expiry</p>
+            <div class="roadmap-content">
+              <h3>Project concept finalized</h3>
             </div>
+            <div class="timeline-connector"></div>
           </div>
-          <div class="roadmap-step">
-            <div class="step-number">3</div>
-            <div class="step-content">
-              <h3>Proof Generation</h3>
-              <p>Device collects GPS + attestation & creates ZK proof</p>
+
+          <div class="roadmap-item completed">
+            <div class="roadmap-date">
+              <i class="fa-solid fa-check"></i>
+              <span class="quarter">Q3<br>2025</span>
             </div>
-          </div>
-          <div class="roadmap-step">
-            <div class="step-number">4</div>
-            <div class="step-content">
-              <h3>Proof Submission</h3>
-              <p>Submit proof & nullifier to Verifier contract</p>
+            <div class="roadmap-content">
+              <h3>MVP launched for early testers</h3>
             </div>
+            <div class="timeline-connector"></div>
           </div>
-          <div class="roadmap-step">
-            <div class="step-number">5</div>
-            <div class="step-content">
-              <h3>Reward Settlement</h3>
-              <p>Escrow pays tokens & logs presence receipt</p>
+
+          <div class="roadmap-item current">
+            <div class="roadmap-date">
+              <i class="fa-solid fa-rocket"></i>
+              <span class="quarter">Q3<br>2025</span>
+            </div>
+            <div class="roadmap-content">
+              <h3>Token Presale + Social Launch Begins</h3>
+            </div>
+            <div class="timeline-connector"></div>
+          </div>
+
+          <div class="roadmap-item future">
+            <div class="roadmap-date">
+              <span class="quarter">Q4<br>2025</span>
+            </div>
+            <div class="roadmap-content">
+              <h3>Business onboarding portal opens</h3>
+            </div>
+            <div class="timeline-connector"></div>
+          </div>
+
+          <div class="roadmap-item future">
+            <div class="roadmap-date">
+              <span class="quarter soon">SOON</span>
+              <span class="quarter">Q1<br>2026</span>
+            </div>
+            <div class="roadmap-content">
+              <h3>Mobile apps + QR/NFC integrations</h3>
+            </div>
+            <div class="timeline-connector"></div>
+          </div>
+
+          <div class="roadmap-item future">
+            <div class="roadmap-date">
+              <i class="fa-solid fa-globe"></i>
+              <span class="quarter">2026+</span>
+            </div>
+            <div class="roadmap-content">
+              <h3>SDK release + Global adoption drive</h3>
             </div>
           </div>
         </div>
       </section>
 
+      <!-- Lifetime Rewards section -->
+      <section class="card lifetime-rewards">
+        <div class="rewards-header">
+          <div class="party-emoji">🎉</div>
+          <h2 class="section-title-large rewards-title">Lifetime Reward Winners Selected!</h2>
+        </div>
+
+        <div class="reward-type-card">
+          <i class="fa-solid fa-bolt reward-icon"></i>
+          <h3 class="reward-type-title">Automatic</h3>
+          <p class="reward-type-text">No sign-up required. Just hold to qualify.</p>
+        </div>
+
+        <div class="reward-type-card">
+          <i class="fa-solid fa-dice reward-icon"></i>
+          <h3 class="reward-type-title">Random Selection</h3>
+          <p class="reward-type-text">Completely random. Could be anyone.</p>
+        </div>
+
+        <div class="reward-type-card">
+          <i class="fa-solid fa-infinity reward-icon"></i>
+          <h3 class="reward-type-title">Lifetime Rewards</h3>
+          <p class="reward-type-text">From every buy, sell, and trade. Forever.</p>
+        </div>
+
+        <div class="reward-special-card">
+          <i class="fa-solid fa-exclamation-triangle warning-icon"></i>
+          <h3 class="special-title">Only 5 wallets. Ever.</h3>
+          <p class="special-text">Once selected, these wallets earn rewards automatically from the entire VeriFyz ecosystem. <span class="highlight">No action required.</span></p>
+        </div>
+
+        <p class="presale-text">Get ready for the presale launch.</p>
+        <button type="button" class="cta-button notification-button">
+          <i class="fa-solid fa-bell"></i>
+          Get Notified
+        </button>
+      </section>
+
+      <!-- Live Connected Wallets section -->
+      <section class="card live-wallets">
+        <div class="live-indicator">
+          <div class="live-dot"></div>
+          <span>LIVE CONNECTED WALLETS</span>
+        </div>
+        <div class="wallet-icon">
+          <i class="fa-solid fa-wallet"></i>
+        </div>
+      </section>
+
+      <!-- Presale section with fingerprint logo -->
+      <section class="presale-header">
+        <div class="presale-logo">
+          <img src="assets/fingerprint.png" alt="VeriFyz fingerprint" class="fingerprint-logo" />
+        </div>
+        <h2 class="presale-title">VeriFyz Token Presale</h2>
+        <p class="presale-subtitle">Get VeriFyz tokens at $0.05 each during our exclusive presale.</p>
+      </section>
+
       <!-- Connect wallet card -->
       <section class="card connect-wallet">
-        <h2 class="section-title">
-          <i class="fa-solid fa-wallet"></i> Connect Your Wallet
-        </h2>
+        <h3 class="card-title">
+          <i class="fa-solid fa-link"></i>
+          Connect Your Wallet
+        </h3>
         <p class="card-desc">
           Connect your MetaMask wallet to participate in the presale
         </p>
         <div class="mobile-notice">
-          <span class="notice-title">Mobile detected – Open this site in MetaMask browser</span>
+          <i class="fa-solid fa-mobile-screen-button notice-icon"></i>
+          <span class="notice-title">Mobile detected - Open this site in MetaMask browser</span>
           <ol class="notice-steps">
             <li>Open MetaMask app</li>
             <li>Tap the menu (≡)</li>
@@ -130,14 +230,18 @@
             <li>Visit this website again</li>
           </ol>
         </div>
-        <button type="button" class="cta-button">Open in MetaMask</button>
+        <button type="button" class="cta-button">
+          <i class="fa-solid fa-external-link-alt"></i>
+          Open in MetaMask
+        </button>
       </section>
 
       <!-- Calculator card -->
       <section class="card calculator">
-        <h2 class="section-title">
-          <i class="fa-solid fa-calculator"></i> USD → VeriFyz Calculator
-        </h2>
+        <h3 class="card-title">
+          <i class="fa-solid fa-calculator"></i>
+          USD → VeriFyz Calculator
+        </h3>
         <label for="usdAmount" class="input-label">USD Amount</label>
         <input
           id="usdAmount"
@@ -146,105 +250,77 @@
           value="100"
           min="0"
         />
-        <div class="info-grid">
-          <div class="info-row">
-            <span class="info-label">MATIC Amount:</span>
-            <span class="info-value" id="maticAmount">369.003 MATIC</span>
+        <div class="calculation-results">
+          <div class="calc-row">
+            <span class="calc-label">MATIC Amount:</span>
+            <span class="calc-value" id="maticAmount">0 MATIC</span>
           </div>
-          <div class="info-row">
-            <span class="info-label">Current MATIC/USD:</span>
-            <span class="info-value" id="currentRate">$0.271</span>
+          <div class="calc-row">
+            <span class="calc-label">Current MATIC/USD:</span>
+            <span class="calc-value" id="currentRate">$0.257</span>
           </div>
-          <div class="info-row">
-            <span class="info-label">Token Price:</span>
-            <span class="info-value" id="tokenPrice">$0.05</span>
+          <div class="calc-row">
+            <span class="calc-label">Token Price:</span>
+            <span class="calc-value" id="tokenPrice">$0.05</span>
           </div>
-          <div class="info-row">
-            <span class="info-label">You'll receive:</span>
-            <span class="info-value" id="tokenReceive">2000 VeriFyz tokens</span>
+          <div class="calc-row highlight">
+            <span class="calc-label">You'll receive:</span>
+            <span class="calc-value" id="tokenReceive">0 VeriFyz tokens</span>
           </div>
         </div>
       </section>
 
       <!-- Complete purchase card -->
       <section class="card complete-purchase">
-        <h2 class="section-title">
-          <i class="fa-solid fa-credit-card"></i> Complete Your Purchase
-        </h2>
-        <label for="recipient" class="input-label">Recipient Address</label>
+        <h3 class="card-title">
+          <i class="fa-solid fa-paper-plane"></i>
+          Complete Your Purchase
+        </h3>
+        <label for="recipient" class="input-label">Recipient Address:</label>
         <input
           id="recipient"
           type="text"
-          class="input-field"
+          class="input-field recipient-field"
           readonly
-          value="0xDde2a0D0BCdc1566c671a31b504a3796d50eEdf"
+          value="0xDde2aD00BCdc1566c671a31b50a433796d50Eedf"
         />
-        <button type="button" class="cta-button purchase-button">Send MATIC</button>
-        <p class="disclaimer">
-          After sending, your VeriFyz tokens will be distributed to your wallet within 24 hours.
-        </p>
-      </section>
-
-      <!-- Lifetime Reward Winners section -->
-      <section class="card rewards-section">
-        <h2 class="section-title">
-          <i class="fa-solid fa-trophy"></i> Lifetime Reward Winners Selected
-        </h2>
-        <div class="reward-grid">
-          <div class="reward-item reward-automatic">
-            <i class="fa-solid fa-magic-wand-sparkles"></i>
-            <h3 class="reward-title">Automatic</h3>
-            <p class="reward-text">Get rewarded automatically for verified presence</p>
-          </div>
-          <div class="reward-item reward-random">
-            <i class="fa-solid fa-dice"></i>
-            <h3 class="reward-title">Random</h3>
-            <p class="reward-text">Random selection from all verified participants</p>
-          </div>
-          <div class="reward-item reward-lifetime">
-            <i class="fa-solid fa-infinity"></i>
-            <h3 class="reward-title">Lifetime</h3>
-            <p class="reward-text">Lifetime rewards for early adopters and VIP members</p>
-          </div>
-          <div class="reward-item reward-final">
-            <i class="fa-solid fa-crown"></i>
-            <h3 class="reward-title">Final</h3>
-            <p class="reward-text">Ultimate rewards for the most active community members</p>
-            <button type="button" class="cta-button reward-button">Claim Reward</button>
-          </div>
+        <button type="button" class="cta-button purchase-button">
+          <i class="fa-solid fa-paper-plane"></i>
+          Send $0 USD (0 MATIC)
+        </button>
+        <div class="safety-notice">
+          <i class="fa-solid fa-exclamation-triangle"></i>
+          <span class="safety-text">Safety Note:</span>
+          <p>Tokens will be distributed after the presale concludes. Please verify the wallet address before sending MATIC. This transaction is irreversible.</p>
         </div>
       </section>
 
       <!-- Stay tuned section -->
       <section class="card stay-tuned">
-        <h2 class="section-title">
-          <i class="fa-solid fa-bell"></i> Stay Tuned for Protocol Launch
-        </h2>
-        <p class="stay-text">
-          VeriFyz Protocol launches October 6th. Be ready to start earning tokens for your verified presence.
-        </p>
-        <div class="launch-details">
-          <div class="detail-item">
-            <i class="fa-solid fa-calendar"></i>
-            <span>Launch Date: Oct 6</span>
-          </div>
-          <div class="detail-item">
-            <i class="fa-solid fa-coins"></i>
-            <span>Token Rewards Available</span>
-          </div>
+        <h3 class="card-title">
+          <i class="fa-solid fa-rocket"></i>
+          Stay Tuned for Presale Start and Results
+        </h3>
+        <div class="countdown-info">
+          <i class="fa-solid fa-hourglass-half"></i>
+          <span class="countdown-title">Presale Coming Soon</span>
+          <p class="countdown-text">Presale will begin shortly. Stay tuned!</p>
         </div>
-        <button type="button" class="cta-button">Get Notified</button>
       </section>
 
       <!-- Footer -->
-      <footer class="closing">
-        <p class="closing-note">
-          Thanks for joining the VeriFyz revolution. The future is anonymous, verified, and rewarded.
-        </p>
-        <div class="social-icons">
-          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-          <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
-          <a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+      <footer class="footer">
+        <p class="copyright">© 2025 VeriFyz Protocol. The future of anonymous presence verification.</p>
+        <div class="social-links">
+          <a href="#" class="social-link twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#" class="social-link discord">
+            <i class="fab fa-discord"></i>
+          </a>
+          <a href="#" class="social-link telegram">
+            <i class="fab fa-telegram"></i>
+          </a>
         </div>
       </footer>
     </div>
