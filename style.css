@@ -39,8 +39,8 @@ body {
   margin: 0 auto;
 }
 
-/* Hero section */
-.hero {
+/* Logo section at top */
+.logo-section {
   text-align: center;
   margin-bottom: 2rem;
 }
@@ -58,22 +58,15 @@ body {
   box-shadow: 0 0 15px var(--color-primary), 0 0 30px var(--color-accent);
 }
 
-/* Logo image inside logo wrapper */
 .logo-wrapper img {
   width: 90%;
   height: 90%;
   object-fit: contain;
   display: block;
   margin: 0 auto;
-  /* Remove filters to preserve the logo's original colors */
 }
 
-/* Hide original icon styling since we replaced it with an image */
-.logo-wrapper i {
-  display: none;
-}
-
-.title {
+.main-title {
   font-family: 'Orbitron', sans-serif;
   font-size: 1.6rem;
   color: var(--color-primary);
@@ -81,9 +74,124 @@ body {
   margin-bottom: 0.4rem;
 }
 
-.subtitle {
-  font-size: 0.85rem;
+/* Video section */
+.video-section {
+  margin-bottom: 2rem;
+}
+
+.video-container {
+  width: 100%;
+  height: 200px;
+  background: rgba(20, 40, 80, 0.6);
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 245, 255, 0.3);
+}
+
+.video-placeholder {
+  text-align: center;
   color: var(--color-text);
+}
+
+.video-icon {
+  font-size: 3rem;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.video-text {
+  font-size: 0.9rem;
+}
+
+/* Use case section */
+.use-case-section {
+  margin-bottom: 2rem;
+}
+
+.use-case-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.use-case-item {
+  text-align: center;
+  padding: 1rem;
+  background: rgba(20, 40, 80, 0.4);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(0, 245, 255, 0.2);
+}
+
+.use-case-item i {
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.use-case-item h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.8rem;
+  color: var(--color-primary);
+  margin-bottom: 0.3rem;
+}
+
+.use-case-item p {
+  font-size: 0.7rem;
+  line-height: 1.3;
+}
+
+/* Roadmap section */
+.roadmap-section {
+  margin-bottom: 2rem;
+}
+
+.roadmap-timeline {
+  margin-top: 1rem;
+}
+
+.roadmap-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(0, 245, 255, 0.2);
+}
+
+.roadmap-step:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.step-number {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, var(--color-primary), var(--color-secondary));
+  color: #000;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.step-content h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.9rem;
+  color: var(--color-primary);
+  margin-bottom: 0.3rem;
+}
+
+.step-content p {
+  font-size: 0.75rem;
   line-height: 1.4;
 }
 
@@ -327,7 +435,27 @@ body {
 .stay-tuned .stay-text {
   font-size: 0.8rem;
   line-height: 1.4;
-  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.launch-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--color-text);
+}
+
+.detail-item i {
+  color: var(--color-primary);
+  width: 16px;
 }
 
 /* Footer / closing note */
