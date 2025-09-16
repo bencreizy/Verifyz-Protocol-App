@@ -1,6 +1,8 @@
 
 import './index.css';
-import circuitBg from './assets/circuit-bg.png';
+import circuitBg from '@assets/circuit-bg.png';
+
+console.log('Imported URL:', circuitBg);
 
 export default function App() {
   return (
