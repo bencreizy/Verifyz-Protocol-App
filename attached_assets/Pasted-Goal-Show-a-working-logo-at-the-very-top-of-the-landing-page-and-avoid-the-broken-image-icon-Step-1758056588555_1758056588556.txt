@@ -1,0 +1,61 @@
+Goal: Show a working logo at the very top of the landing page and avoid the broken-image icon.
+
+Steps:
+
+1) Identify the file that renders the "/" page (the page that shows the text “Real proof in presence.”). Open it.
+
+2) Insert this snippet DIRECTLY ABOVE the slogan line, replacing any previous logo markup:
+   <header id="site-logo" class="site-logo">
+     <img id="top-logo" src="/assets/logo.png" alt="VeriFyz Protocol logo"
+          onerror="this.onerror=null; this.src='/assets/test-logo.svg';" />
+   </header>
+
+3) In the main stylesheet for that page (home.css or style.css), append:
+   .site-logo{
+     display:flex;
+     justify-content:center;
+     align-items:center;
+     padding:24px 0 8px;
+   }
+   .site-logo img{
+     width:min(22vw,144px);
+     height:auto;
+     filter: drop-shadow(0 0 18px #00f7ff) drop-shadow(0 0 36px #ff34d2);
+   }
+
+4) Create a visible fallback asset so the logo never shows broken:
+   - Create a new file at assets/test-logo.svg with the following contents:
+
+     <?xml version="1.0" encoding="UTF-8"?>
+     <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+       <defs>
+         <radialGradient id="g" cx="50%" cy="50%" r="50%">
+           <stop offset="0%" stop-color="#00f7ff"/>
+           <stop offset="100%" stop-color="#0af"/>
+         </radialGradient>
+         <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+           <feGaussianBlur stdDeviation="12" result="blur"/>
+           <feMerge>
+             <feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/>
+           </feMerge>
+         </filter>
+       </defs>
+       <rect width="256" height="256" fill="none"/>
+       <circle cx="128" cy="128" r="70" fill="url(#g)" filter="url(#glow)"/>
+     </svg>
+
+   - Purpose: If /assets/logo.png fails to load for any reason, the <img> automatically swaps to this SVG so there is never a broken icon.
+
+5) Validate the primary logo file:
+   - Ensure a real image file exists at /assets/logo.png (case-sensitive).
+   - Click it in the file tree; it must preview. If it does not preview, delete it and re-upload a valid PNG.
+   - If it previews but still won’t render, rename it to /assets/logo-v1.png and update the HTML src to "/assets/logo-v1.png" (forces cache bust).
+
+6) As a temporary safety net (optional):
+   - If /assets/logo.png is missing, copy any existing image (e.g., assets/fingerprint.png) to /assets/logo.png so the tag has a valid source.
+
+7) Save all files and hard-refresh the Preview. Confirm:
+   - If /assets/logo.png loads, it shows at the top.
+   - If it doesn’t, test-logo.svg displays instead (no broken icon).
+
+Report back which source is currently rendering (logo.png or test-logo.svg) and what action was taken (re-uploaded, renamed, or fallback used).
