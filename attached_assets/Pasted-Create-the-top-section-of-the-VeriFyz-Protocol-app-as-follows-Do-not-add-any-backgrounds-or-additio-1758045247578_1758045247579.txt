@@ -1,0 +1,266 @@
+Create the top section of the VeriFyz Protocol app as follows. Do not add any backgrounds or additional features beyond what is specified. Use the uploaded fingerprint image (attached with this prompt) and place it at the top of the page. After completing these steps, wait for further instructions.
+
+1. Create a folder called `assets` at the project root (if it doesn’t already exist) and copy the uploaded fingerprint image into it as `fingerprint.png`.
+
+2. Create a file named **home.html** at the project root with the following content:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VeriFyz Protocol</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-cl17DracWIeoYum1g8DJCdXo4p2Dx8F++yWjavY06lRuLGhLsw5/5Y9N+9ixZruxtSfiArTD1fQBPPw/a6U3Vg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./home.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <!-- Hero section -->
+      <header class="hero">
+        <!-- Place the fingerprint logo here -->
+        <img src="assets/fingerprint.png" alt="VeriFyz fingerprint logo" class="logo-image" />
+        <h1 class="hero-title">VeriFyz Protocol</h1>
+        <p class="hero-subtitle">Be You. Anonymous. Unstoppable.</p>
+        <button class="hero-button">
+          <i class="fa-solid fa-rocket"></i>
+          Join Presale
+        </button>
+        <div class="scroll-down">
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+      </header>
+
+      <!-- Demo/video section -->
+      <section class="video-section">
+        <div class="video-card">
+          <!-- Leave src empty; placeholder will be added later -->
+          <img src="" alt="Demo video placeholder" class="video-thumbnail" />
+        </div>
+      </section>
+
+      <!-- Why VeriFyz section -->
+      <section class="why-section">
+        <h2 class="why-title">Why VeriFyz Changes Everything</h2>
+        <div class="card-list">
+          <div class="info-card card-blue">
+            <i class="fa-solid fa-shield-halved card-icon"></i>
+            <h3 class="card-title">Anonymous Verification</h3>
+            <p class="card-text">Your identity remains private and secure during every verification process.</p>
+          </div>
+          <div class="info-card card-pink">
+            <i class="fa-solid fa-building card-icon"></i>
+            <h3 class="card-title">Big Tech Failed</h3>
+            <p class="card-text">Legacy platforms mishandle personal data – VeriFyz puts you in control of your digital footprint.</p>
+          </div>
+          <div class="info-card card-green">
+            <i class="fa-solid fa-lock card-icon"></i>
+            <h3 class="card-title">True Proof of Presence</h3>
+            <p class="card-text">Prove you are present without revealing personal information.</p>
+          </div>
+          <div class="info-card card-purple">
+            <i class="fa-solid fa-chart-line card-icon"></i>
+            <h3 class="card-title">Valuable Data</h3>
+            <p class="card-text">Unlock the value of your data while keeping it secure and under your control.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
+
+3. Create a file named home.css at the project root with the following content:
+
+
+
+:root {
+  --color-cyan: #00f5ff;
+  --color-purple: #5f27cd;
+  --color-pink: #ff0099;
+  --color-green: #3aff36;
+  --color-light: #e6efff;
+  --color-text: #aab7e1;
+  --card-bg: rgba(10, 20, 40, 0.8);
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: #010616;
+  color: var(--color-text);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 1rem;
+}
+.wrapper {
+  width: 100%;
+  max-width: 420px;
+}
+/* Hero section */
+.hero {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.logo-image {
+  display: block;
+  width: 140px;
+  height: auto;
+  margin: 0 auto 1rem;
+  filter: drop-shadow(0 0 20px var(--color-cyan)) drop-shadow(0 0 40px var(--color-pink));
+}
+.hero-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  background: linear-gradient(120deg, var(--color-cyan), var(--color-purple), var(--color-pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 8px var(--color-cyan), 0 0 16px var(--color-pink);
+  margin-bottom: 0.5rem;
+}
+.hero-subtitle {
+  font-size: 0.85rem;
+  color: var(--color-text);
+  margin-bottom: 1.2rem;
+}
+.hero-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border: none;
+  border-radius: 0.75rem;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.3px;
+  background-image: linear-gradient(90deg, var(--color-cyan) 0%, var(--color-purple) 50%, var(--color-pink) 100%);
+  color: #fff;
+  text-shadow: 0 0 6px var(--color-purple);
+  box-shadow: 0 0 12px var(--color-cyan), 0 0 24px var(--color-pink);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  margin-bottom: 1rem;
+}
+.hero-button i { font-size: 1rem; }
+.hero-button:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 16px var(--color-cyan), 0 0 32px var(--color-pink);
+}
+.scroll-down {
+  font-size: 1.5rem;
+  color: var(--color-cyan);
+  animation: bounce 2s infinite;
+}
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+/* Video section */
+.video-section { margin-bottom: 2rem; }
+.video-card {
+  position: relative;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: var(--card-bg);
+  overflow: hidden;
+}
+.video-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(135deg, var(--color-cyan), var(--color-purple), var(--color-pink));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: -1;
+}
+.video-thumbnail {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  display: block;
+}
+/* Why section */
+.why-section { margin-bottom: 2rem; }
+.why-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.4rem;
+  text-align: center;
+  color: var(--color-green);
+  text-shadow: 0 0 8px var(--color-green), 0 0 16px var(--color-purple);
+  margin-bottom: 1.5rem;
+}
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+/* Base info card styling */
+.info-card {
+  position: relative;
+  padding: 1.25rem;
+  border-radius: 1rem;
+  background: var(--card-bg);
+  overflow: hidden;
+  color: var(--color-text);
+}
+.info-card::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: var(--card-gradient);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: -1;
+}
+.card-icon {
+  font-size: 1.6rem;
+  margin-bottom: 0.6rem;
+  display: block;
+  color: var(--card-accent);
+}
+.card-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+  color: var(--card-accent);
+}
+.card-text {
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+/* Colour variations for the cards */
+.card-blue {
+  --card-accent: var(--color-cyan);
+  --card-gradient: linear-gradient(135deg, var(--color-cyan), var(--color-purple));
+}
+.card-pink {
+  --card-accent: var(--color-pink);
+  --card-gradient: linear-gradient(135deg, var(--color-pink), var(--color-purple));
+}
+.card-green {
+  --card-accent: var(--color-green);
+  --card-gradient: linear-gradient(135deg, var(--color-green), var(--color-cyan));
+}
+.card-purple {
+  --card-accent: var(--color-purple);
+  --card-gradient: linear-gradient(135deg, var(--color-purple), var(--color-pink));
+}
+
+Do not implement any JavaScript for this section. Simply create the HTML and CSS files and copy the fingerprint image into assets/fingerprint.png. Once everything is created in the correct paths, stop and wait for the next section.
