@@ -1,6 +1,5 @@
 
 import './index.css';
-import circuitBg from '/circuit-bg.png';
 
 export default function App() {
   return (
@@ -9,18 +8,21 @@ export default function App() {
       <div 
         className="absolute inset-0" 
         style={{
-          backgroundImage: `linear-gradient(rgba(11, 16, 32, 0.3), rgba(11, 16, 32, 0.3)), url(${circuitBg})`,
+          backgroundImage: `linear-gradient(rgba(11, 16, 32, 0.3), rgba(11, 16, 32, 0.3)), url('/circuit-bg.png')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           backgroundBlendMode: 'overlay',
-          opacity: 1
+          minHeight: '100vh'
         }}
       ></div>
       
       {/* Lighter gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-brand-900/30 via-brand-800/20 to-brand-700/30"></div>
 
+      {/* Temporary test image - remove this once background works */}
+      <img src="/circuit-bg.png" alt="test" style={{ position: 'absolute', top: 0, left: 0, opacity: 0.5, width: '200px', zIndex: 999 }} />
+      
       {/* Main content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-6">
         {/* Logo circle with V */}
