@@ -1,13 +1,110 @@
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>VeriFyz Protocol</title>
+    <title>VeriFyz Token Presale</title>
+    <!-- Google Fonts for futuristic style -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Montserrat:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-cl17DracWIeoYum1g8DJCdXo4p2Dx8F++yWjavY06lRuLGhLsw5/5Y9N+9ixZruxtSfiArTD1fQBPPw/a6U3Vg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="style.css" />
   </head>
-  <body class="bg-verifyz-gradient text-white">
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+  <body>
+    <div class="main-wrapper">
+      <!-- Hero section with logo and tagline -->
+      <header class="hero">
+        <div class="logo-wrapper">
+          <!-- Fingerprint icon -->
+          <i class="fa-solid fa-fingerprint"></i>
+        </div>
+        <h1 class="title">VeriFyz Token Presale</h1>
+        <p class="subtitle">
+          Get VeriFyz tokens at <strong>$0.05</strong> each during our exclusive
+          presale
+        </p>
+      </header>
+
+      <!-- Connect wallet card -->
+      <section class="card connect-wallet">
+        <h2 class="section-title">
+          <i class="fa-solid fa-wallet"></i> Connect Your Wallet
+        </h2>
+        <p class="card-desc">
+          Connect your MetaMask wallet to participate in the presale
+        </p>
+        <div class="mobile-notice">
+          <span class="notice-title">Mobile detected – Open this site in
+            MetaMask browser</span>
+          <ol class="notice-steps">
+            <li>Open MetaMask app</li>
+            <li>Tap the menu (≡)</li>
+            <li>Select "Browser"</li>
+            <li>Visit this website again</li>
+          </ol>
+        </div>
+        <button type="button" class="cta-button">Open in MetaMask</button>
+      </section>
+
+      <!-- Calculator card -->
+      <section class="card calculator">
+        <h2 class="section-title">
+          <i class="fa-solid fa-coins"></i> USD → VeriFyz Calculator
+        </h2>
+        <label for="usdAmount" class="input-label">USD Amount</label>
+        <input
+          id="usdAmount"
+          type="number"
+          class="input-field"
+          value="100"
+          min="0"
+        />
+        <div class="info-grid">
+          <div class="info-row">
+            <span class="info-label">MATIC Amount:</span>
+            <span class="info-value" id="maticAmount">0 MATIC</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Current MATIC/USD:</span>
+            <span class="info-value" id="currentRate">$0.271</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Token Price:</span>
+            <span class="info-value" id="tokenPrice">$0.05</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">You'll receive:</span>
+            <span class="info-value" id="tokenReceive">0 VeriFyz tokens</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Complete purchase card -->
+      <section class="card complete-purchase">
+        <h2 class="section-title">
+          <i class="fa-solid fa-credit-card"></i> Complete Your Purchase
+        </h2>
+        <label for="recipient" class="input-label">Recipient Address</label>
+        <input
+          id="recipient"
+          type="text"
+          class="input-field"
+          readonly
+          value="0xDde2a0D0BCdc1566c671a31b504a3796d50eEdf"
+        />
+      </section>
+    </div>
+
+    <script src="script.js"></script>
   </body>
 </html>
