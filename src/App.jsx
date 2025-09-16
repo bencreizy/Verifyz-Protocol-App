@@ -11,9 +11,9 @@ import './styles.css'
 
 export default function App() {
   return (
-    <div className="bg-circuit bg-cover bg-center min-h-screen text-white relative">
+    <div className="min-h-screen text-white relative" style={{backgroundImage: "url('/attached_assets/circuit_board_cyan_upscaled_4k_1757982811493.png')", backgroundSize: 'cover', backgroundPosition: 'center'}}>
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+      <div className="absolute inset-0 bg-black bg-opacity-15"></div>
       <div className="relative z-10">
       <Nav />
       <main>
