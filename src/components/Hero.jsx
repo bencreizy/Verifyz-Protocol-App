@@ -7,7 +7,10 @@ export default function Hero() {
           <img 
             src="/verifyz-logo-main.png" 
             alt="VeriFyz Protocol" 
-            className="w-64 h-auto mx-auto object-contain"
+            className="w-64 h-auto mx-auto object-contain filter drop-shadow-lg"
+            style={{
+              filter: 'drop-shadow(0 0 20px rgba(0, 247, 255, 0.6)) drop-shadow(0 0 40px rgba(255, 52, 210, 0.4))'
+            }}
           />
         </div>
       </div>
