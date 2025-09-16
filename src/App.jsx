@@ -12,10 +12,10 @@ import './styles.css'
 export default function App() {
   return (
     <div className="min-h-screen text-white relative bg-verifyz-gradient">
-      {/* Subtle circuit background overlay */}
-      <div className="absolute inset-0" style={{backgroundImage: "url('/attached_assets/circuit_board_cyan_upscaled_4k_1757982811493.png')", backgroundSize: '80% 80%', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', opacity: '0.25'}}></div>
-      {/* Additional gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-brand-900/90 via-brand-800/80 to-brand-700/90"></div>
+      {/* Circuit background overlay */}
+      <div className="absolute inset-0" style={{backgroundImage: "url('/circuit-bg.png')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', opacity: '0.15'}}></div>
+      {/* Additional gradient overlay for better text readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-brand-900/70 via-brand-800/60 to-brand-700/70"></div>
       <div className="relative z-10">
       <Nav />
       <main>
