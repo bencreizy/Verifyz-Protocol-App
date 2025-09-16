@@ -1,16 +1,13 @@
-
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 5000,
-    host: '0.0.0.0'
+    host: true, // allow external access
+    allowedHosts: [
+      '.replit.dev',
+      '.spock.replit.dev',
+    ],
   },
-  resolve: {
-    alias: {
-      '@assets': './attached_assets'
-    }
-  }
 })
