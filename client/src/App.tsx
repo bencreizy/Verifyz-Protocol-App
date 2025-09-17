@@ -127,7 +127,15 @@ export default function App() {
         <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 animate-bounce">
           <button 
             onClick={() => document.getElementById('presale')?.scrollIntoView({ behavior: 'smooth' })}
-            className="cursor-pointer hover:scale-110 transition-transform bg-transparent border-none outline-none"
+            className="cursor-pointer hover:scale-110 transition-transform"
+            style={{ 
+              background: 'transparent', 
+              border: 'none', 
+              outline: 'none', 
+              boxShadow: 'none',
+              padding: '0',
+              fontSize: 'inherit'
+            }}
             aria-label="Scroll to presale"
           >
             <svg 
