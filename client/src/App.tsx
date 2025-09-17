@@ -91,9 +91,10 @@ export default function App() {
               src={logoImg}
               alt="VeriFyz Protocol" 
               className="w-64 h-auto mx-auto object-contain"
+              style={{ filter: 'drop-shadow(0 0 30px rgba(0, 255, 255, 0.3)) drop-shadow(0 0 60px rgba(168, 85, 247, 0.2))' }}
             />
           </div>
-          <p className="text-xl text-purple-400 font-light">
+          <p className="text-xl text-purple-400 font-light" style={{ textShadow: '0 0 20px rgba(168, 85, 247, 0.3), 0 0 40px rgba(168, 85, 247, 0.2)' }}>
             Real proof in presence. 🟢
           </p>
           <div className="pt-8">
@@ -115,7 +116,7 @@ export default function App() {
       {/* Why VeriFyz Section */}
       <section className="relative py-20 px-6">
         <div className="max-w-4xl mx-auto text-center space-y-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-cyan-400">
+          <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-cyan-400" style={{ textShadow: '0 0 30px rgba(34, 197, 94, 0.3), 0 0 60px rgba(0, 255, 255, 0.2)' }}>
             Why VeriFyz<br />Changes<br />Everything
           </h2>
           
@@ -184,7 +185,7 @@ export default function App() {
       {/* Roadmap Section */}
       <section className="relative py-20 px-6 overflow-hidden">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 text-center mb-20">
+          <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 text-center mb-20" style={{ textShadow: '0 0 30px rgba(168, 85, 247, 0.3), 0 0 60px rgba(236, 72, 153, 0.2)' }}>
             VeriFyz Protocol<br />Roadmap
           </h2>
 
@@ -345,7 +346,7 @@ export default function App() {
           </div>
 
           <div className="mt-12 text-center">
-            <p className="text-2xl text-white mb-8">Get ready for the presale launch.</p>
+            <p className="text-2xl text-white mb-8" style={{ textShadow: '0 0 20px rgba(255, 255, 255, 0.3), 0 0 40px rgba(255, 255, 255, 0.1)' }}>Get ready for the presale launch.</p>
             <Button className="px-12 py-6 text-xl font-bold bg-green-500 hover:bg-green-400 text-black rounded-lg shadow-lg hover:shadow-green-400/50 transition-all duration-300">
               🔔 Get Notified
             </Button>
@@ -379,11 +380,12 @@ export default function App() {
               src={logoImg}
               alt="VeriFyz Protocol" 
               className="w-48 h-auto mx-auto mb-8"
+              style={{ filter: 'drop-shadow(0 0 30px rgba(0, 255, 255, 0.3)) drop-shadow(0 0 60px rgba(168, 85, 247, 0.2))' }}
             />
-            <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">
+            <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400" style={{ textShadow: '0 0 30px rgba(0, 255, 255, 0.3), 0 0 60px rgba(168, 85, 247, 0.2)' }}>
               VeriFyz Token<br />Presale
             </h2>
-            <p className="text-xl text-purple-400 mt-4">
+            <p className="text-xl text-purple-400 mt-4" style={{ textShadow: '0 0 20px rgba(168, 85, 247, 0.3), 0 0 40px rgba(168, 85, 247, 0.1)' }}>
               Get VeriFyz tokens at $0.05 each during our exclusive presale
             </p>
           </div>
