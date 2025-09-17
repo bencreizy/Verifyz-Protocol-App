@@ -37,8 +37,13 @@ export default function App() {
 
   const connectWallet = async () => {
     setIsConnecting(true);
+    
+    // Check if on mobile
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    
     try {
       if (typeof window.ethereum !== 'undefined') {
+        // MetaMask is available (we're in MetaMask browser or desktop)
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         if (accounts.length > 0) {
           setConnectedWallet(accounts[0]);
@@ -47,6 +52,10 @@ export default function App() {
             description: `Connected to ${accounts[0].slice(0, 6)}...${accounts[0].slice(-4)}`,
           });
         }
+      } else if (isMobile) {
+        // On mobile, use deep link to open in MetaMask browser
+        const dappUrl = window.location.href.replace(/^https?:\/\//, '');
+        window.location.href = `https://metamask.app.link/dapp/${dappUrl}`;
       } else {
         toast({
           title: "MetaMask Not Found",
