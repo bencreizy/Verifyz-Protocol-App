@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { AlertCircle, Shield, Building2, Lock, TrendingUp, Zap, Dice6, Infinity, AlertTriangle, Twitter, MessageCircle, Send, Rocket } from 'lucide-react';
-import logoImg from '@assets/Logopit_1758031376084_1758048335352.png';
+import logoImg from '@assets/verifyz protocol _1758069285416.png';
 import fingerprintLogo from '@assets/Messenger_creation_8654D694-ACD4-430E-8B08-4A3E9DAF71B6_1757684706591.png';
 
 export default function App() {
@@ -91,15 +91,9 @@ export default function App() {
             <img 
               src={logoImg}
               alt="VeriFyz Protocol" 
-              className="w-48 h-48 mx-auto object-contain"
+              className="w-64 h-auto mx-auto object-contain"
             />
           </div>
-          <h1 className="text-6xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-cyan-300">
-            VeriFyz
-          </h1>
-          <h2 className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-cyan-400">
-            Protocol
-          </h2>
           <p className="text-xl text-purple-400 font-light">
             Real proof in presence. 🟢
           </p>
@@ -195,77 +189,103 @@ export default function App() {
       </section>
 
       {/* Roadmap Section */}
-      <section className="relative py-20 px-6">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 text-center mb-16">
+      <section className="relative py-20 px-6 overflow-hidden">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 text-center mb-20">
             VeriFyz Protocol<br />Roadmap
           </h2>
 
-          <div className="space-y-8">
-            {/* Q2 2025 */}
-            <Card className="bg-gray-900/80 border-green-500/30 backdrop-blur-sm p-6">
-              <div className="flex items-start space-x-4">
-                <div className="text-green-400 text-2xl">✅</div>
-                <div>
-                  <h3 className="text-green-400 font-bold text-xl mb-2">Q2 2025</h3>
-                  <p className="text-gray-300">Project concept finalized</p>
-                </div>
+          <div className="relative">
+            {/* Connecting line */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-cyan-500/20 via-purple-500/20 to-pink-500/20"></div>
+            
+            {/* Q2 2025 - Left */}
+            <div className="relative flex items-center mb-32">
+              <div className="w-5/12">
+                <Card className="bg-gray-900/80 border-green-500/30 backdrop-blur-sm p-6">
+                  <div className="text-green-400 text-2xl mb-2">✅ Q2</div>
+                  <h3 className="text-green-400 font-bold text-xl mb-2">2025</h3>
+                  <p className="text-gray-300">Project<br />concept<br />finalized</p>
+                </Card>
               </div>
-            </Card>
-
-            {/* Q3 2025 */}
-            <Card className="bg-gray-900/80 border-green-500/30 backdrop-blur-sm p-6">
-              <div className="flex items-start space-x-4">
-                <div className="text-green-400 text-2xl">✅</div>
-                <div>
-                  <h3 className="text-green-400 font-bold text-xl mb-2">Q3 2025</h3>
-                  <p className="text-gray-300">MVP launched for early testers</p>
-                </div>
+              <div className="absolute left-1/2 transform -translate-x-1/2">
+                <div className="w-8 h-8 bg-gray-900 border-2 border-cyan-400 rounded-full"></div>
               </div>
-            </Card>
+              <div className="w-5/12 ml-auto"></div>
+            </div>
 
-            {/* Q3 2025 - Presale */}
-            <Card className="bg-gray-900/80 border-pink-500/30 backdrop-blur-sm p-6">
-              <div className="flex items-start space-x-4">
-                <div className="text-pink-400 text-2xl">🚀</div>
-                <div>
-                  <h3 className="text-pink-400 font-bold text-xl mb-2">Q3 2025</h3>
-                  <p className="text-gray-300">Token Presale + Social Launch Begins</p>
-                </div>
+            {/* Q3 2025 MVP - Right */}
+            <div className="relative flex items-center mb-32">
+              <div className="w-5/12"></div>
+              <div className="absolute left-1/2 transform -translate-x-1/2">
+                <div className="w-8 h-8 bg-gray-900 border-2 border-cyan-400 rounded-full"></div>
               </div>
-            </Card>
-
-            {/* Business Onboarding */}
-            <Card className="bg-gray-900/80 border-gray-500/30 backdrop-blur-sm p-6">
-              <div className="flex items-start space-x-4">
-                <div className="text-gray-400 text-2xl">⭕</div>
-                <div>
-                  <p className="text-gray-300">Business onboarding portal opens</p>
-                </div>
+              <div className="w-5/12">
+                <Card className="bg-gray-900/80 border-green-500/30 backdrop-blur-sm p-6 ml-auto">
+                  <div className="text-green-400 text-2xl mb-2">✅ Q3</div>
+                  <h3 className="text-green-400 font-bold text-xl mb-2">2025</h3>
+                  <p className="text-gray-300">MVP launched<br />for early<br />testers</p>
+                </Card>
               </div>
-            </Card>
+            </div>
 
-            {/* Q1 2026 */}
-            <Card className="bg-gray-900/80 border-gray-500/30 backdrop-blur-sm p-6">
-              <div className="flex items-start space-x-4">
-                <div className="text-gray-400 text-2xl">➡️</div>
-                <div>
-                  <h3 className="text-gray-400 font-bold text-xl mb-2">SOON Q1 2026</h3>
-                  <p className="text-gray-300">Mobile apps + QR/NFC integrations</p>
-                </div>
+            {/* Q3 2025 Presale - Left */}
+            <div className="relative flex items-center mb-32">
+              <div className="w-5/12">
+                <Card className="bg-gray-900/80 border-pink-500/30 backdrop-blur-sm p-6">
+                  <div className="text-pink-400 text-2xl mb-2">🚀 Q3</div>
+                  <h3 className="text-pink-400 font-bold text-xl mb-2">2025</h3>
+                  <p className="text-gray-300">Token Presale<br />+ Social<br />Launch Begins</p>
+                </Card>
               </div>
-            </Card>
+              <div className="absolute left-1/2 transform -translate-x-1/2">
+                <div className="w-8 h-8 bg-gray-900 border-2 border-purple-400 rounded-full"></div>
+              </div>
+              <div className="w-5/12 ml-auto"></div>
+            </div>
 
-            {/* 2026+ */}
-            <Card className="bg-gray-900/80 border-purple-500/30 backdrop-blur-sm p-6">
-              <div className="flex items-start space-x-4">
-                <div className="text-purple-400 text-2xl">🎯</div>
-                <div>
+            {/* Business Onboarding - Right */}
+            <div className="relative flex items-center mb-32">
+              <div className="w-5/12"></div>
+              <div className="absolute left-1/2 transform -translate-x-1/2">
+                <div className="w-8 h-8 bg-gray-900 border-2 border-gray-400 rounded-full"></div>
+              </div>
+              <div className="w-5/12">
+                <Card className="bg-gray-900/80 border-gray-500/30 backdrop-blur-sm p-6 ml-auto">
+                  <p className="text-gray-300">Business<br />onboarding<br />portal opens</p>
+                </Card>
+              </div>
+            </div>
+
+            {/* Q1 2026 - Left */}
+            <div className="relative flex items-center mb-32">
+              <div className="w-5/12">
+                <Card className="bg-gray-900/80 border-gray-500/30 backdrop-blur-sm p-6">
+                  <div className="text-gray-400 text-2xl mb-2">➡️ SOON Q1</div>
+                  <h3 className="text-gray-400 font-bold text-xl mb-2">2026</h3>
+                  <p className="text-gray-300">Mobile apps +<br />QR/NFC<br />integrations</p>
+                </Card>
+              </div>
+              <div className="absolute left-1/2 transform -translate-x-1/2">
+                <div className="w-8 h-8 bg-gray-900 border-2 border-gray-400 rounded-full"></div>
+              </div>
+              <div className="w-5/12 ml-auto"></div>
+            </div>
+
+            {/* 2026+ - Right */}
+            <div className="relative flex items-center">
+              <div className="w-5/12"></div>
+              <div className="absolute left-1/2 transform -translate-x-1/2">
+                <div className="w-8 h-8 bg-gray-900 border-2 border-purple-400 rounded-full"></div>
+              </div>
+              <div className="w-5/12">
+                <Card className="bg-gray-900/80 border-purple-500/30 backdrop-blur-sm p-6 ml-auto">
+                  <div className="text-purple-400 text-2xl mb-2">🎯</div>
                   <h3 className="text-purple-400 font-bold text-xl mb-2">2026+</h3>
-                  <p className="text-gray-300">SDK release + Global adoption drive</p>
-                </div>
+                  <p className="text-gray-300">SDK release +<br />Global<br />adoption drive.</p>
+                </Card>
               </div>
-            </Card>
+            </div>
           </div>
         </div>
       </section>
