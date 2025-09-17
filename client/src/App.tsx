@@ -104,7 +104,7 @@ export default function App() {
             />
           </div>
           <p className="text-xl text-purple-400 font-light" style={{ textShadow: '0 0 20px rgba(168, 85, 247, 0.3), 0 0 40px rgba(168, 85, 247, 0.2)' }}>
-            Real proof in presence. 🟢
+            Real proof in presence.
           </p>
           
           <div className="pt-8 flex flex-col items-center space-y-6">
