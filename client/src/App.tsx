@@ -120,39 +120,41 @@ export default function App() {
             >
               <Rocket className="mr-2" /> Join Presale
             </Button>
+            
+            {/* Glowing Arrow pointing to Presale - positioned below Join Presale button */}
+            <div className="mt-8 flex justify-center">
+              <svg 
+                className="w-10 h-10 animate-bounce cursor-pointer hover:scale-110 transition-transform" 
+                viewBox="0 0 24 24" 
+                fill="none"
+                onClick={() => document.getElementById('presale')?.scrollIntoView({ behavior: 'smooth' })}
+                aria-label="Scroll to presale"
+              >
+                <path 
+                  d="M12 5v14m0 0l-7-7m7 7l7-7" 
+                  stroke="url(#arrow-gradient)" 
+                  strokeWidth="3" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                  filter="url(#glow)"
+                />
+                <defs>
+                  <linearGradient id="arrow-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="#00ffff" stopOpacity="1" />
+                    <stop offset="100%" stopColor="#a855f7" stopOpacity="1" />
+                  </linearGradient>
+                  <filter id="glow">
+                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                    <feMerge>
+                      <feMergeNode in="coloredBlur"/>
+                      <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                  </filter>
+                </defs>
+              </svg>
+            </div>
           </div>
         </div>
-        
-        {/* Glowing Arrow pointing to Presale */}
-        <svg 
-          className="absolute bottom-20 left-1/2 transform -translate-x-1/2 w-10 h-10 animate-bounce cursor-pointer hover:scale-110 transition-transform" 
-          viewBox="0 0 24 24" 
-          fill="none"
-          onClick={() => document.getElementById('presale')?.scrollIntoView({ behavior: 'smooth' })}
-          aria-label="Scroll to presale"
-        >
-          <path 
-            d="M12 5v14m0 0l-7-7m7 7l7-7" 
-            stroke="url(#arrow-gradient)" 
-            strokeWidth="3" 
-            strokeLinecap="round" 
-            strokeLinejoin="round"
-            filter="url(#glow)"
-          />
-          <defs>
-            <linearGradient id="arrow-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#00ffff" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a855f7" stopOpacity="1" />
-            </linearGradient>
-            <filter id="glow">
-              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-              <feMerge>
-                <feMergeNode in="coloredBlur"/>
-                <feMergeNode in="SourceGraphic"/>
-              </feMerge>
-            </filter>
-          </defs>
-        </svg>
       </section>
 
       {/* Why VeriFyz Section */}
