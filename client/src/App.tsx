@@ -123,7 +123,7 @@ export default function App() {
           </div>
         </div>
         <button 
-          className="absolute bottom-10 animate-bounce cursor-pointer group"
+          className="absolute bottom-10 animate-bounce cursor-pointer hover:text-cyan-300 transition-colors"
           onClick={() => {
             const nextSection = document.querySelector('#hero-section')?.nextElementSibling;
             if (nextSection) {
@@ -132,13 +132,9 @@ export default function App() {
           }}
           aria-label="Scroll to next section"
         >
-          <div 
-            className="w-16 h-8 bg-gradient-to-b from-cyan-400 to-purple-400 rounded-lg opacity-80 group-hover:opacity-100 transition-opacity duration-300"
-            style={{
-              boxShadow: '0 0 20px rgba(0, 255, 255, 0.6), 0 0 40px rgba(168, 85, 247, 0.4), 0 0 60px rgba(0, 255, 255, 0.3)',
-              filter: 'blur(0.5px)'
-            }}
-          />
+          <svg className="w-8 h-8 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
         </button>
       </section>
 
