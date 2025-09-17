@@ -1,5 +1,5 @@
 import './index.css';
-import circuitBg from '@assets/circuit-bg.png';
+import circuitBg from '@assets/circuit_board_cyan_upscaled_4k_1757982811493.png';
 
 console.log('Imported URL:', circuitBg);
 
