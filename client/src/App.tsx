@@ -84,7 +84,7 @@ export default function App() {
       
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center px-6">
+      <section id="hero-section" className="relative min-h-screen flex flex-col items-center justify-center px-6">
         <div className="text-center space-y-6 z-10">
           <div className="mb-8">
             <img 
@@ -97,20 +97,44 @@ export default function App() {
           <p className="text-xl text-purple-400 font-light" style={{ textShadow: '0 0 20px rgba(168, 85, 247, 0.3), 0 0 40px rgba(168, 85, 247, 0.2)' }}>
             Real proof in presence. 🟢
           </p>
-          <div className="pt-8">
+          <div className="pt-8 space-y-6">
             <Button 
               className="px-12 py-6 text-lg font-bold bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 text-black rounded-lg shadow-lg hover:shadow-cyan-400/50 transition-all duration-300"
               onClick={() => document.getElementById('presale')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <Rocket className="mr-2" /> Join Presale
             </Button>
+            
+            {/* Whitepaper Button */}
+            <div className="mt-6">
+              <a 
+                href="/whitepaper/verifyz-whitepaper.pdf" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center px-8 py-3 text-sm font-semibold bg-gray-900/80 border border-purple-500/50 text-purple-400 rounded-lg hover:bg-purple-900/30 hover:border-purple-400 transition-all duration-300 shadow-lg hover:shadow-purple-400/30"
+              >
+                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Read Whitepaper
+              </a>
+            </div>
           </div>
         </div>
-        <div className="absolute bottom-10 animate-bounce">
+        <button 
+          className="absolute bottom-10 animate-bounce cursor-pointer hover:text-cyan-300 transition-colors"
+          onClick={() => {
+            const nextSection = document.querySelector('#hero-section')?.nextElementSibling;
+            if (nextSection) {
+              nextSection.scrollIntoView({ behavior: 'smooth' });
+            }
+          }}
+          aria-label="Scroll to next section"
+        >
           <svg className="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
           </svg>
-        </div>
+        </button>
       </section>
 
       {/* Why VeriFyz Section */}
