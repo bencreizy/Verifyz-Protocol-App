@@ -244,7 +244,7 @@ export default function App() {
                 <div className="w-8 h-8 bg-gray-900 border-2 border-gray-400 rounded-full"></div>
               </div>
               <div className="w-5/12">
-                <Card className="bg-gray-900/80 border-gray-500/30 backdrop-blur-sm p-6 ml-auto">
+                <Card className="bg-gray-900/80 border-gray-500/30 backdrop-blur-sm p-6 ml-auto card-glow-cyan">
                   <p className="text-gray-300">Business<br />onboarding<br />portal opens</p>
                 </Card>
               </div>
@@ -253,7 +253,7 @@ export default function App() {
             {/* Q1 2026 - Left */}
             <div className="relative flex items-center mb-32">
               <div className="w-5/12">
-                <Card className="bg-gray-900/80 border-gray-500/30 backdrop-blur-sm p-6">
+                <Card className="bg-gray-900/80 border-gray-500/30 backdrop-blur-sm p-6 card-glow-cyan">
                   <div className="text-gray-400 text-2xl mb-2">➡️ SOON Q1</div>
                   <h3 className="text-gray-400 font-bold text-xl mb-2">2026</h3>
                   <p className="text-gray-300">Mobile apps +<br />QR/NFC<br />integrations</p>
