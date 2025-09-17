@@ -124,39 +124,44 @@ export default function App() {
         </div>
         
         {/* Glowing Arrow pointing to Presale */}
-        <button 
-          onClick={() => document.getElementById('presale')?.scrollIntoView({ behavior: 'smooth' })}
-          className="absolute bottom-20 left-1/2 transform -translate-x-1/2 animate-bounce cursor-pointer hover:scale-110 transition-transform"
-          aria-label="Scroll to presale"
-        >
-          <svg 
-            className="w-10 h-10" 
-            viewBox="0 0 24 24" 
-            fill="none"
+        <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <button 
+            onClick={() => document.getElementById('presale')?.scrollIntoView({ behavior: 'smooth' })}
+            className="cursor-pointer hover:scale-110 transition-transform bg-transparent border-none outline-none"
+            aria-label="Scroll to presale"
           >
-            <path 
-              d="M12 5v14m0 0l-7-7m7 7l7-7" 
-              stroke="url(#arrow-gradient)" 
-              strokeWidth="3" 
-              strokeLinecap="round" 
-              strokeLinejoin="round"
-              filter="url(#glow)"
-            />
-            <defs>
-              <linearGradient id="arrow-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#00ffff" stopOpacity="1" />
-                <stop offset="100%" stopColor="#a855f7" stopOpacity="1" />
-              </linearGradient>
-              <filter id="glow">
-                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-                <feMerge>
-                  <feMergeNode in="coloredBlur"/>
-                  <feMergeNode in="SourceGraphic"/>
-                </feMerge>
-              </filter>
-            </defs>
-          </svg>
-        </button>
+            <svg 
+              className="w-10 h-10" 
+              viewBox="0 0 24 24" 
+              fill="none"
+            >
+              <path 
+                d="M12 5v14m0 0l-7-7m7 7l7-7" 
+                stroke="url(#arrow-gradient)" 
+                strokeWidth="3" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                filter="url(#glow)"
+              />
+              <defs>
+                <linearGradient id="arrow-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor="#00ffff" stopOpacity="1" />
+                  <stop offset="100%" stopColor="#a855f7" stopOpacity="1" />
+                </linearGradient>
+                <filter id="glow">
+                  <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                  <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+            </svg>
+            <div className="text-cyan-400 text-xs mt-2 font-semibold text-center" style={{ textShadow: '0 0 10px rgba(0, 255, 255, 0.8)' }}>
+              PRESALE
+            </div>
+          </button>
+        </div>
       </section>
 
       {/* Why VeriFyz Section */}
