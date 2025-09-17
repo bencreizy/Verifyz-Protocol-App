@@ -119,22 +119,16 @@ export default function App() {
             Why VeriFyz<br />Changes<br />Everything
           </h2>
           
-          <Card className="bg-gray-900/80 border-cyan-500/30 backdrop-blur-sm p-8 card-glow-cyan">
-            <div className="flex items-center justify-center mb-6">
-              <div className="w-32 h-32 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center">
-                <span className="text-6xl">💵</span>
-              </div>
-            </div>
-            <h3 className="text-2xl font-bold text-cyan-400 mb-4">
-              "IN A WORLD WHERE YOUR DATA IS CURRENCY..."
-            </h3>
-            <p className="text-gray-400">
-              Only VeriFyz lets YOU control and monetize it.
-            </p>
-            <p className="text-xs text-gray-500 mt-4">
-              FOREVER TOKENS SOLD
-            </p>
-          </Card>
+          <div className="relative w-full max-w-2xl mx-auto" style={{ paddingBottom: '177.78%' }}>
+            <iframe 
+              className="absolute top-0 left-0 w-full h-full rounded-lg border-2 border-cyan-500/30 card-glow-cyan"
+              src="https://www.youtube.com/embed/oX_d-31JNF0"
+              title="VeriFyz Commercial"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            ></iframe>
+          </div>
         </div>
       </section>
 
