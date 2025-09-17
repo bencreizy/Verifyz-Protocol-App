@@ -97,16 +97,9 @@ export default function App() {
           <p className="text-xl text-purple-400 font-light" style={{ textShadow: '0 0 20px rgba(168, 85, 247, 0.3), 0 0 40px rgba(168, 85, 247, 0.2)' }}>
             Real proof in presence. 🟢
           </p>
-          <div className="pt-8 space-y-6">
-            <Button 
-              className="px-12 py-6 text-lg font-bold bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 text-black rounded-lg shadow-lg hover:shadow-cyan-400/50 transition-all duration-300"
-              onClick={() => document.getElementById('presale')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              <Rocket className="mr-2" /> Join Presale
-            </Button>
-            
+          <div className="pt-8 space-y-4">
             {/* Whitepaper Button */}
-            <div className="mt-6">
+            <div>
               <a 
                 href="/whitepaper/verifyz-whitepaper.pdf" 
                 target="_blank" 
@@ -119,6 +112,13 @@ export default function App() {
                 Read Whitepaper
               </a>
             </div>
+            
+            <Button 
+              className="px-12 py-6 text-lg font-bold bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 text-black rounded-lg shadow-lg hover:shadow-cyan-400/50 transition-all duration-300"
+              onClick={() => document.getElementById('presale')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              <Rocket className="mr-2" /> Join Presale
+            </Button>
           </div>
         </div>
         <button 
