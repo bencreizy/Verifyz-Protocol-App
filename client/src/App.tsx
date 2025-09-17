@@ -1,5 +1,5 @@
 import './index.css';
-import circuitBg from '@assets/circuit_board_cyan_upscaled_4k_1758068194486.png';
+import circuitBg from '@assets/file_000000001408622f958d2f57d7ac4ee1_1758071935262.png';
 import { useState, useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { Toaster } from '@/components/ui/toaster';
@@ -73,7 +73,7 @@ export default function App() {
     <div className="min-h-screen relative bg-black overflow-x-hidden">
       {/* Circuit background */}
       <div 
-        className="fixed inset-0 opacity-40" 
+        className="fixed inset-0 opacity-40 animate-zigzag" 
         style={{
           backgroundImage: `url(${circuitBg})`,
           backgroundSize: 'cover',
