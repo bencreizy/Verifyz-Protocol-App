@@ -83,17 +83,6 @@ export default function App() {
         }}
       />
       
-      {/* Animated circuit lines overlay */}
-      <div className="fixed inset-0 pointer-events-none">
-        <svg className="w-full h-full opacity-30">
-          <defs>
-            <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#00ffff" stopOpacity="0.8" />
-              <stop offset="100%" stopColor="#ff00ff" stopOpacity="0.8" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex flex-col items-center justify-center px-6">
