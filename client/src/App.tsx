@@ -107,25 +107,32 @@ export default function App() {
             Real proof in presence. 🟢
           </p>
           
-          <div className="pt-8 space-y-4">
-            {/* Whitepaper Button */}
-            <div>
-              <a 
-                href="/whitepaper/verifyz-whitepaper.pdf" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex items-center px-8 py-3 text-sm font-semibold bg-gray-900/80 border border-purple-500/50 text-purple-400 rounded-lg hover:bg-purple-900/30 hover:border-purple-400 transition-all duration-300 shadow-lg hover:shadow-purple-400/30"
-              >
-                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                Read Whitepaper
-              </a>
-            </div>
+          <div className="pt-8 flex flex-col items-center space-y-6">
+            {/* Whitepaper Button - Centered with glowing effect */}
+            <a 
+              href="/whitepaper/verifyz-whitepaper.pdf" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-8 py-3 text-sm font-semibold bg-gradient-to-r from-purple-900/50 to-cyan-900/50 border border-purple-400/60 text-white rounded-lg hover:from-purple-800/60 hover:to-cyan-800/60 hover:border-cyan-400 transition-all duration-300"
+              style={{ 
+                boxShadow: '0 0 20px rgba(168, 85, 247, 0.4), 0 0 40px rgba(0, 255, 255, 0.2)',
+                textShadow: '0 0 10px rgba(255, 255, 255, 0.5)'
+              }}
+            >
+              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              Read Whitepaper
+            </a>
             
+            {/* Join Presale Button with enhanced glow */}
             <Button 
-              className="px-12 py-6 text-lg font-bold bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 text-black rounded-lg shadow-lg hover:shadow-cyan-400/50 transition-all duration-300"
+              className="px-12 py-6 text-lg font-bold bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 text-black rounded-lg transition-all duration-300"
               onClick={() => document.getElementById('presale')?.scrollIntoView({ behavior: 'smooth' })}
+              style={{ 
+                boxShadow: '0 0 30px rgba(0, 255, 255, 0.5), 0 0 60px rgba(168, 85, 247, 0.3)',
+                textShadow: '0 0 8px rgba(0, 0, 0, 0.5)'
+              }}
             >
               <Rocket className="mr-2" /> Join Presale
             </Button>
