@@ -122,27 +122,6 @@ export default function App() {
             </Button>
           </div>
         </div>
-        <button 
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10 animate-bounce cursor-pointer hover:scale-110 transition-transform"
-          onClick={() => {
-            const nextSection = document.querySelector('#hero-section')?.nextElementSibling;
-            if (nextSection) {
-              nextSection.scrollIntoView({ behavior: 'smooth' });
-            }
-          }}
-          aria-label="Scroll to next section"
-        >
-          <svg className="w-10 h-10" viewBox="0 0 24 24" fill="none">
-            <path 
-              d="M12 4v16M5 13l7 7 7-7" 
-              stroke="#00ffff" 
-              strokeWidth="3" 
-              strokeLinecap="round" 
-              strokeLinejoin="round"
-              style={{ filter: 'drop-shadow(0 0 8px rgba(0, 255, 255, 0.8))' }}
-            />
-          </svg>
-        </button>
       </section>
 
       {/* Why VeriFyz Section */}
