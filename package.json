@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@libsql/client": "^0.15.15",
+    "@neondatabase/serverless": "^1.0.1",
     "@replit/vite-plugin-cartographer": "^0.3.1",
     "@replit/vite-plugin-runtime-error-modal": "^0.0.3",
     "@tailwindcss/typography": "^0.5.16",
@@ -22,7 +23,8 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "tailwindcss-animate": "^1.0.7",
-    "tsx": "^4.20.5"
+    "tsx": "^4.20.5",
+    "ws": "^8.18.3"
   },
   "devDependencies": {
     "@types/express": "^5.0.3",
