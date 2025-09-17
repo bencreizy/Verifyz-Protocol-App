@@ -373,7 +373,7 @@ export default function App() {
       </section>
 
       {/* Token Presale Section */}
-      <section id="presale" className="relative py-20 px-6">
+      <section id="presale" className="relative py-20 px-6 overflow-hidden">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <img 
@@ -385,7 +385,7 @@ export default function App() {
             <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400" style={{ textShadow: '0 0 30px rgba(0, 255, 255, 0.3), 0 0 60px rgba(168, 85, 247, 0.2)' }}>
               VeriFyz Token<br />Presale
             </h2>
-            <p className="text-xl text-purple-400 mt-4" style={{ textShadow: '0 0 20px rgba(168, 85, 247, 0.3), 0 0 40px rgba(168, 85, 247, 0.1)' }}>
+            <p className="text-xl text-purple-400 mt-4 px-4 break-words" style={{ textShadow: '0 0 20px rgba(168, 85, 247, 0.3), 0 0 40px rgba(168, 85, 247, 0.1)' }}>
               Get VeriFyz tokens at $0.05 each during our exclusive presale
             </p>
           </div>
@@ -437,7 +437,7 @@ export default function App() {
           </Card>
 
           {/* Calculator */}
-          <Card className="bg-gray-900/80 border-purple-500/30 backdrop-blur-sm p-8 mb-8 card-glow-purple">
+          <Card className="bg-gray-900/80 border-purple-500/30 backdrop-blur-sm p-8 mb-8 card-glow-purple overflow-hidden">
             <h3 className="text-2xl font-bold text-purple-400 mb-6">
               💵 USD → VeriFyz Calculator
             </h3>
@@ -453,22 +453,22 @@ export default function App() {
                 />
               </div>
               
-              <div className="bg-black/50 border border-gray-700 rounded-lg p-4 space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-gray-400">MATIC Amount:</span>
-                  <span className="text-cyan-400 font-bold text-xl">{maticAmount} MATIC</span>
+              <div className="bg-black/50 border border-gray-700 rounded-lg p-4 space-y-2 overflow-hidden">
+                <div className="flex justify-between items-start gap-2">
+                  <span className="text-gray-400 whitespace-nowrap">MATIC Amount:</span>
+                  <span className="text-cyan-400 font-bold text-xl break-all text-right">{maticAmount} MATIC</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Current MATIC/USD:</span>
-                  <span className="text-green-400 font-bold">${maticPrice.toFixed(3)}</span>
+                <div className="flex justify-between items-start gap-2">
+                  <span className="text-gray-400 whitespace-nowrap">Current MATIC/USD:</span>
+                  <span className="text-green-400 font-bold text-right">${maticPrice.toFixed(3)}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Token Price:</span>
-                  <span className="text-purple-400 font-bold">$0.05</span>
+                <div className="flex justify-between items-start gap-2">
+                  <span className="text-gray-400 whitespace-nowrap">Token Price:</span>
+                  <span className="text-purple-400 font-bold text-right">$0.05</span>
                 </div>
-                <div className="border-t border-gray-700 pt-2 flex justify-between">
-                  <span className="text-white font-bold">You'll receive:</span>
-                  <span className="text-green-400 font-bold text-xl">{vfyzTokens} VeriFyz tokens</span>
+                <div className="border-t border-gray-700 pt-2 flex justify-between items-start gap-2">
+                  <span className="text-white font-bold whitespace-nowrap">You'll receive:</span>
+                  <span className="text-green-400 font-bold text-xl break-all text-right">{vfyzTokens} VeriFyz tokens</span>
                 </div>
               </div>
             </div>
@@ -500,7 +500,7 @@ export default function App() {
                     <AlertTriangle className="w-5 h-5 text-yellow-400 mt-1" />
                     <div>
                       <p className="text-yellow-400 font-bold">Safety Note:</p>
-                      <p className="text-gray-400 text-sm">
+                      <p className="text-gray-400 text-sm break-words">
                         Tokens will be distributed after the presale concludes. Please verify the wallet address before sending MATIC. This transaction is irreversible.
                       </p>
                     </div>
@@ -515,7 +515,7 @@ export default function App() {
             <div className="flex items-start space-x-4">
               <div className="text-3xl">🚀</div>
               <div>
-                <h3 className="text-3xl font-bold text-green-400 mb-4">
+                <h3 className="text-3xl font-bold text-green-400 mb-4 break-words">
                   Stay Tuned for<br />Presale Start and<br />Results
                 </h3>
                 <div className="flex items-center space-x-2 text-gray-400">
