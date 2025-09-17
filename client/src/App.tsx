@@ -97,22 +97,8 @@ export default function App() {
           <p className="text-xl text-purple-400 font-light" style={{ textShadow: '0 0 20px rgba(168, 85, 247, 0.3), 0 0 40px rgba(168, 85, 247, 0.2)' }}>
             Real proof in presence. 🟢
           </p>
-          <div className="pt-8 space-y-4">
-            {/* Whitepaper Button */}
-            <div>
-              <a 
-                href="/whitepaper/verifyz-whitepaper.pdf" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex items-center px-8 py-3 text-sm font-semibold bg-gray-900/80 border border-purple-500/50 text-purple-400 rounded-lg hover:bg-purple-900/30 hover:border-purple-400 transition-all duration-300 shadow-lg hover:shadow-purple-400/30"
-              >
-                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                Read Whitepaper
-              </a>
-            </div>
-            
+          
+          <div className="pt-8">
             <Button 
               className="px-12 py-6 text-lg font-bold bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 text-black rounded-lg shadow-lg hover:shadow-cyan-400/50 transition-all duration-300"
               onClick={() => document.getElementById('presale')?.scrollIntoView({ behavior: 'smooth' })}
@@ -120,9 +106,24 @@ export default function App() {
               <Rocket className="mr-2" /> Join Presale
             </Button>
           </div>
+          
+          {/* Whitepaper Button - Centered between Join Presale and bottom arrow */}
+          <div className="mt-20">
+            <a 
+              href="/whitepaper/verifyz-whitepaper.pdf" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-8 py-3 text-sm font-semibold bg-gray-900/80 border border-purple-500/50 text-purple-400 rounded-lg hover:bg-purple-900/30 hover:border-purple-400 transition-all duration-300 shadow-lg hover:shadow-purple-400/30"
+            >
+              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              Read Whitepaper
+            </a>
+          </div>
         </div>
         <button 
-          className="absolute bottom-10 animate-bounce cursor-pointer hover:text-cyan-300 transition-colors"
+          className="absolute bottom-10 animate-bounce cursor-pointer group"
           onClick={() => {
             const nextSection = document.querySelector('#hero-section')?.nextElementSibling;
             if (nextSection) {
@@ -131,9 +132,13 @@ export default function App() {
           }}
           aria-label="Scroll to next section"
         >
-          <svg className="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          </svg>
+          <div 
+            className="w-16 h-8 bg-gradient-to-b from-cyan-400 to-purple-400 rounded-lg opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+            style={{
+              boxShadow: '0 0 20px rgba(0, 255, 255, 0.6), 0 0 40px rgba(168, 85, 247, 0.4), 0 0 60px rgba(0, 255, 255, 0.3)',
+              filter: 'blur(0.5px)'
+            }}
+          />
         </button>
       </section>
 
