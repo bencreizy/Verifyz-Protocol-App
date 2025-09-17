@@ -7,21 +7,22 @@ import RewardsDistributorABI from '../contracts/abi/RewardsDistributor.json';
 dotenv.config();
 
 export class BlockchainService {
-  private provider: ethers.JsonRpcProvider;
+  private provider: ethers.providers.JsonRpcProvider;
   private vfzToken: ethers.Contract;
   private presale: ethers.Contract;
   private rewardsDistributor: ethers.Contract;
 
   constructor() {
-    // Initialize provider
-    const rpcUrl = process.env.POLYGON_RPC_URL || 'https://polygon-rpc.com';
-    this.provider = new ethers.JsonRpcProvider(rpcUrl);
+    // Initialize provider with ethers v5 syntax
+    const rpcUrl = process.env.POLYGON_RPC || process.env.POLYGON_AMOY_RPC || 'https://polygon-rpc.com';
+    this.provider = new ethers.providers.JsonRpcProvider(rpcUrl);
 
     // Initialize contracts (addresses from environment variables)
     const vfzTokenAddress = process.env.VFZ_TOKEN_ADDRESS || '';
     const presaleAddress = process.env.PRESALE_ADDRESS || '';
     const rewardsDistributorAddress = process.env.REWARDS_DISTRIBUTOR_ADDRESS || '';
 
+    // Create contract instances with ethers v5
     this.vfzToken = new ethers.Contract(
       vfzTokenAddress,
       VFZTokenABI.abi,
@@ -47,7 +48,7 @@ export class BlockchainService {
       const network = await this.provider.getNetwork();
       return {
         chainId: network.chainId.toString(),
-        name: network.name || 'Polygon Mainnet'
+        name: network.name || (network.chainId === 137 ? 'Polygon Mainnet' : 'Polygon Amoy Testnet')
       };
     } catch (error) {
       console.error('Error getting network info:', error);
@@ -67,7 +68,7 @@ export class BlockchainService {
       ]);
 
       return {
-        totalSupply: ethers.formatUnits(totalSupply, decimals),
+        totalSupply: ethers.utils.formatUnits(totalSupply, decimals),
         decimals: Number(decimals),
         taxPercentage: Number(taxPercentage),
         feeSplit: {
@@ -103,14 +104,14 @@ export class BlockchainService {
       ]);
 
       return {
-        totalRaised: ethers.formatEther(totalRaised),
-        totalTokensSold: ethers.formatEther(totalTokensSold),
+        totalRaised: ethers.utils.formatEther(totalRaised),
+        totalTokensSold: ethers.utils.formatEther(totalTokensSold),
         hasStarted: hasStarted,
         hasEnded: hasEnded,
         finalized: hasEnded,
         buyersCount: participants,
-        presaleAllocation: ethers.formatEther(presaleAllocation),
-        tokenPrice: ethers.formatEther(price)
+        presaleAllocation: ethers.utils.formatEther(presaleAllocation),
+        tokenPrice: ethers.utils.formatEther(price)
       };
     } catch (error) {
       console.error('Error getting presale status:', error);
@@ -159,8 +160,8 @@ export class BlockchainService {
   // Rewards methods
   async getPendingRewards(address: string) {
     try {
-      // Validate address
-      if (!ethers.isAddress(address)) {
+      // Validate address using ethers v5
+      if (!ethers.utils.isAddress(address)) {
         throw new Error('Invalid Ethereum address');
       }
 
@@ -171,9 +172,9 @@ export class BlockchainService {
 
       return {
         address: address,
-        pendingRewards: ethers.formatEther(pendingRewards),
-        claimedRewards: ethers.formatEther(claimedRewards),
-        totalEarned: ethers.formatEther(pendingRewards + claimedRewards)
+        pendingRewards: ethers.utils.formatEther(pendingRewards),
+        claimedRewards: ethers.utils.formatEther(claimedRewards),
+        totalEarned: ethers.utils.formatEther(pendingRewards.add(claimedRewards))
       };
     } catch (error) {
       console.error('Error getting pending rewards:', error);
@@ -193,17 +194,17 @@ export class BlockchainService {
       rewardsDistributor: false
     };
 
-    if (vfzAddress && ethers.isAddress(vfzAddress)) {
+    if (vfzAddress && ethers.utils.isAddress(vfzAddress)) {
       const code = await this.provider.getCode(vfzAddress);
       checks.vfzToken = code !== '0x';
     }
 
-    if (presaleAddress && ethers.isAddress(presaleAddress)) {
+    if (presaleAddress && ethers.utils.isAddress(presaleAddress)) {
       const code = await this.provider.getCode(presaleAddress);
       checks.presale = code !== '0x';
     }
 
-    if (rewardsAddress && ethers.isAddress(rewardsAddress)) {
+    if (rewardsAddress && ethers.utils.isAddress(rewardsAddress)) {
       const code = await this.provider.getCode(rewardsAddress);
       checks.rewardsDistributor = code !== '0x';
     }
