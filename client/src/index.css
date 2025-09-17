@@ -85,9 +85,10 @@
   }
 
   body {
-    @apply font-sans antialiased text-foreground;
+    @apply antialiased text-foreground;
     margin: 0;
     padding: 0;
+    font-family: 'Orbitron', 'Inter', sans-serif !important;
   }
 
   button, .btn, .get-started {
@@ -234,6 +235,27 @@
 }
 
 @layer components {
+  /* Neon glow effects for cards */
+  .card-glow-cyan {
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.5), 0 0 60px rgba(0, 255, 255, 0.3), 0 0 90px rgba(0, 255, 255, 0.1);
+  }
+
+  .card-glow-purple {
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.5), 0 0 60px rgba(168, 85, 247, 0.3), 0 0 90px rgba(168, 85, 247, 0.1);
+  }
+
+  .card-glow-green {
+    box-shadow: 0 0 30px rgba(34, 197, 94, 0.5), 0 0 60px rgba(34, 197, 94, 0.3), 0 0 90px rgba(34, 197, 94, 0.1);
+  }
+
+  .card-glow-pink {
+    box-shadow: 0 0 30px rgba(236, 72, 153, 0.5), 0 0 60px rgba(236, 72, 153, 0.3), 0 0 90px rgba(236, 72, 153, 0.1);
+  }
+
+  .card-glow-yellow {
+    box-shadow: 0 0 30px rgba(250, 204, 21, 0.5), 0 0 60px rgba(250, 204, 21, 0.3), 0 0 90px rgba(250, 204, 21, 0.1);
+  }
+
   .gradient-bg {
     background: linear-gradient(135deg, #000012 0%, #001a00 25%, #1a0033 50%, #003333 75%, #000012 100%);
     background-size: 400% 400%;

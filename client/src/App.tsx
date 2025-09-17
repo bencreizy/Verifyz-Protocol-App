@@ -120,7 +120,7 @@ export default function App() {
             Why VeriFyz<br />Changes<br />Everything
           </h2>
           
-          <Card className="bg-gray-900/80 border-cyan-500/30 backdrop-blur-sm p-8">
+          <Card className="bg-gray-900/80 border-cyan-500/30 backdrop-blur-sm p-8 card-glow-cyan">
             <div className="flex items-center justify-center mb-6">
               <div className="w-32 h-32 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center">
                 <span className="text-6xl">💵</span>
@@ -143,7 +143,7 @@ export default function App() {
       <section className="relative py-20 px-6">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8">
           {/* Anonymous Verification */}
-          <Card className="bg-gray-900/80 border-cyan-500/30 backdrop-blur-sm p-8 hover:border-cyan-400 transition-colors">
+          <Card className="bg-gray-900/80 border-cyan-500/30 backdrop-blur-sm p-8 hover:border-cyan-400 transition-colors card-glow-cyan">
             <div className="flex justify-center mb-6">
               <Shield className="w-16 h-16 text-cyan-400" />
             </div>
@@ -154,7 +154,7 @@ export default function App() {
           </Card>
 
           {/* Big Tech Failed */}
-          <Card className="bg-gray-900/80 border-purple-500/30 backdrop-blur-sm p-8 hover:border-purple-400 transition-colors">
+          <Card className="bg-gray-900/80 border-purple-500/30 backdrop-blur-sm p-8 hover:border-purple-400 transition-colors card-glow-purple">
             <div className="flex justify-center mb-6">
               <Building2 className="w-16 h-16 text-purple-400" />
             </div>
@@ -165,7 +165,7 @@ export default function App() {
           </Card>
 
           {/* True Proof of Presence */}
-          <Card className="bg-gray-900/80 border-green-500/30 backdrop-blur-sm p-8 hover:border-green-400 transition-colors">
+          <Card className="bg-gray-900/80 border-green-500/30 backdrop-blur-sm p-8 hover:border-green-400 transition-colors card-glow-green">
             <div className="flex justify-center mb-6">
               <Lock className="w-16 h-16 text-green-400" />
             </div>
@@ -176,7 +176,7 @@ export default function App() {
           </Card>
 
           {/* Valuable Data */}
-          <Card className="bg-gray-900/80 border-purple-500/30 backdrop-blur-sm p-8 hover:border-purple-400 transition-colors">
+          <Card className="bg-gray-900/80 border-purple-500/30 backdrop-blur-sm p-8 hover:border-purple-400 transition-colors card-glow-purple">
             <div className="flex justify-center mb-6">
               <TrendingUp className="w-16 h-16 text-purple-400" />
             </div>
@@ -202,7 +202,7 @@ export default function App() {
             {/* Q2 2025 - Left */}
             <div className="relative flex items-center mb-32">
               <div className="w-5/12">
-                <Card className="bg-gray-900/80 border-green-500/30 backdrop-blur-sm p-6">
+                <Card className="bg-gray-900/80 border-green-500/30 backdrop-blur-sm p-6 card-glow-green">
                   <div className="text-green-400 text-2xl mb-2">✅ Q2</div>
                   <h3 className="text-green-400 font-bold text-xl mb-2">2025</h3>
                   <p className="text-gray-300">Project<br />concept<br />finalized</p>
@@ -221,7 +221,7 @@ export default function App() {
                 <div className="w-8 h-8 bg-gray-900 border-2 border-cyan-400 rounded-full"></div>
               </div>
               <div className="w-5/12">
-                <Card className="bg-gray-900/80 border-green-500/30 backdrop-blur-sm p-6 ml-auto">
+                <Card className="bg-gray-900/80 border-green-500/30 backdrop-blur-sm p-6 ml-auto card-glow-green">
                   <div className="text-green-400 text-2xl mb-2">✅ Q3</div>
                   <h3 className="text-green-400 font-bold text-xl mb-2">2025</h3>
                   <p className="text-gray-300">MVP launched<br />for early<br />testers</p>
@@ -232,7 +232,7 @@ export default function App() {
             {/* Q3 2025 Presale - Left */}
             <div className="relative flex items-center mb-32">
               <div className="w-5/12">
-                <Card className="bg-gray-900/80 border-pink-500/30 backdrop-blur-sm p-6">
+                <Card className="bg-gray-900/80 border-pink-500/30 backdrop-blur-sm p-6 card-glow-pink">
                   <div className="text-pink-400 text-2xl mb-2">🚀 Q3</div>
                   <h3 className="text-pink-400 font-bold text-xl mb-2">2025</h3>
                   <p className="text-gray-300">Token Presale<br />+ Social<br />Launch Begins</p>
@@ -279,7 +279,7 @@ export default function App() {
                 <div className="w-8 h-8 bg-gray-900 border-2 border-purple-400 rounded-full"></div>
               </div>
               <div className="w-5/12">
-                <Card className="bg-gray-900/80 border-purple-500/30 backdrop-blur-sm p-6 ml-auto">
+                <Card className="bg-gray-900/80 border-purple-500/30 backdrop-blur-sm p-6 ml-auto card-glow-purple">
                   <div className="text-purple-400 text-2xl mb-2">🎯</div>
                   <h3 className="text-purple-400 font-bold text-xl mb-2">2026+</h3>
                   <p className="text-gray-300">SDK release +<br />Global<br />adoption drive.</p>
@@ -293,7 +293,7 @@ export default function App() {
       {/* Lifetime Rewards Section */}
       <section className="relative py-20 px-6">
         <div className="max-w-4xl mx-auto">
-          <Card className="bg-gray-900/80 border-green-500/30 backdrop-blur-sm p-12">
+          <Card className="bg-gray-900/80 border-green-500/30 backdrop-blur-sm p-12 card-glow-green">
             <div className="text-center space-y-8">
               <div className="text-6xl mb-4">🎉</div>
               <h2 className="text-4xl md:text-5xl font-bold text-green-400">
@@ -304,7 +304,7 @@ export default function App() {
 
           <div className="mt-12 space-y-6">
             {/* Automatic */}
-            <Card className="bg-gray-900/80 border-cyan-500/30 backdrop-blur-sm p-6">
+            <Card className="bg-gray-900/80 border-cyan-500/30 backdrop-blur-sm p-6 card-glow-cyan">
               <div className="flex items-start space-x-4">
                 <Zap className="w-8 h-8 text-yellow-400 mt-1" />
                 <div>
@@ -315,7 +315,7 @@ export default function App() {
             </Card>
 
             {/* Random Selection */}
-            <Card className="bg-gray-900/80 border-purple-500/30 backdrop-blur-sm p-6">
+            <Card className="bg-gray-900/80 border-purple-500/30 backdrop-blur-sm p-6 card-glow-purple">
               <div className="flex items-start space-x-4">
                 <Dice6 className="w-8 h-8 text-purple-400 mt-1" />
                 <div>
@@ -337,7 +337,7 @@ export default function App() {
             </Card>
 
             {/* Only 5 Wallets */}
-            <Card className="bg-gray-900/80 border-yellow-500/30 backdrop-blur-sm p-6">
+            <Card className="bg-gray-900/80 border-yellow-500/30 backdrop-blur-sm p-6 card-glow-yellow">
               <div className="flex items-start space-x-4">
                 <AlertTriangle className="w-8 h-8 text-yellow-400 mt-1" />
                 <div>
@@ -363,7 +363,7 @@ export default function App() {
       {/* Live Connected Wallets */}
       <section className="relative py-20 px-6">
         <div className="max-w-4xl mx-auto">
-          <Card className="bg-gray-900/80 border-cyan-500/30 backdrop-blur-sm p-12">
+          <Card className="bg-gray-900/80 border-cyan-500/30 backdrop-blur-sm p-12 card-glow-cyan">
             <div className="flex items-center justify-between">
               <div>
                 <div className="flex items-center space-x-2 mb-2">
@@ -396,7 +396,7 @@ export default function App() {
           </div>
 
           {/* Connect Wallet */}
-          <Card className="bg-gray-900/80 border-green-500/30 backdrop-blur-sm p-8 mb-8">
+          <Card className="bg-gray-900/80 border-green-500/30 backdrop-blur-sm p-8 mb-8 card-glow-green">
             <div className="flex items-start space-x-4">
               <div className="text-3xl">🔗</div>
               <div className="flex-1">
@@ -407,7 +407,7 @@ export default function App() {
                 
                 {!connectedWallet && (
                   <div className="space-y-4">
-                    <Card className="bg-purple-900/30 border-purple-500/30 p-4">
+                    <Card className="bg-purple-900/30 border-purple-500/30 p-4 card-glow-purple">
                       <div className="flex items-start space-x-2">
                         <AlertCircle className="w-5 h-5 text-purple-400 mt-1" />
                         <div>
@@ -442,7 +442,7 @@ export default function App() {
           </Card>
 
           {/* Calculator */}
-          <Card className="bg-gray-900/80 border-purple-500/30 backdrop-blur-sm p-8 mb-8">
+          <Card className="bg-gray-900/80 border-purple-500/30 backdrop-blur-sm p-8 mb-8 card-glow-purple">
             <h3 className="text-2xl font-bold text-purple-400 mb-6">
               💵 USD → VeriFyz Calculator
             </h3>
@@ -480,7 +480,7 @@ export default function App() {
           </Card>
 
           {/* Complete Purchase */}
-          <Card className="bg-gray-900/80 border-green-500/30 backdrop-blur-sm p-8 mb-8">
+          <Card className="bg-gray-900/80 border-green-500/30 backdrop-blur-sm p-8 mb-8 card-glow-green">
             <div className="flex items-start space-x-4">
               <div className="text-3xl">🛍️</div>
               <div className="flex-1">
@@ -500,7 +500,7 @@ export default function App() {
                   Send ${usdAmount} USD ({maticAmount} MATIC)
                 </Button>
                 
-                <Card className="bg-yellow-900/20 border-yellow-500/30 mt-6 p-4">
+                <Card className="bg-yellow-900/20 border-yellow-500/30 mt-6 p-4 card-glow-yellow">
                   <div className="flex items-start space-x-2">
                     <AlertTriangle className="w-5 h-5 text-yellow-400 mt-1" />
                     <div>
@@ -516,7 +516,7 @@ export default function App() {
           </Card>
 
           {/* Stay Tuned */}
-          <Card className="bg-gray-900/80 border-pink-500/30 backdrop-blur-sm p-8">
+          <Card className="bg-gray-900/80 border-pink-500/30 backdrop-blur-sm p-8 card-glow-pink">
             <div className="flex items-start space-x-4">
               <div className="text-3xl">🚀</div>
               <div>
