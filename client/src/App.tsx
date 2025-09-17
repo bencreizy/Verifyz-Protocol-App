@@ -390,9 +390,9 @@ export default function App() {
 
           {/* Connect Wallet */}
           <Card className="bg-gray-900/80 border-green-500/30 backdrop-blur-sm p-8 mb-8 card-glow-green">
-            <div className="flex items-start space-x-4">
-              <div className="text-3xl">🔗</div>
-              <div className="flex-1">
+            <div className="flex flex-col items-center text-center">
+              <div className="text-3xl mb-4">🔗</div>
+              <div className="w-full">
                 <h3 className="text-2xl font-bold text-green-400 mb-4">Connect Your Wallet</h3>
                 <p className="text-gray-400 mb-6">
                   Connect your MetaMask wallet to participate in the presale
@@ -446,7 +446,7 @@ export default function App() {
                   type="number"
                   value={usdAmount}
                   onChange={(e) => setUsdAmount(e.target.value)}
-                  className="bg-black/50 border-purple-500/30 text-white text-xl py-3"
+                  className="w-full bg-black/50 border-purple-500/30 text-white text-xl py-3"
                   placeholder="100"
                 />
               </div>
@@ -474,10 +474,10 @@ export default function App() {
 
           {/* Complete Purchase */}
           <Card className="bg-gray-900/80 border-green-500/30 backdrop-blur-sm p-8 mb-8 card-glow-green">
-            <div className="flex items-start space-x-4">
-              <div className="text-3xl">🛍️</div>
-              <div className="flex-1">
-                <h3 className="text-2xl font-bold text-green-400 mb-6">Complete Your Purchase</h3>
+            <div className="flex flex-col items-center text-center">
+              <div className="text-3xl mb-4">🛍️</div>
+              <div className="w-full">
+                <h3 className="text-xl md:text-2xl font-bold text-green-400 mb-6 break-words">Complete Your Purchase</h3>
                 
                 <div className="bg-black/50 border border-gray-700 rounded-lg p-4 mb-6">
                   <p className="text-gray-400 mb-2">Recipient Address:</p>
