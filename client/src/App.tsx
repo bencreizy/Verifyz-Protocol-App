@@ -382,7 +382,7 @@ export default function App() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <img 
-              src={vfyzLogo}
+              src={logoImg}
               alt="VeriFyz Protocol" 
               className="w-48 h-auto mx-auto mb-8"
             />
