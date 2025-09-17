@@ -8,7 +8,6 @@ import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { AlertCircle, Shield, Building2, Lock, TrendingUp, Zap, Dice6, Infinity, AlertTriangle, Twitter, MessageCircle, Send, Rocket } from 'lucide-react';
 import logoImg from '@assets/verifyz protocol _1758069285416.png';
-import fingerprintLogo from '@assets/Messenger_creation_8654D694-ACD4-430E-8B08-4A3E9DAF71B6_1757684706591.png';
 
 export default function App() {
   const { toast } = useToast();
@@ -383,9 +382,9 @@ export default function App() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <img 
-              src={fingerprintLogo}
-              alt="VeriFyz Fingerprint" 
-              className="w-48 h-48 mx-auto mb-8 opacity-80"
+              src={vfyzLogo}
+              alt="VeriFyz Protocol" 
+              className="w-48 h-auto mx-auto mb-8"
             />
             <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">
               VeriFyz Token<br />Presale
