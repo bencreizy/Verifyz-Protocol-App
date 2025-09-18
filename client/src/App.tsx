@@ -13,6 +13,7 @@ export default function App() {
   const { toast } = useToast();
   const [maticPrice, setMaticPrice] = useState(0.257);
   const [usdAmount, setUsdAmount] = useState('100');
+  const [isFirstTouch, setIsFirstTouch] = useState(true);
   const [connectedWallet, setConnectedWallet] = useState<string | null>(null);
   const [isConnecting, setIsConnecting] = useState(false);
 
@@ -508,13 +509,20 @@ export default function App() {
                   type="number"
                   value={usdAmount}
                   onChange={(e) => setUsdAmount(e.target.value)}
-                  onFocus={(e) => {
-                    if (e.target.value === '100') {
+                  onFocus={() => {
+                    if (isFirstTouch && usdAmount === '100') {
                       setUsdAmount('');
+                      setIsFirstTouch(false);
+                    }
+                  }}
+                  onTouchStart={() => {
+                    if (isFirstTouch && usdAmount === '100') {
+                      setUsdAmount('');
+                      setIsFirstTouch(false);
                     }
                   }}
                   className="w-full bg-black/50 border-purple-500/30 text-white text-xl py-3"
-                  placeholder="100"
+                  placeholder="Enter amount"
                 />
               </div>
               
