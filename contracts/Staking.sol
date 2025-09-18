@@ -101,13 +101,23 @@ contract Staking is Ownable, ReentrancyGuard {
         emit RewardsClaimed(msg.sender, reward);
     }
 
-    function exit() external {
-        UserInfo memory user = userInfo[msg.sender];
-        if (user.amount > 0) {
-            unstake(user.amount);
+    function exit() external nonReentrant updateReward(msg.sender) {
+        UserInfo storage user = userInfo[msg.sender];
+        
+        uint256 stakedAmount = user.amount;
+        uint256 reward = user.rewards;
+        
+        if (stakedAmount > 0) {
+            user.amount = 0;
+            totalStaked -= stakedAmount;
+            stakingToken.safeTransfer(msg.sender, stakedAmount);
+            emit Unstaked(msg.sender, stakedAmount);
         }
-        if (earned(msg.sender) > 0) {
-            claimRewards();
+        
+        if (reward > 0) {
+            user.rewards = 0;
+            stakingToken.safeTransfer(msg.sender, reward);
+            emit RewardsClaimed(msg.sender, reward);
         }
     }
 

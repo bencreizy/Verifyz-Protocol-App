@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "@chainlink/contracts/src/v0.8/vrf/VRFConsumerBaseV2.sol";
-import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
+import "@chainlink/contracts/src/v0.8/vrf/interfaces/VRFCoordinatorV2Interface.sol";
 
 interface IVerifyzVerifier {
     function transfer(address to, uint256 amount) external returns (bool);
@@ -235,7 +235,6 @@ contract Presale is Ownable, ReentrancyGuard, VRFConsumerBaseV2 {
         require(softCapReached, "Soft cap not reached");
         require(contributions[msg.sender] > 0, "No contribution found");
 
-        uint256 totalTokens = (contributions[msg.sender] * 1e18) / price;
         uint256 availableTokens = getClaimableTokens(msg.sender);
         
         require(availableTokens > 0, "No tokens available to claim");
