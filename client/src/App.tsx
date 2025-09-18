@@ -508,6 +508,11 @@ export default function App() {
                   type="number"
                   value={usdAmount}
                   onChange={(e) => setUsdAmount(e.target.value)}
+                  onFocus={(e) => {
+                    if (e.target.value === '100') {
+                      setUsdAmount('');
+                    }
+                  }}
                   className="w-full bg-black/50 border-purple-500/30 text-white text-xl py-3"
                   placeholder="100"
                 />
