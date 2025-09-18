@@ -196,7 +196,7 @@ contract Presale is Ownable, ReentrancyGuard, VRFConsumerBaseV2 {
 
     function fulfillRandomWords(uint256 /*requestId_*/, uint256[] memory randomWords) internal override {
         randomSeed = randomWords[0];
-        _selectWinners(randomSeed);
+        _selectWinners(randomness);
     }
 
     function _selectWinners(uint256 seed) internal {
@@ -315,6 +315,9 @@ contract Presale is Ownable, ReentrancyGuard, VRFConsumerBaseV2 {
         }
     }
 
+    function withdrawLink() external onlyOwner {
+        LINK.transfer(owner(), LINK.balanceOf(address(this)));
+    }
 
     // View functions
     function getParticipantCount() external view returns (uint256) {

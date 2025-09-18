@@ -86,7 +86,8 @@ function setLifetimeWinners(address[5] calldata winners) external onlyOwner {
         claimedRewards[msg.sender] += amount;
         totalClaimed += amount;
         
-        rewardToken.safeTransfer(msg.sender, amount);
+        (bool success, ) = payable(msg.sender).call{value: amount}("");
+        require(success, "Reward transfer failed");
         
         emit RewardsClaimed(msg.sender, amount);
     }

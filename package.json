@@ -12,6 +12,7 @@
     "@libsql/client": "^0.15.15",
     "@neondatabase/serverless": "^1.0.1",
     "@nomiclabs/hardhat-ethers": "^2.2.3",
+    "@nomiclabs/hardhat-etherscan": "^3.1.8",
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-toast": "^1.2.15",
     "@replit/vite-plugin-cartographer": "^0.3.1",
