@@ -549,10 +549,13 @@ export default function App() {
                 </div>
                 
                 <Button 
-                  className="w-full py-6 text-xl font-bold bg-green-500 hover:bg-green-400 text-black rounded-lg shadow-lg hover:shadow-green-400/50 transition-all duration-300"
+                  className="w-full py-6 text-lg font-bold bg-green-500 hover:bg-green-400 text-black rounded-lg shadow-lg hover:shadow-green-400/50 transition-all duration-300 min-h-[80px]"
                   disabled={!connectedWallet}
                 >
-                  Send ${usdAmount} USD ({maticAmount} MATIC)
+                  <div className="flex flex-col items-center">
+                    <span className="text-lg">Send ${usdAmount} USD</span>
+                    <span className="text-base">({maticAmount} MATIC)</span>
+                  </div>
                 </Button>
                 
                 <Card className="bg-yellow-900/20 border-yellow-500/30 mt-6 p-4 card-glow-yellow">
