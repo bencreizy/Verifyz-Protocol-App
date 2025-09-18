@@ -20,7 +20,7 @@ export default function Presale(){
         </div>
       </div>
       <div className="card-neon p-4 mt-6 text-sm text-white/80">
-        Presale runs Sept 15–29 • Launches Oct 6
+        Presale runs Sept 22–Oct 13 • Launches Oct 20
       </div>
     </section>
   )
