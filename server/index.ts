@@ -54,7 +54,7 @@ app.get("/api/price", (req, res) => {
 const PORT = parseInt(process.env.PORT || '5000', 10);
 
 // Start Vite dev server first
-console.log("Starting Vite development server...");
+console.log("🚀 Starting Vite development server...");
 const vite = spawn("npm", ["run", "dev"], {
   cwd: path.join(__dirname, "../client"),
   stdio: "inherit",
@@ -62,10 +62,10 @@ const vite = spawn("npm", ["run", "dev"], {
 });
 
 vite.on("error", (err) => {
-  console.error("Failed to start Vite:", err);
+  console.error("❌ Failed to start Vite:", err);
 });
 
-// Wait a moment for Vite to start, then set up proxy
+// Wait for Vite to start, then set up proxy
 setTimeout(async () => {
   try {
     const { createProxyMiddleware } = await import("http-proxy-middleware");
@@ -74,18 +74,18 @@ setTimeout(async () => {
     app.use(
       /^(?!\/api).*/,
       createProxyMiddleware({
-        target: "http://localhost:5173",
+        target: "http://127.0.0.1:5173",
         changeOrigin: true,
         ws: true,
-        secure: false, // Allow proxy to insecure backend
-        xfwd: true, // Add X-Forwarded-* headers
+        secure: false,
+        logLevel: 'silent',
         onError: (err, req, res) => {
-          console.error("Proxy error:", err);
+          console.log("🔄 Proxy fallback - Vite still starting...");
           res.status(200).send(`
             <!DOCTYPE html>
             <html>
               <head>
-                <title>VeriFyz - Starting...</title>
+                <title>VeriFyz - Loading...</title>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <style>
@@ -94,8 +94,6 @@ setTimeout(async () => {
                     font-family: system-ui, -apple-system, sans-serif;
                     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
                     color: white;
-                  }
-                  .container {
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -115,14 +113,15 @@ setTimeout(async () => {
                     to { transform: rotate(360deg); }
                   }
                 </style>
+                <script>
+                  setTimeout(() => window.location.reload(), 3000);
+                </script>
               </head>
               <body>
-                <div class="container">
-                  <div>
-                    <div class="spinner"></div>
-                    <h1>Starting VeriFyz...</h1>
-                    <p>Please wait a moment and refresh the page.</p>
-                  </div>
+                <div>
+                  <div class="spinner"></div>
+                  <h1>VeriFyz Loading...</h1>
+                  <p>Starting up development server...</p>
                 </div>
               </body>
             </html>
@@ -130,16 +129,17 @@ setTimeout(async () => {
         }
       })
     );
+    console.log("✅ Proxy middleware configured");
   } catch (error) {
-    console.error("Failed to set up proxy:", error);
+    console.error("❌ Failed to set up proxy:", error);
   }
 }, 2000);
 
-const server = app.listen(PORT, () => {
-  console.log(`✅ VeriFyz server running on port ${PORT}`);
-  console.log(`🔗 Replit HTTPS proxy ready`);
-  console.log(`🌐 Server accessible at: https://${process.env.REPL_SLUG || 'your-repl'}.${process.env.REPL_OWNER || 'username'}.repl.co`);
-  console.log(`Environment PORT: ${process.env.PORT || 'not set, defaulting to 5000'}`);
+// Critical: Bind to 0.0.0.0 for Replit's HTTPS proxy
+const server = app.listen(PORT, "0.0.0.0", () => {
+  console.log(`✅ VeriFyz Express server running on 0.0.0.0:${PORT}`);
+  console.log(`🔗 Replit HTTPS proxy active`);
+  console.log(`🌐 Public URL: https://${process.env.REPL_SLUG || 'your-repl'}.${process.env.REPL_OWNER || 'username'}.repl.co`);
 });
 
 // Handle server errors
