@@ -13,12 +13,32 @@ const app = express();
 // Trust Replit's proxy headers for HTTPS detection
 app.set('trust proxy', true);
 
-// Handle Replit's proxy environment
+// Handle Replit's proxy environment and set CSP headers
 app.use((req, res, next) => {
   // Set correct protocol for Replit's HTTPS proxy
   if (req.headers['x-forwarded-proto'] === 'https') {
     req.secure = true;
   }
+  
+  // Set Content Security Policy headers for mobile compatibility
+  res.setHeader('Content-Security-Policy', [
+    "default-src 'self'",
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+    "font-src 'self' https://fonts.gstatic.com data:",
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://replit.com",
+    "img-src 'self' data: https: blob:",
+    "connect-src 'self' ws: wss: https:",
+    "media-src 'self'",
+    "object-src 'none'",
+    "base-uri 'self'",
+    "form-action 'self'"
+  ].join('; '));
+  
+  // Additional headers for mobile compatibility
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  
   next();
 });
 
