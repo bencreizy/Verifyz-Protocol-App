@@ -13,6 +13,15 @@ const app = express();
 // Trust Replit's proxy headers for HTTPS detection
 app.set('trust proxy', true);
 
+// Handle Replit's proxy environment
+app.use((req, res, next) => {
+  // Set correct protocol for Replit's HTTPS proxy
+  if (req.headers['x-forwarded-proto'] === 'https') {
+    req.secure = true;
+  }
+  next();
+});
+
 // Middleware - Enhanced CORS for mobile access
 app.use(cors({
   origin: true,
@@ -42,7 +51,7 @@ app.get("/api/price", (req, res) => {
   });
 });
 
-const PORT = parseInt(process.env.PORT || "5000", 10);
+const PORT = process.env.PORT || 5000;
 
 // Start Vite dev server first
 console.log("Starting Vite development server...");
@@ -127,9 +136,8 @@ setTimeout(async () => {
 }, 2000);
 
 const server = app.listen(PORT, "0.0.0.0", () => {
-  console.log(`✅ VeriFyz server running on http://0.0.0.0:${PORT}`);
-  console.log(`🔗 Access your app at: http://0.0.0.0:${PORT}`);
-  console.log(`📱 Mobile access: Use the webview or external port`);
+  console.log(`✅ VeriFyz server running on port ${PORT}`);
+  console.log(`🔗 Ready for Replit proxy on port ${PORT}`);
 });
 
 // Handle server errors
