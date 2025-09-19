@@ -26,12 +26,17 @@ app.get("/api/health", (req, res) => {
 });
 
 app.get("/api/price", (req, res) => {
-  res.json({
-    price: 0.0075,
-    currency: "USD",
-    lastUpdated: new Date().toISOString(),
-    source: "coingecko"
-  });
+  try {
+    res.json({
+      price: 0.0075,
+      currency: "USD",
+      lastUpdated: new Date().toISOString(),
+      source: "mock"
+    });
+  } catch (error) {
+    console.error('API price error:', error);
+    res.status(500).json({ error: "Failed to fetch price" });
+  }
 });
 
 // Serve static files from Vite build
