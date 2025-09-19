@@ -35,22 +35,6 @@ export async function serveStatic(app: Express) {
 }
 
 export async function setupVite(app: Express) {
-  const serverOptions = {
-    middlewareMode: true,
-    hmr: {
-      port: 24678,
-      host: '0.0.0.0'
-    },
-    server: {
-      host: '0.0.0.0',
-      strictPort: false,
-      fs: {
-        strict: false,
-        allow: ['..']
-      }
-    }
-  };
-
   const vite = await createViteServer({
     ...viteConfig,
     configFile: false,
@@ -61,7 +45,19 @@ export async function setupVite(app: Express) {
         process.exit(1);
       },
     },
-    server: serverOptions,
+    server: {
+      middlewareMode: true,
+      hmr: {
+        port: 24678,
+        host: '0.0.0.0'
+      },
+      host: '0.0.0.0',
+      strictPort: false,
+      fs: {
+        strict: false,
+        allow: ['..']
+      }
+    },
     appType: "custom",
   });
 
