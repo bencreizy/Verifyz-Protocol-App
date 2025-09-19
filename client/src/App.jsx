@@ -1,4 +1,5 @@
 
+import React from 'react'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
 import Features from './components/Features'
@@ -17,16 +18,16 @@ export default function App() {
       {/* Additional gradient overlay for better text readability */}
       <div className="absolute inset-0 bg-gradient-to-b from-brand-900/70 via-brand-800/60 to-brand-700/70"></div>
       <div className="relative z-10">
-      <Nav />
-      <main>
-        <Hero />
-        <Features />
-        <Timeline />
-        <WinnersCTA />
-        <Presale />
-        <ProofSubmit />
-      </main>
-      <Footer />
+        <Nav />
+        <main>
+          <Hero />
+          <Features />
+          <Timeline />
+          <WinnersCTA />
+          <Presale />
+          <ProofSubmit />
+        </main>
+        <Footer />
       </div>
     </div>
   )
