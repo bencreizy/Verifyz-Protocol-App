@@ -21,10 +21,10 @@ export default function App() {
   useEffect(() => {
     const fetchPrice = async () => {
       try {
-        const response = await fetch('/api/presale/prices');
+        const response = await fetch('/api/price');
         const data = await response.json();
-        if (data.maticUsd) {
-          setMaticPrice(data.maticUsd);
+        if (data.price) {
+          setMaticPrice(data.price);
         }
       } catch (error) {
         console.error('Error fetching MATIC price:', error);
@@ -98,13 +98,17 @@ export default function App() {
         <div className="text-center space-y-6 z-10">
           <div className="mb-8">
             <img 
-              src="/verifyz-logo.png"
+              src="/verifyz-logo-main.png"
               alt="VeriFyz Protocol" 
               className="w-64 h-auto mx-auto object-contain"
               style={{ filter: 'drop-shadow(0 0 30px rgba(0, 255, 255, 0.3)) drop-shadow(0 0 60px rgba(168, 85, 247, 0.2))' }}
               onError={(e) => {
-                console.error('Logo failed to load, trying fallback');
-                e.currentTarget.src = '/logo.png';
+                console.log('Trying logo fallback');
+                if (e.currentTarget.src.includes('verifyz-logo-main.png')) {
+                  e.currentTarget.src = '/verifyz-logo.png';
+                } else if (e.currentTarget.src.includes('verifyz-logo.png')) {
+                  e.currentTarget.src = '/logo.png';
+                }
               }}
             />
           </div>
@@ -442,13 +446,17 @@ export default function App() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <img 
-              src="/verifyz-logo.png"
+              src="/verifyz-logo-main.png"
               alt="VeriFyz Protocol" 
               className="w-48 h-auto mx-auto mb-8"
               style={{ filter: 'drop-shadow(0 0 30px rgba(0, 255, 255, 0.3)) drop-shadow(0 0 60px rgba(168, 85, 247, 0.2))' }}
               onError={(e) => {
-                console.error('Logo failed to load, trying fallback');
-                e.currentTarget.src = '/logo.png';
+                console.log('Trying logo fallback');
+                if (e.currentTarget.src.includes('verifyz-logo-main.png')) {
+                  e.currentTarget.src = '/verifyz-logo.png';
+                } else if (e.currentTarget.src.includes('verifyz-logo.png')) {
+                  e.currentTarget.src = '/logo.png';
+                }
               }}
             />
             <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400" style={{ textShadow: '0 0 30px rgba(0, 255, 255, 0.3), 0 0 60px rgba(168, 85, 247, 0.2)' }}>
