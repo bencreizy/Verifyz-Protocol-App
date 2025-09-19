@@ -38,11 +38,14 @@ app.use((req, res, next) => {
 });
 
 (async () => {
-  // Register API routes
+  // Register API routes here when you add them
+  // app.use('/api', apiRoutes);
 
   if (isProduction) {
+    log("Production mode: Serving static files from dist");
     await serveStatic(app);
   } else {
+    log("Development mode: Setting up Vite middleware");
     await setupVite(app);
   }
 
