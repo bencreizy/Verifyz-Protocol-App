@@ -1,15 +1,39 @@
-import type { Express } from "express";
-import { createServer, type Server } from "http";
+import express, { type Request, Response } from "express";
+import { createServer } from "http";
 import { storage } from "./storage";
 import { insertUserSchema, insertPresaleTransactionSchema, insertProofSubmissionSchema } from "@shared/schema";
 import { z } from "zod";
 
-export async function registerRoutes(app: Express): Promise<Server> {
+export function registerRoutes(app: express.Application) {
+  // API Routes
+  app.get("/api/health", (req: Request, res: Response) => {
+    res.json({ status: "ok", timestamp: new Date().toISOString() });
+  });
+
+  app.get("/api/presale/prices", (req: Request, res: Response) => {
+    res.json({
+      maticUsd: 0.257306,
+      vfyzUsd: 0.05,
+      presalePhase: 1,
+      totalRaised: 0,
+      maxCap: 1000000
+    });
+  });
+
+  app.get("/api/presale/stats", (req: Request, res: Response) => {
+    res.json({
+      totalParticipants: 0,
+      tokensDistributed: 0,
+      currentPhase: 1,
+      nextPhaseDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
+    });
+  });
+
   // User routes
   app.post("/api/users", async (req, res) => {
     try {
       const userData = insertUserSchema.parse(req.body);
-      
+
       // Check if user already exists by username or wallet address
       const existingUserByUsername = await storage.getUserByUsername(userData.username);
       if (existingUserByUsername) {
@@ -140,18 +164,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const response = await fetch(
         'https://api.coingecko.com/api/v3/simple/price?ids=matic-network&vs_currencies=usd&include_last_updated_at=true'
       );
-      
+
       if (!response.ok) {
         throw new Error(`CoinGecko API error: ${response.status}`);
       }
-      
+
       const data = await response.json();
       const maticUsd = data['matic-network']?.usd;
-      
+
       if (!maticUsd) {
         throw new Error('MATIC price not found in response');
       }
-      
+
       res.json({
         maticUsd: maticUsd,
         vfyzUsd: 0.05, // Fixed VFYZ price during presale
@@ -184,6 +208,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.json({ status: "ok", timestamp: new Date().toISOString() });
   });
 
-  const httpServer = createServer(app);
-  return httpServer;
+  const server = createServer(app);
+  return server;
 }
