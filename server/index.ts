@@ -10,6 +10,9 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
+// Trust Replit's proxy headers for HTTPS detection
+app.set('trust proxy', true);
+
 // Middleware - Enhanced CORS for mobile access
 app.use(cors({
   origin: true,
@@ -65,6 +68,8 @@ setTimeout(async () => {
         target: "http://localhost:5173",
         changeOrigin: true,
         ws: true,
+        secure: false, // Allow proxy to insecure backend
+        xfwd: true, // Add X-Forwarded-* headers
         onError: (err, req, res) => {
           console.error("Proxy error:", err);
           res.status(200).send(`
