@@ -135,9 +135,10 @@ setTimeout(async () => {
   }
 }, 2000);
 
-const server = app.listen(PORT, "0.0.0.0", () => {
+const server = app.listen(PORT, () => {
   console.log(`✅ VeriFyz server running on port ${PORT}`);
-  console.log(`🔗 Replit proxy ready`);
+  console.log(`🔗 Replit HTTPS proxy ready`);
+  console.log(`🌐 Server accessible at: https://${process.env.REPL_SLUG || 'your-repl'}.${process.env.REPL_OWNER || 'username'}.repl.co`);
   console.log(`Environment PORT: ${process.env.PORT || 'not set, defaulting to 5000'}`);
 });
 
