@@ -52,6 +52,7 @@ app.use((req, res, next) => {
   const port = parseInt(process.env.PORT || '5000', 10);
   const server = app.listen(port, "0.0.0.0", () => {
     log(`VeriFyz server running on port ${port} (${isProduction ? 'production' : 'development'})`);
+    log(`Server accessible at http://0.0.0.0:${port}`);
     if (isProduction) {
       log("Ready for Replit SSL proxy - single HTTP endpoint active");
     }
