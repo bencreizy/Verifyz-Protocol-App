@@ -16,10 +16,17 @@ export default defineConfig({
     },
   },
   server: {
-    host: '0.0.0.0',
+    host: true, // Binds to 0.0.0.0 (all interfaces)
     port: 5173,
     fs: {
       strict: false
+    },
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        secure: false // Disables SSL checks for internal HTTP proxy
+      }
     }
   }
 });

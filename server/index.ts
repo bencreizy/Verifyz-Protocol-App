@@ -20,14 +20,14 @@ app.use((req, res, next) => {
     req.secure = true;
   }
   
-  // Set Content Security Policy headers for mobile compatibility
+  // Set Content Security Policy headers for mobile and wallet compatibility
   res.setHeader('Content-Security-Policy', [
     "default-src 'self'",
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' https://fonts.gstatic.com data:",
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://replit.com",
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://replit.com https://*.metamask.io https://*.infura.io",
     "img-src 'self' data: https: blob:",
-    "connect-src 'self' ws: wss: https:",
+    "connect-src 'self' ws: wss: https: https://*.infura.io https://api.etherscan.io https://*.metamask.io",
     "media-src 'self'",
     "object-src 'none'",
     "base-uri 'self'",
@@ -71,7 +71,7 @@ app.get("/api/price", (req, res) => {
   });
 });
 
-const PORT = parseInt(process.env.PORT || '5000', 10);
+const PORT = parseInt(process.env.PORT || '3000', 10);
 
 // Start Vite dev server first
 console.log("🚀 Starting Vite development server...");
@@ -99,6 +99,7 @@ setTimeout(async () => {
         ws: true,
         secure: false,
         logLevel: 'silent',
+        timeout: 30000,
         onError: (err, req, res) => {
           console.log("🔄 Proxy fallback - Vite still starting...");
           res.status(200).send(`
