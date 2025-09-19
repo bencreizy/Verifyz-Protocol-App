@@ -51,7 +51,7 @@ app.get("/api/price", (req, res) => {
   });
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = parseInt(process.env.PORT || '5000', 10);
 
 // Start Vite dev server first
 console.log("Starting Vite development server...");
@@ -137,7 +137,8 @@ setTimeout(async () => {
 
 const server = app.listen(PORT, "0.0.0.0", () => {
   console.log(`✅ VeriFyz server running on port ${PORT}`);
-  console.log(`🔗 Ready for Replit proxy on port ${PORT}`);
+  console.log(`🔗 Replit proxy ready`);
+  console.log(`Environment PORT: ${process.env.PORT || 'not set, defaulting to 5000'}`);
 });
 
 // Handle server errors
