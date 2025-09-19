@@ -1,74 +1,15 @@
-import express, { type Request, Response } from "express";
-import { createServer } from "http";
+import type { Express } from "express";
+import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertUserSchema, insertPresaleTransactionSchema, insertProofSubmissionSchema } from "@shared/schema";
 import { z } from "zod";
 
-export function registerRoutes(app: express.Application) {
-  // API Routes
-  app.get("/api/health", (req: Request, res: Response) => {
-    res.json({ status: "ok", timestamp: new Date().toISOString() });
-  });
-
-  app.get("/api/presale/prices", async (req: Request, res: Response) => {
-    try {
-      // Fetch live MATIC/USD price from CoinGecko
-      const response = await fetch(
-        'https://api.coingecko.com/api/v3/simple/price?ids=matic-network&vs_currencies=usd&include_last_updated_at=true'
-      );
-
-      if (!response.ok) {
-        throw new Error(`CoinGecko API error: ${response.status}`);
-      }
-
-      const data = await response.json();
-      const maticUsd = data['matic-network']?.usd;
-
-      if (!maticUsd) {
-        throw new Error('MATIC price not found in response');
-      }
-
-      res.json({
-        maticUsd: maticUsd,
-        vfyzUsd: 0.05, // Fixed VFYZ price during presale
-        presaleActive: true,
-        presalePhase: 1,
-        totalRaised: 0,
-        maxCap: 1000000,
-        updated: new Date().toISOString(),
-        source: 'coingecko'
-      });
-    } catch (error) {
-      console.error('Price feed error:', error);
-      // Fallback to mock prices if API fails
-      res.json({
-        maticUsd: 0.85, // Fallback price
-        vfyzUsd: 0.05,
-        presaleActive: true,
-        presalePhase: 1,
-        totalRaised: 0,
-        maxCap: 1000000,
-        updated: new Date().toISOString(),
-        source: 'fallback',
-        error: 'Live price feed unavailable'
-      });
-    }
-  });
-
-  app.get("/api/presale/stats", (req: Request, res: Response) => {
-    res.json({
-      totalParticipants: 0,
-      tokensDistributed: 0,
-      currentPhase: 1,
-      nextPhaseDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
-    });
-  });
-
+export async function registerRoutes(app: Express): Promise<Server> {
   // User routes
   app.post("/api/users", async (req, res) => {
     try {
       const userData = insertUserSchema.parse(req.body);
-
+      
       // Check if user already exists by username or wallet address
       const existingUserByUsername = await storage.getUserByUsername(userData.username);
       if (existingUserByUsername) {
@@ -192,8 +133,57 @@ export function registerRoutes(app: express.Application) {
     }
   });
 
-  
+  // Live price feeds endpoint
+  app.get("/api/presale/prices", async (req, res) => {
+    try {
+      // Fetch live MATIC/USD price from CoinGecko
+      const response = await fetch(
+        'https://api.coingecko.com/api/v3/simple/price?ids=matic-network&vs_currencies=usd&include_last_updated_at=true'
+      );
+      
+      if (!response.ok) {
+        throw new Error(`CoinGecko API error: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      const maticUsd = data['matic-network']?.usd;
+      
+      if (!maticUsd) {
+        throw new Error('MATIC price not found in response');
+      }
+      
+      res.json({
+        maticUsd: maticUsd,
+        vfyzUsd: 0.05, // Fixed VFYZ price during presale
+        presaleActive: true,
+        presaleStartDate: "2024-09-15",
+        presaleEndDate: "2024-09-29",
+        launchDate: "2024-10-06",
+        updated: new Date().toISOString(),
+        source: 'coingecko'
+      });
+    } catch (error) {
+      console.error('Price feed error:', error);
+      // Fallback to mock prices if API fails
+      res.json({
+        maticUsd: 0.85, // Fallback price
+        vfyzUsd: 0.05,
+        presaleActive: true,
+        presaleStartDate: "2024-09-15",
+        presaleEndDate: "2024-09-29",
+        launchDate: "2024-10-06",
+        updated: new Date().toISOString(),
+        source: 'fallback',
+        error: 'Live price feed unavailable'
+      });
+    }
+  });
 
-  const server = createServer(app);
-  return server;
+  // Health check endpoint
+  app.get("/api/health", async (req, res) => {
+    res.json({ status: "ok", timestamp: new Date().toISOString() });
+  });
+
+  const httpServer = createServer(app);
+  return httpServer;
 }

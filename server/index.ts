@@ -1,68 +1,71 @@
-import express from "express";
-import cors from "cors";
-import path from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import express, { type Request, Response, NextFunction } from "express";
+import { registerRoutes } from "./routes";
+import { setupVite, serveStatic, log } from "./vite";
 
 const app = express();
-
-// Trust Replit's proxy headers
-app.set('trust proxy', true);
-
-// Middleware
-app.use(cors({
-  origin: true,
-  credentials: true
-}));
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// API Routes
-app.get("/api/health", (req, res) => {
-  res.json({ status: "ok" });
-});
+app.use((req, res, next) => {
+  const start = Date.now();
+  const path = req.path;
+  let capturedJsonResponse: Record<string, any> | undefined = undefined;
 
-app.get("/api/price", (req, res) => {
-  try {
-    res.json({
-      price: 0.0075,
-      currency: "USD",
-      lastUpdated: new Date().toISOString(),
-      source: "mock"
-    });
-  } catch (error) {
-    console.error('API price error:', error);
-    res.status(500).json({ error: "Failed to fetch price" });
-  }
-});
+  const originalResJson = res.json;
+  res.json = function (bodyJson, ...args) {
+    capturedJsonResponse = bodyJson;
+    return originalResJson.apply(res, [bodyJson, ...args]);
+  };
 
-// Serve static files from Vite build
-const distPath = path.join(__dirname, "../dist");
-app.use(express.static(distPath));
+  res.on("finish", () => {
+    const duration = Date.now() - start;
+    if (path.startsWith("/api")) {
+      let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
+      if (capturedJsonResponse) {
+        logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
+      }
 
-// Fallback to index.html for SPA routing
-app.get("*", (req, res) => {
-  res.sendFile(path.join(distPath, "index.html"));
-});
+      if (logLine.length > 80) {
+        logLine = logLine.slice(0, 79) + "…";
+      }
 
-// Single server on Replit's port
-const PORT = parseInt(process.env.PORT || '5000', 10);
-
-const server = app.listen(PORT, "0.0.0.0", () => {
-  console.log(`✅ VeriFyz server running on 0.0.0.0:${PORT}`);
-  console.log(`🌐 Public URL: https://${process.env.REPL_SLUG || 'your-repl'}.${process.env.REPL_OWNER || 'username'}.repl.co`);
-});
-
-server.on('error', (err) => {
-  console.error('Server error:', err);
-});
-
-process.on('SIGTERM', () => {
-  console.log('SIGTERM received, shutting down gracefully');
-  server.close(() => {
-    console.log('Process terminated');
+      log(logLine);
+    }
   });
+
+  next();
 });
+
+(async () => {
+  const server = await registerRoutes(app);
+
+  app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
+    const status = err.status || err.statusCode || 500;
+    const message = err.message || "Internal Server Error";
+
+    res.status(status).json({ message });
+    throw err;
+  });
+
+  // importantly only setup vite in development and after
+  // setting up all the other routes so the catch-all route
+  // doesn't interfere with the other routes
+  if (app.get("env") === "development") {
+    await setupVite(app, server);
+  } else {
+    serveStatic(app);
+  }
+
+  // ALWAYS serve the app on the port specified in the environment variable PORT
+  // Other ports are firewalled. Default to 5000 if not specified.
+  // this serves both the API and the client.
+  // It is the only port that is not firewalled.
+  const port = parseInt(process.env.PORT || '5000', 10);
+  server.listen({
+    port,
+    host: "0.0.0.0",
+    reusePort: true,
+  }, () => {
+    log(`serving on port ${port}`);
+  });
+})();

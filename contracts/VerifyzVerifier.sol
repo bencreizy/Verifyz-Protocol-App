@@ -71,38 +71,37 @@ contract VerifyzVerifier is ERC20, Ownable, ReentrancyGuard {
         emit FeeExemptionSet(account, exempt);
     }
 
-    function _update(address from, address to, uint256 amount) internal override {
-        // Handle fee logic only for transfers (not mints or burns)
-        if (from != address(0) && to != address(0) && feesEnabled && !feeExempt[from] && !feeExempt[to]) {
-            uint256 feeAmount = (amount * FEE_PERCENTAGE) / 100;
-            uint256 transferAmount = amount - feeAmount;
+    function _transfer(address from, address to, uint256 amount) internal override {
+        require(from != address(0), "Transfer from zero address");
+        require(to != address(0), "Transfer to zero address");
 
-            if (feeAmount > 0) {
-                // 1% to rewards distributor for lifetime winners
-                uint256 rewardsAmount = (amount * REWARD_WINNERS_FEE) / 100;
-                // 4% to treasury
-                uint256 treasuryAmount = feeAmount - rewardsAmount;
-
-                if (rewardsDistributor != address(0) && rewardsAmount > 0) {
-                    super._update(from, rewardsDistributor, rewardsAmount);
-                    IRewardsDistributor(rewardsDistributor).distributeFees(rewardsAmount);
-                } else {
-                    // If distributor not set, send to treasury
-                    treasuryAmount += rewardsAmount;
-                }
-
-                if (treasuryAmount > 0) {
-                    super._update(from, treasury, treasuryAmount);
-                }
-                
-                // Transfer the net amount to recipient
-                super._update(from, to, transferAmount);
-            } else {
-                super._update(from, to, amount);
-            }
-        } else {
-            // No fees for mints, burns, or exempted addresses
-            super._update(from, to, amount);
+        if (!feesEnabled || feeExempt[from] || feeExempt[to]) {
+            super._transfer(from, to, amount);
+            return;
         }
+
+        uint256 feeAmount = (amount * FEE_PERCENTAGE) / 100;
+        uint256 transferAmount = amount - feeAmount;
+
+        if (feeAmount > 0) {
+            // 1% to rewards distributor for lifetime winners
+            uint256 rewardsAmount = (amount * REWARD_WINNERS_FEE) / 100;
+            // 4% to treasury
+            uint256 treasuryAmount = feeAmount - rewardsAmount;
+
+            if (rewardsDistributor != address(0)) {
+                super._transfer(from, rewardsDistributor, rewardsAmount);
+                IRewardsDistributor(rewardsDistributor).distributeFees(rewardsAmount);
+            } else {
+                // If distributor not set, send to treasury
+                treasuryAmount += rewardsAmount;
+            }
+
+            if (treasuryAmount > 0) {
+                super._transfer(from, treasury, treasuryAmount);
+            }
+        }
+
+        super._transfer(from, to, transferAmount);
     }
 }

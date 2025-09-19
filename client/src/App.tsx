@@ -1,5 +1,5 @@
 import './index.css';
-import circuitBg from '/circuit-bg.png';
+import circuitBg from '@assets/file_000000001408622f958d2f57d7ac4ee1_1758071935262.png';
 import { useState, useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { Toaster } from '@/components/ui/toaster';
@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { AlertCircle, Shield, Building2, Lock, TrendingUp, Zap, Dice6, Infinity, AlertTriangle, Twitter, MessageCircle, Send, Rocket } from 'lucide-react';
-
+import logoImg from '@assets/verifyz protocol _1758069285416.png';
 
 export default function App() {
   const { toast } = useToast();
@@ -21,10 +21,10 @@ export default function App() {
   useEffect(() => {
     const fetchPrice = async () => {
       try {
-        const response = await fetch('/api/price');
+        const response = await fetch('/api/presale/prices');
         const data = await response.json();
-        if (data.price) {
-          setMaticPrice(data.price);
+        if (data.maticUsd) {
+          setMaticPrice(data.maticUsd);
         }
       } catch (error) {
         console.error('Error fetching MATIC price:', error);
@@ -38,10 +38,10 @@ export default function App() {
 
   const connectWallet = async () => {
     setIsConnecting(true);
-
+    
     // Check if on mobile
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
+    
     try {
       if (typeof window.ethereum !== 'undefined') {
         // MetaMask is available (we're in MetaMask browser or desktop)
@@ -91,31 +91,23 @@ export default function App() {
           backgroundRepeat: 'no-repeat'
         }}
       />
-
+      
 
       {/* Hero Section */}
       <section id="hero-section" className="relative min-h-screen flex flex-col items-center justify-center px-6">
         <div className="text-center space-y-6 z-10">
           <div className="mb-8">
             <img 
-              src="/verifyz-logo-main.png"
+              src={logoImg}
               alt="VeriFyz Protocol" 
               className="w-64 h-auto mx-auto object-contain"
               style={{ filter: 'drop-shadow(0 0 30px rgba(0, 255, 255, 0.3)) drop-shadow(0 0 60px rgba(168, 85, 247, 0.2))' }}
-              onError={(e) => {
-                console.log('Trying logo fallback');
-                if (e.currentTarget.src.includes('verifyz-logo-main.png')) {
-                  e.currentTarget.src = '/verifyz-logo.png';
-                } else if (e.currentTarget.src.includes('verifyz-logo.png')) {
-                  e.currentTarget.src = '/logo.png';
-                }
-              }}
             />
           </div>
           <p className="text-xl text-purple-400 font-light" style={{ textShadow: '0 0 20px rgba(168, 85, 247, 0.3), 0 0 40px rgba(168, 85, 247, 0.2)' }}>
             Real proof in presence.
           </p>
-
+          
           <div className="pt-8 flex flex-col items-center space-y-6">
             {/* Whitepaper Button - Centered with glowing effect */}
             <a 
@@ -133,7 +125,7 @@ export default function App() {
               </svg>
               Read Whitepaper
             </a>
-
+            
             {/* Join Presale Button with enhanced glow */}
             <Button 
               className="px-12 py-6 text-lg font-bold bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 text-black rounded-lg transition-all duration-300"
@@ -145,7 +137,7 @@ export default function App() {
             >
               <Rocket className="mr-2" /> Join Presale
             </Button>
-
+            
             {/* Glowing Arrow pointing to Presale - positioned below Join Presale button */}
             <div className="mt-8 flex justify-center">
               <svg 
@@ -188,7 +180,7 @@ export default function App() {
           <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-cyan-400" style={{ textShadow: '0 0 30px rgba(34, 197, 94, 0.3), 0 0 60px rgba(0, 255, 255, 0.2)' }}>
             Why VeriFyz<br />Changes<br />Everything
           </h2>
-
+          
           <div className="relative w-full max-w-2xl mx-auto" style={{ paddingBottom: '177.78%' }}>
             <iframe 
               className="absolute top-0 left-0 w-full h-full rounded-lg border-2 border-cyan-500/30 card-glow-cyan"
@@ -261,7 +253,7 @@ export default function App() {
           <div className="relative">
             {/* Connecting line */}
             <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-cyan-500/20 via-purple-500/20 to-pink-500/20"></div>
-
+            
             {/* Q2 2025 - Left */}
             <div className="relative flex items-center mb-32">
               <div className="w-5/12">
@@ -446,18 +438,10 @@ export default function App() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <img 
-              src="/verifyz-logo-main.png"
+              src={logoImg}
               alt="VeriFyz Protocol" 
               className="w-48 h-auto mx-auto mb-8"
               style={{ filter: 'drop-shadow(0 0 30px rgba(0, 255, 255, 0.3)) drop-shadow(0 0 60px rgba(168, 85, 247, 0.2))' }}
-              onError={(e) => {
-                console.log('Trying logo fallback');
-                if (e.currentTarget.src.includes('verifyz-logo-main.png')) {
-                  e.currentTarget.src = '/verifyz-logo.png';
-                } else if (e.currentTarget.src.includes('verifyz-logo.png')) {
-                  e.currentTarget.src = '/logo.png';
-                }
-              }}
             />
             <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400" style={{ textShadow: '0 0 30px rgba(0, 255, 255, 0.3), 0 0 60px rgba(168, 85, 247, 0.2)' }}>
               VeriFyz Token<br />Presale
@@ -476,7 +460,7 @@ export default function App() {
                 <p className="text-gray-400 mb-6">
                   Connect your MetaMask wallet to participate in the presale
                 </p>
-
+                
                 {!connectedWallet && (
                   <div className="space-y-4">
                     <Card className="bg-purple-900/30 border-purple-500/30 p-4 card-glow-purple">
@@ -493,7 +477,7 @@ export default function App() {
                         </div>
                       </div>
                     </Card>
-
+                    
                     <Button 
                       className="w-full py-6 text-xl font-bold bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 text-black rounded-lg"
                       onClick={connectWallet}
@@ -503,7 +487,7 @@ export default function App() {
                     </Button>
                   </div>
                 )}
-
+                
                 {connectedWallet && (
                   <div className="text-green-400">
                     ✓ Connected: {connectedWallet.slice(0, 6)}...{connectedWallet.slice(-4)}
@@ -541,7 +525,7 @@ export default function App() {
                   placeholder="Enter amount"
                 />
               </div>
-
+              
               <div className="bg-black/50 border border-gray-700 rounded-lg p-4 space-y-2 overflow-hidden">
                 <div className="flex justify-between items-start gap-2">
                   <span className="text-gray-400 whitespace-nowrap">MATIC Amount:</span>
@@ -569,14 +553,14 @@ export default function App() {
               <div className="text-3xl mb-4">🛍️</div>
               <div className="w-full">
                 <h3 className="text-xl md:text-2xl font-bold text-green-400 mb-6 break-words">Complete Your Purchase</h3>
-
+                
                 <div className="bg-black/50 border border-gray-700 rounded-lg p-4 mb-6">
                   <p className="text-gray-400 mb-2">Recipient Address:</p>
                   <p className="text-cyan-400 font-mono text-sm break-all">
                     0xDde2aD00BCdc1566c671a31b50a433796d50Eedf
                   </p>
                 </div>
-
+                
                 <Button 
                   className="w-full py-6 text-lg font-bold bg-green-500 hover:bg-green-400 text-black rounded-lg shadow-lg hover:shadow-green-400/50 transition-all duration-300 min-h-[80px]"
                   disabled={!connectedWallet}
@@ -586,7 +570,7 @@ export default function App() {
                     <span className="text-base">({maticAmount} MATIC)</span>
                   </div>
                 </Button>
-
+                
                 <Card className="bg-yellow-900/20 border-yellow-500/30 mt-6 p-4 card-glow-yellow">
                   <div className="flex items-start space-x-2">
                     <AlertTriangle className="w-5 h-5 text-yellow-400 mt-1" />

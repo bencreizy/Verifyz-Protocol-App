@@ -6,8 +6,7 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
-import "@chainlink/contracts/src/v0.8/vrf/VRFConsumerBaseV2.sol";
-import "@chainlink/contracts/src/v0.8/vrf/interfaces/VRFCoordinatorV2Interface.sol";
+import "@chainlink/contracts/src/v0.8/vrf/VRFConsumerBase.sol";
 
 interface IVerifyzVerifier {
     function transfer(address to, uint256 amount) external returns (bool);
@@ -25,7 +24,7 @@ interface IRewardsDistributor {
  * As per whitepaper: 35% of total supply (175M tokens) for presale
  * 5 random winners selected via Chainlink VRF for lifetime rewards
  */
-contract Presale is Ownable, ReentrancyGuard, VRFConsumerBaseV2 {
+contract Presale is Ownable, ReentrancyGuard, VRFConsumerBase {
     using SafeERC20 for IERC20;
 
     IVerifyzVerifier public token;
@@ -50,12 +49,9 @@ contract Presale is Ownable, ReentrancyGuard, VRFConsumerBaseV2 {
     bool public hardCapReached;
 
     // VRF for random winner selection
-    VRFCoordinatorV2Interface internal COORDINATOR;
     bytes32 internal keyHash;
-    uint64 internal subscriptionId;
-    uint32 internal callbackGasLimit;
-    uint16 internal requestConfirmations;
-    uint32 internal numWords;
+    uint256 internal vrfFee;
+    bytes32 public requestId;
     uint256 public randomSeed;
     address[5] public winners;
     
@@ -86,27 +82,21 @@ contract Presale is Ownable, ReentrancyGuard, VRFConsumerBaseV2 {
         uint256 _price,
         uint256 _duration,
         address _vrfCoordinator,
-        uint64 _subscriptionId,
+        address _linkToken,
         bytes32 _keyHash,
-        uint32 _callbackGasLimit,
-        uint16 _requestConfirmations,
-        uint32 _numWords
-    )
+        uint256 _vrfFee
+    ) 
         Ownable(owner)
-        VRFConsumerBaseV2(_vrfCoordinator)
+        VRFConsumerBase(_vrfCoordinator, _linkToken)
     {
         token = IVerifyzVerifier(tokenAddress);
         rewardsDistributor = IRewardsDistributor(rewardsDistributorAddress);
         price = _price;
         duration = _duration;
         
-        // VRF v2 setup
-        COORDINATOR = VRFCoordinatorV2Interface(_vrfCoordinator);
-        subscriptionId = _subscriptionId;
+        // VRF setup
         keyHash = _keyHash;
-        callbackGasLimit = _callbackGasLimit;
-        requestConfirmations = _requestConfirmations;
-        numWords = _numWords;
+        vrfFee = _vrfFee;
 
         // Default caps (can be updated by owner)
         hardCap = 1000 * 10**18; // 1000 ETH
@@ -184,19 +174,15 @@ contract Presale is Ownable, ReentrancyGuard, VRFConsumerBaseV2 {
     }
 
     function _requestWinners() internal {
-        uint256 requestId_ = COORDINATOR.requestRandomWords(
-            keyHash,
-            subscriptionId,
-            requestConfirmations,
-            callbackGasLimit,
-            numWords
-        );
-        emit WinnersRequested(bytes32(requestId_));
+        require(LINK.balanceOf(address(this)) >= vrfFee, "Not enough LINK");
+        requestId = requestRandomness(keyHash, vrfFee);
+        emit WinnersRequested(requestId);
     }
 
-    function fulfillRandomWords(uint256 /*requestId_*/, uint256[] memory randomWords) internal override {
-        randomSeed = randomWords[0];
-        _selectWinners(randomSeed);
+    function fulfillRandomness(bytes32 requestId_, uint256 randomness) internal override {
+        require(requestId == requestId_, "Invalid request ID");
+        randomSeed = randomness;
+        _selectWinners(randomness);
     }
 
     function _selectWinners(uint256 seed) internal {
@@ -235,6 +221,7 @@ contract Presale is Ownable, ReentrancyGuard, VRFConsumerBaseV2 {
         require(softCapReached, "Soft cap not reached");
         require(contributions[msg.sender] > 0, "No contribution found");
 
+        uint256 totalTokens = (contributions[msg.sender] * 1e18) / price;
         uint256 availableTokens = getClaimableTokens(msg.sender);
         
         require(availableTokens > 0, "No tokens available to claim");
@@ -314,6 +301,9 @@ contract Presale is Ownable, ReentrancyGuard, VRFConsumerBaseV2 {
         }
     }
 
+    function withdrawLink() external onlyOwner {
+        LINK.transfer(owner(), LINK.balanceOf(address(this)));
+    }
 
     // View functions
     function getParticipantCount() external view returns (uint256) {

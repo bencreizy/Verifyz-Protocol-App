@@ -4,8 +4,6 @@ pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 /**
  * @title RewardsDistributor
@@ -13,10 +11,6 @@ import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
  * As per whitepaper: 1% of all transaction fees split equally among 5 winners
  */
 contract RewardsDistributor is Ownable, ReentrancyGuard {
-    using SafeERC20 for IERC20;
-
-    IERC20 public rewardToken;
-    address public tokenContract; // Verifyz token allowed to call distributeFees
     address[5] public lifetimeWinners;
     bool public winnersSet;
     
@@ -26,28 +20,13 @@ contract RewardsDistributor is Ownable, ReentrancyGuard {
     uint256 public totalDistributed;
     uint256 public totalClaimed;
     
-    event RewardTokenSet(address indexed token);
-event TokenContractSet(address indexed tokenContract);
-event WinnersSet(address[5] winners);
+    event WinnersSet(address[5] winners);
     event FeesDistributed(uint256 amount);
     event RewardsClaimed(address indexed winner, uint256 amount);
 
     constructor() Ownable(msg.sender) {}
 
-    
-
-function setRewardToken(address _token) external onlyOwner {
-    require(_token != address(0), "Invalid token");
-    rewardToken = IERC20(_token);
-    emit RewardTokenSet(_token);
-}
-
-function setTokenContract(address _tokenContract) external onlyOwner {
-    require(_tokenContract != address(0), "Invalid address");
-    tokenContract = _tokenContract;
-    emit TokenContractSet(_tokenContract);
-}
-function setLifetimeWinners(address[5] calldata winners) external onlyOwner {
+    function setLifetimeWinners(address[5] calldata winners) external onlyOwner {
         require(!winnersSet, "Winners already set");
         
         for (uint256 i = 0; i < 5; i++) {
@@ -60,7 +39,6 @@ function setLifetimeWinners(address[5] calldata winners) external onlyOwner {
     }
 
     function distributeFees(uint256 amount) external {
-        require(msg.sender == tokenContract, "Unauthorized");
         require(winnersSet, "Winners not set yet");
         require(amount > 0, "Amount must be > 0");
         
@@ -86,7 +64,8 @@ function setLifetimeWinners(address[5] calldata winners) external onlyOwner {
         claimedRewards[msg.sender] += amount;
         totalClaimed += amount;
         
-        rewardToken.safeTransfer(msg.sender, amount);
+        (bool success, ) = payable(msg.sender).call{value: amount}("");
+        require(success, "Reward transfer failed");
         
         emit RewardsClaimed(msg.sender, amount);
     }
@@ -110,4 +89,8 @@ function setLifetimeWinners(address[5] calldata winners) external onlyOwner {
 
     function getWinners() external view returns (address[5] memory) {
         return lifetimeWinners;
-    }}
+    }
+
+    // Fallback to receive ETH from token contract
+    receive() external payable {}
+}
