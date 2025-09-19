@@ -19,10 +19,25 @@ export function log(message: string, source = "express") {
   console.log(`${formattedTime} [${source}] ${message}`);
 }
 
-export async function setupVite(app: Express, server: Server) {
+export async function serveStatic(app: Express) {
+  const distPath = path.resolve(import.meta.dirname, "..", "dist");
+  
+  if (!fs.existsSync(distPath)) {
+    throw new Error("dist directory not found. Please run 'npm run build' first.");
+  }
+
+  app.use(express.static(distPath));
+  
+  app.use("*", (req, res) => {
+    const indexPath = path.resolve(distPath, "index.html");
+    res.sendFile(indexPath);
+  });
+}
+
+export async function setupVite(app: Express) {
   const serverOptions = {
     middlewareMode: true,
-    hmr: { server },
+    hmr: { port: 24678 },
     allowedHosts: true as const,
   };
 

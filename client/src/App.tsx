@@ -1,5 +1,5 @@
 import './index.css';
-import circuitBg from '@assets/file_000000001408622f958d2f57d7ac4ee1_1758071935262.png';
+import circuitBg from '/circuit-bg.png';
 import { useState, useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { Toaster } from '@/components/ui/toaster';
@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { AlertCircle, Shield, Building2, Lock, TrendingUp, Zap, Dice6, Infinity, AlertTriangle, Twitter, MessageCircle, Send, Rocket } from 'lucide-react';
-import logoImg from '@assets/verifyz protocol _1758069285416.png';
+import logoImg from '/verifyz-logo-main.png';
 
 export default function App() {
   const { toast } = useToast();
