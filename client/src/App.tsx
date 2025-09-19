@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { AlertCircle, Shield, Building2, Lock, TrendingUp, Zap, Dice6, Infinity, AlertTriangle, Twitter, MessageCircle, Send, Rocket } from 'lucide-react';
-import logoImg from '/verifyz-logo.png';
+
 
 export default function App() {
   const { toast } = useToast();
@@ -98,10 +98,14 @@ export default function App() {
         <div className="text-center space-y-6 z-10">
           <div className="mb-8">
             <img 
-              src={logoImg}
+              src="/verifyz-logo.png"
               alt="VeriFyz Protocol" 
               className="w-64 h-auto mx-auto object-contain"
               style={{ filter: 'drop-shadow(0 0 30px rgba(0, 255, 255, 0.3)) drop-shadow(0 0 60px rgba(168, 85, 247, 0.2))' }}
+              onError={(e) => {
+                console.error('Logo failed to load, trying fallback');
+                e.currentTarget.src = '/logo.png';
+              }}
             />
           </div>
           <p className="text-xl text-purple-400 font-light" style={{ textShadow: '0 0 20px rgba(168, 85, 247, 0.3), 0 0 40px rgba(168, 85, 247, 0.2)' }}>
@@ -438,10 +442,14 @@ export default function App() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <img 
-              src={logoImg}
+              src="/verifyz-logo.png"
               alt="VeriFyz Protocol" 
               className="w-48 h-auto mx-auto mb-8"
               style={{ filter: 'drop-shadow(0 0 30px rgba(0, 255, 255, 0.3)) drop-shadow(0 0 60px rgba(168, 85, 247, 0.2))' }}
+              onError={(e) => {
+                console.error('Logo failed to load, trying fallback');
+                e.currentTarget.src = '/logo.png';
+              }}
             />
             <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400" style={{ textShadow: '0 0 30px rgba(0, 255, 255, 0.3), 0 0 60px rgba(168, 85, 247, 0.2)' }}>
               VeriFyz Token<br />Presale
