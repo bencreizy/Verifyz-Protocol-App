@@ -56,4 +56,20 @@ app.use((req, res, next) => {
       log("Ready for Replit SSL proxy - single HTTP endpoint active");
     }
   });
+
+  // Handle deployment environment signals
+  const shutdown = (signal: string) => {
+    log(`Received ${signal}. Shutting down gracefully.`);
+    server.close((err) => {
+      if (err) {
+        log(`Error during shutdown: ${err.message}`);
+        process.exit(1);
+      }
+      log("Server closed successfully");
+      process.exit(0);
+    });
+  };
+
+  process.on('SIGTERM', () => shutdown('SIGTERM'));
+  process.on('SIGINT', () => shutdown('SIGINT'));
 })();
