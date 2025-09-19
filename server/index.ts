@@ -1,7 +1,9 @@
+
 import express from "express";
 import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
+import { spawn } from "child_process";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -28,13 +30,26 @@ app.get("/api/price", (req, res) => {
   });
 });
 
-// In development, we'll proxy to the Vite dev server
-if (process.env.NODE_ENV !== "production") {
-  // Import vite dynamically in development
-  const setupViteProxy = async () => {
+const PORT = parseInt(process.env.PORT || "5000", 10);
+
+// Start Vite dev server first
+console.log("Starting Vite development server...");
+const vite = spawn("npm", ["run", "dev"], {
+  cwd: path.join(__dirname, "../client"),
+  stdio: "inherit",
+  shell: true
+});
+
+vite.on("error", (err) => {
+  console.error("Failed to start Vite:", err);
+});
+
+// Wait a moment for Vite to start, then set up proxy
+setTimeout(async () => {
+  try {
     const { createProxyMiddleware } = await import("http-proxy-middleware");
     
-    // Proxy everything except /api to Vite dev server running on port 5173
+    // Proxy everything except /api to Vite dev server
     app.use(
       /^(?!\/api).*/,
       createProxyMiddleware({
@@ -43,19 +58,46 @@ if (process.env.NODE_ENV !== "production") {
         ws: true,
         onError: (err, req, res) => {
           console.error("Proxy error:", err);
-          // If Vite isn't running, serve a basic HTML page
           res.status(200).send(`
             <!DOCTYPE html>
             <html>
               <head>
-                <title>Starting Vite...</title>
+                <title>VeriFyz - Starting...</title>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <style>
+                  body { 
+                    margin: 0; 
+                    font-family: system-ui, -apple-system, sans-serif;
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white;
+                  }
+                  .container {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 100vh;
+                    text-align: center;
+                  }
+                  .spinner {
+                    width: 40px;
+                    height: 40px;
+                    border: 4px solid rgba(255,255,255,0.3);
+                    border-radius: 50%;
+                    border-top-color: white;
+                    animation: spin 1s linear infinite;
+                    margin: 0 auto 20px;
+                  }
+                  @keyframes spin {
+                    to { transform: rotate(360deg); }
+                  }
+                </style>
               </head>
               <body>
-                <div style="display: flex; align-items: center; justify-content: center; height: 100vh; font-family: sans-serif;">
-                  <div style="text-align: center;">
-                    <h1>Starting Development Server...</h1>
+                <div class="container">
+                  <div>
+                    <div class="spinner"></div>
+                    <h1>Starting VeriFyz...</h1>
                     <p>Please wait a moment and refresh the page.</p>
                   </div>
                 </div>
@@ -65,38 +107,12 @@ if (process.env.NODE_ENV !== "production") {
         }
       })
     );
-  };
-  
-  setupViteProxy().catch(console.error);
-} else {
-  // In production, serve the built client files
-  const clientPath = path.join(__dirname, "../client/dist");
-  app.use(express.static(clientPath));
-  
-  // Catch-all for client-side routing
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(clientPath, "index.html"));
-  });
-}
-
-const PORT = parseInt(process.env.PORT || "5000", 10);
+  } catch (error) {
+    console.error("Failed to set up proxy:", error);
+  }
+}, 2000);
 
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`✅ Server running on http://0.0.0.0:${PORT}`);
-  
-  // Also start Vite in development
-  if (process.env.NODE_ENV !== "production") {
-    import("child_process").then(({ spawn }) => {
-      console.log("Starting Vite development server...");
-      const vite = spawn("npx", ["vite", "--host", "0.0.0.0"], {
-        cwd: path.join(__dirname, "../client"),
-        stdio: "inherit",
-        shell: true
-      });
-      
-      vite.on("error", (err) => {
-        console.error("Failed to start Vite:", err);
-      });
-    });
-  }
+  console.log(`✅ VeriFyz server running on http://0.0.0.0:${PORT}`);
+  console.log(`🔗 Access your app at: http://0.0.0.0:${PORT}`);
 });
