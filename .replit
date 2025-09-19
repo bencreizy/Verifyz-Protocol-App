@@ -67,7 +67,7 @@ mode = "sequential"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npm run build && cp -r client/dist ./dist && npm run dev"
+args = "npm run build && npm run dev"
 
 [agent]
 integrations = ["javascript_database:1.0.0"]
