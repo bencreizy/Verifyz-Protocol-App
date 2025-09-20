@@ -1,28 +1,27 @@
-
-import express from 'express';
-import path from 'path';
-import { createServer as createViteServer } from 'vite';
-
-const app = express();
-const port = process.env.PORT || 3000;
-
-async function startServer() {
-  const vite = await createViteServer({
-    server: { middlewareMode: true },
-    appType: 'custom'
-  });
-
-  app.use(vite.middlewares);
-
-  app.use('*', (req, res) => {
-    const indexPath = path.resolve(process.cwd(), 'client', 'index.html');
-    res.sendFile(indexPath);
-  });
-
-  app.listen(port, '0.0.0.0', () => {
-    console.log(`[express] serving on port ${port}`);
-    console.log('Vite middleware is set up and running.');
-  });
+{
+  "name": "verifyz-app",
+  "version": "1.0.0",
+  "description": "Verifyz Protocol App - Proof of Presence platform",
+  "main": "server/index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx server/index.ts",
+    "build": "vite build",
+    "start": "tsx server/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["verifyz", "protocol", "crypto", "presence", "app"],
+  "author": "Jason Emerick",
+  "license": "ISC",
+  "dependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "express": "^4.18.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "vite": "^5.0.12"
+  },
+  "devDependencies": {
+    "tsx": "^3.12.7",
+    "typescript": "^5.3.3"
+  }
 }
-
-startServer();
