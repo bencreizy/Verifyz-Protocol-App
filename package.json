@@ -1,17 +1,17 @@
 {
   "name": "verifyz-app",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Verifyz Protocol App - Proof of Presence platform",
+  "main": "server/index.ts",
   "type": "module",
   "scripts": {
     "dev": "tsx server/index.ts",
-    "build": "tsc",
-    "start": "node dist/server/index.js",
+    "build": "vite build",
+    "start": "tsx server/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["verifyz", "protocol", "crypto", "presence", "app"],
+  "author": "Jason Emerick",
   "license": "ISC",
   "dependencies": {
     "@vitejs/plugin-react": "^4.2.1",
