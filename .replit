@@ -1,9 +1,12 @@
-modules = ["nodejs-20", "web", "postgresql-16"]
+modules = ["nodejs-20"]
 run = "npm run dev -- --host 0.0.0.0"
 hidden = [".config", ".git", "generated-icon.png", "node_modules", "dist"]
 
 [nix]
 channel = "stable-24_05"
+
+[env]
+PORT = "5000"
 
 [deployment]
 deploymentTarget = "autoscale"
@@ -12,109 +15,8 @@ run = ["sh", "-c", "NODE_ENV=production npm start"]
 
 [[ports]]
 localPort = 3000
-externalPort = 5000
-
-[[ports]]
-localPort = 5000
-externalPort = 80
-
-[[ports]]
-localPort = 5001
-externalPort = 4200
-
-[[ports]]
-localPort = 5173
-externalPort = 5173
-
-[[ports]]
-localPort = 5174
-externalPort = 6000
-
-[[ports]]
-localPort = 5175
-externalPort = 6800
-
-[[ports]]
-localPort = 5176
-externalPort = 8000
-
-[[ports]]
-localPort = 5177
-externalPort = 8008
-
-[[ports]]
-localPort = 33111
-externalPort = 8099
-
-[[ports]]
-localPort = 33537
-externalPort = 3003
-
-[[ports]]
-localPort = 33683
-externalPort = 3001
-
-[[ports]]
-localPort = 36265
-externalPort = 9000
-
-[[ports]]
-localPort = 38709
 externalPort = 3000
 
 [[ports]]
-localPort = 39457
-externalPort = 3002
-
-[[ports]]
-localPort = 39671
-externalPort = 8081
-
-[[ports]]
-localPort = 41237
-externalPort = 8080
-
-[env]
-PORT = "5000"
-
-[workflows]
-runButton = "Dev Server"
-
-[[workflows.workflow]]
-name = "Project"
-mode = "parallel"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "Start application"
-
-[[workflows.workflow]]
-name = "Start application"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "npm run dev"
-waitForPort = 5000
-
-[[workflows.workflow]]
-name = "Client Dev Server"
-author = 44366827
-mode = "sequential"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "cd client && npm run dev -- --host 0.0.0.0"
-
-[[workflows.workflow]]
-name = "Dev Server"
-author = 44366827
-mode = "sequential"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "npm run dev"
-
-[agent]
-integrations = ["javascript_database:1.0.0"]
+localPort = 5000
+externalPort = 5000
