@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "tsx server/index.ts",
-    "start": "node server/index.js",
+    "build": "tsc",
+    "start": "node dist/server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -20,7 +21,7 @@
     "vite": "^5.0.12"
   },
   "devDependencies": {
-    "tsx": "^3.12.7"
+    "tsx": "^3.12.7",
+    "typescript": "^5.3.3"
   }
 }
-
