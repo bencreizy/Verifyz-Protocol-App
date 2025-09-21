@@ -1,19 +1,13 @@
 # Main entrypoint and run command
 run = "npm run dev"
 
-# Language definition
 language = "nodejs"
 
-# Prevent UPM auto-detection
-enablePackages = "true"
-disableGuessing = "true"
-
 [nix]
-# Pin Nix environment
 channel = "nixpkgs-23_05"
 
 [packager]
-# Disable UPM completely
+# Disable Replit’s Universal Package Manager (UPM)
 language-packs = []
 ignore-run-and-debug-config = true
 
