@@ -1,10 +1,9 @@
 import type { Express } from "express";
-import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertUserSchema, insertPresaleTransactionSchema, insertProofSubmissionSchema } from "@shared/schema";
+import { insertUserSchema, insertPresaleTransactionSchema, insertProofSubmissionSchema } from "../shared/schema.js";
 import { z } from "zod";
 
-export async function registerRoutes(app: Express): Promise<Server> {
+export function registerRoutes(app: Express): void {
   // User routes
   app.post("/api/users", async (req, res) => {
     try {
@@ -183,7 +182,4 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/health", async (req, res) => {
     res.json({ status: "ok", timestamp: new Date().toISOString() });
   });
-
-  const httpServer = createServer(app);
-  return httpServer;
 }

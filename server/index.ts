@@ -1,27 +1,28 @@
-{
-  "name": "verifyz-app",
-  "version": "1.0.0",
-  "description": "Verifyz Protocol App - Proof of Presence platform",
-  "main": "server/index.ts",
-  "type": "module",
-  "scripts": {
-    "dev": "tsx server/index.ts",
-    "build": "vite build",
-    "start": "tsx server/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": ["verifyz", "protocol", "crypto", "presence", "app"],
-  "author": "Jason Emerick",
-  "license": "ISC",
-  "dependencies": {
-    "@vitejs/plugin-react": "^4.2.1",
-    "express": "^4.18.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "vite": "^5.0.12"
-  },
-  "devDependencies": {
-    "tsx": "^3.12.7",
-    "typescript": "^5.3.3"
-  }
+import express from "express";
+import { createServer } from "http";
+import { setupVite } from "./vite.js";
+import { registerRoutes } from "./routes.js";
+
+const app = express();
+const server = createServer(app);
+
+// Setup middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Setup routes
+registerRoutes(app);
+
+// Setup Vite in development or serve static files in production
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("dist"));
+} else {
+  await setupVite(app);
 }
+
+const PORT = process.env.PORT || 3000;
+
+server.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log(`Environment: ${process.env.NODE_ENV || "development"}`);
+});
